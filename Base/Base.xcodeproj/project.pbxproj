@@ -1,0 +1,199 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		3A949AFA2454629C007E7928 /* Kit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kit.swift; sourceTree = "<group>"; };
+		3A949AFB2454629C007E7928 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		3A949AFC2454629C007E7928 /* Seal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seal.swift; sourceTree = "<group>"; };
+		3A949AFD2454629C007E7928 /* Unowned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unowned.swift; sourceTree = "<group>"; };
+		3A949AFE2454629C007E7928 /* DelegatedCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatedCall.swift; sourceTree = "<group>"; };
+		3A949AFF2454629C007E7928 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		3A949B012454629C007E7928 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
+		3A949B022454629C007E7928 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		3A949B032454629C007E7928 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		3A949B042454629C007E7928 /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
+		3A949B062454629C007E7928 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		3A949B072454629C007E7928 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		3A949B092454629C007E7928 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		3A949B0A2454629C007E7928 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		3A949B0B2454629C007E7928 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		3A949B0C2454629C007E7928 /* FixedWidthInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedWidthInteger.swift; sourceTree = "<group>"; };
+		3A949B0D2454629C007E7928 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		3A949B0E2454629C007E7928 /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
+		3A949B0F2454629C007E7928 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
+		3A949B102454629C007E7928 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		3A949B122454629C007E7928 /* EnumDictionarySet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDictionarySet.swift; sourceTree = "<group>"; };
+		3A949B132454629C007E7928 /* KeyValuePair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValuePair.swift; sourceTree = "<group>"; };
+		3A949B142454629C007E7928 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		3A949B162454629C007E7928 /* DataStringRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringRepresentable.swift; sourceTree = "<group>"; };
+		3A949B172454629C007E7928 /* RandomableElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomableElement.swift; sourceTree = "<group>"; };
+		3A949B182454629C007E7928 /* InfoContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContaining.swift; sourceTree = "<group>"; };
+		3A949B192454629C007E7928 /* Randomable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomable.swift; sourceTree = "<group>"; };
+		3A949B1A2454629C007E7928 /* TypeIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeIdentifiable.swift; sourceTree = "<group>"; };
+		3A949B1B2454629C007E7928 /* CreatableByInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatableByInt.swift; sourceTree = "<group>"; };
+		3A949B1C2454629C007E7928 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		3A949B1D2454629C007E7928 /* HashableByIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableByIdentifier.swift; sourceTree = "<group>"; };
+		3A949B1F2454629C007E7928 /* RandomableElementConforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomableElementConforming.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3A949AB2245461CA007E7928 = {
+			isa = PBXGroup;
+			children = (
+				3A949AF82454629C007E7928 /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		3A949AF82454629C007E7928 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3A949AF92454629C007E7928 /* Classes */,
+				3A949B052454629C007E7928 /* Declarations */,
+				3A949B002454629C007E7928 /* Enums */,
+				3A949B082454629C007E7928 /* Extensions */,
+				3A949B152454629C007E7928 /* Protocols */,
+				3A949B1E2454629C007E7928 /* ProtocolsConforming */,
+				3A949B112454629C007E7928 /* Structs */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		3A949AF92454629C007E7928 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3A949AFA2454629C007E7928 /* Kit.swift */,
+				3A949AFB2454629C007E7928 /* Event.swift */,
+				3A949AFC2454629C007E7928 /* Seal.swift */,
+				3A949AFD2454629C007E7928 /* Unowned.swift */,
+				3A949AFE2454629C007E7928 /* DelegatedCall.swift */,
+				3A949AFF2454629C007E7928 /* Weak.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		3A949B002454629C007E7928 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B012454629C007E7928 /* Directions.swift */,
+				3A949B022454629C007E7928 /* Edge.swift */,
+				3A949B042454629C007E7928 /* KeyCode.swift */,
+				3A949B032454629C007E7928 /* Result.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		3A949B052454629C007E7928 /* Declarations */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B062454629C007E7928 /* Operators.swift */,
+				3A949B072454629C007E7928 /* Typealiases.swift */,
+			);
+			path = Declarations;
+			sourceTree = "<group>";
+		};
+		3A949B082454629C007E7928 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B092454629C007E7928 /* Array.swift */,
+				3A949B0F2454629C007E7928 /* Bool.swift */,
+				3A949B0A2454629C007E7928 /* Collection.swift */,
+				3A949B0B2454629C007E7928 /* Data.swift */,
+				3A949B0C2454629C007E7928 /* FixedWidthInteger.swift */,
+				3A949B0E2454629C007E7928 /* Numeric.swift */,
+				3A949B102454629C007E7928 /* Set.swift */,
+				3A949B0D2454629C007E7928 /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3A949B112454629C007E7928 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B122454629C007E7928 /* EnumDictionarySet.swift */,
+				3A949B132454629C007E7928 /* KeyValuePair.swift */,
+				3A949B142454629C007E7928 /* Coordinates.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		3A949B152454629C007E7928 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B1B2454629C007E7928 /* CreatableByInt.swift */,
+				3A949B162454629C007E7928 /* DataStringRepresentable.swift */,
+				3A949B1D2454629C007E7928 /* HashableByIdentifier.swift */,
+				3A949B1C2454629C007E7928 /* Identifiable.swift */,
+				3A949B182454629C007E7928 /* InfoContaining.swift */,
+				3A949B192454629C007E7928 /* Randomable.swift */,
+				3A949B172454629C007E7928 /* RandomableElement.swift */,
+				3A949B1A2454629C007E7928 /* TypeIdentifiable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3A949B1E2454629C007E7928 /* ProtocolsConforming */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B1F2454629C007E7928 /* RandomableElementConforming.swift */,
+			);
+			path = ProtocolsConforming;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		3A949AB3245461CA007E7928 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+			};
+			buildConfigurationList = 3A949AB6245461CA007E7928 /* Build configuration list for PBXProject "Base" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A949AB2245461CA007E7928;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		3A949AB7245461CA007E7928 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3A949AB8245461CA007E7928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A949AB6245461CA007E7928 /* Build configuration list for PBXProject "Base" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A949AB7245461CA007E7928 /* Debug */,
+				3A949AB8245461CA007E7928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A949AB3245461CA007E7928 /* Project object */;
+}

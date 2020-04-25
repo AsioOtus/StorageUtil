@@ -1,0 +1,253 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		3A949B3F2454637E007E7928 /* LambdaConstructorTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambdaConstructorTypealiases.swift; sourceTree = "<group>"; };
+		3A949B412454637E007E7928 /* EmptyInitializableConformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyInitializableConformance.swift; sourceTree = "<group>"; };
+		3A949B422454637E007E7928 /* CustomInitializableConformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInitializableConformance.swift; sourceTree = "<group>"; };
+		3A949B432454637E007E7928 /* CustomizableConformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableConformance.swift; sourceTree = "<group>"; };
+		3A949B472454637E007E7928 /* TransformingCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformingCopy.swift; sourceTree = "<group>"; };
+		3A949B482454637E007E7928 /* TransformingSelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformingSelf.swift; sourceTree = "<group>"; };
+		3A949B492454637E007E7928 /* Transforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transforming.swift; sourceTree = "<group>"; };
+		3A949B4B2454637E007E7928 /* UsingSelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingSelf.swift; sourceTree = "<group>"; };
+		3A949B4C2454637E007E7928 /* Using.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Using.swift; sourceTree = "<group>"; };
+		3A949B4D2454637E007E7928 /* UsingCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingCopy.swift; sourceTree = "<group>"; };
+		3A949B4F2454637E007E7928 /* SettingCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCopy.swift; sourceTree = "<group>"; };
+		3A949B502454637E007E7928 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		3A949B512454637E007E7928 /* SettingSelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSelf.swift; sourceTree = "<group>"; };
+		3A949B522454637E007E7928 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		3A949B532454637E007E7928 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		3A949B572454637E007E7928 /* Transformable(self).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transformable(self).swift"; sourceTree = "<group>"; };
+		3A949B582454637E007E7928 /* Transformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformable.swift; sourceTree = "<group>"; };
+		3A949B592454637E007E7928 /* Transformable(copy).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transformable(copy).swift"; sourceTree = "<group>"; };
+		3A949B5B2454637E007E7928 /* Settable(self).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settable(self).swift"; sourceTree = "<group>"; };
+		3A949B5C2454637E007E7928 /* Settable(copy).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settable(copy).swift"; sourceTree = "<group>"; };
+		3A949B5D2454637E007E7928 /* Settable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settable.swift; sourceTree = "<group>"; };
+		3A949B5F2454637E007E7928 /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
+		3A949B602454637E007E7928 /* Usable(self).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Usable(self).swift"; sourceTree = "<group>"; };
+		3A949B612454637E007E7928 /* Usable(copy).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Usable(copy).swift"; sourceTree = "<group>"; };
+		3A949B642454637E007E7928 /* UseWrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseWrapped.swift; sourceTree = "<group>"; };
+		3A949B662454637E007E7928 /* EmptyInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyInitializable.swift; sourceTree = "<group>"; };
+		3A949B672454637E007E7928 /* ClosureInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureInitializable.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3A949ABC245461DB007E7928 = {
+			isa = PBXGroup;
+			children = (
+				3A949B3D2454637E007E7928 /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		3A949B3D2454637E007E7928 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B3E2454637E007E7928 /* Declarations */,
+				3A949B442454637E007E7928 /* Functions */,
+				3A949B542454637E007E7928 /* Protocols */,
+				3A949B402454637E007E7928 /* ProtocolsConformance */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		3A949B3E2454637E007E7928 /* Declarations */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B3F2454637E007E7928 /* LambdaConstructorTypealiases.swift */,
+			);
+			path = Declarations;
+			sourceTree = "<group>";
+		};
+		3A949B402454637E007E7928 /* ProtocolsConformance */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B422454637E007E7928 /* CustomInitializableConformance.swift */,
+				3A949B432454637E007E7928 /* CustomizableConformance.swift */,
+				3A949B412454637E007E7928 /* EmptyInitializableConformance.swift */,
+			);
+			path = ProtocolsConformance;
+			sourceTree = "<group>";
+		};
+		3A949B442454637E007E7928 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B522454637E007E7928 /* Block.swift */,
+				3A949B532454637E007E7928 /* Debug.swift */,
+				3A949B452454637E007E7928 /* Customization */,
+			);
+			path = Functions;
+			sourceTree = "<group>";
+		};
+		3A949B452454637E007E7928 /* Customization */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B462454637E007E7928 /* Transforming */,
+				3A949B4A2454637E007E7928 /* Using */,
+				3A949B4E2454637E007E7928 /* Setting */,
+			);
+			path = Customization;
+			sourceTree = "<group>";
+		};
+		3A949B462454637E007E7928 /* Transforming */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B472454637E007E7928 /* TransformingCopy.swift */,
+				3A949B482454637E007E7928 /* TransformingSelf.swift */,
+				3A949B492454637E007E7928 /* Transforming.swift */,
+			);
+			path = Transforming;
+			sourceTree = "<group>";
+		};
+		3A949B4A2454637E007E7928 /* Using */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B4B2454637E007E7928 /* UsingSelf.swift */,
+				3A949B4C2454637E007E7928 /* Using.swift */,
+				3A949B4D2454637E007E7928 /* UsingCopy.swift */,
+			);
+			path = Using;
+			sourceTree = "<group>";
+		};
+		3A949B4E2454637E007E7928 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B4F2454637E007E7928 /* SettingCopy.swift */,
+				3A949B502454637E007E7928 /* Setting.swift */,
+				3A949B512454637E007E7928 /* SettingSelf.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		3A949B542454637E007E7928 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B552454637E007E7928 /* InstanceCustomization */,
+				3A949B622454637E007E7928 /* OptionalExtensions */,
+				3A949B652454637E007E7928 /* Initialization */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3A949B552454637E007E7928 /* InstanceCustomization */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B5A2454637E007E7928 /* Settable */,
+				3A949B562454637E007E7928 /* Transformable */,
+				3A949B5E2454637E007E7928 /* Usable */,
+			);
+			path = InstanceCustomization;
+			sourceTree = "<group>";
+		};
+		3A949B562454637E007E7928 /* Transformable */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B572454637E007E7928 /* Transformable(self).swift */,
+				3A949B582454637E007E7928 /* Transformable.swift */,
+				3A949B592454637E007E7928 /* Transformable(copy).swift */,
+			);
+			path = Transformable;
+			sourceTree = "<group>";
+		};
+		3A949B5A2454637E007E7928 /* Settable */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B5B2454637E007E7928 /* Settable(self).swift */,
+				3A949B5C2454637E007E7928 /* Settable(copy).swift */,
+				3A949B5D2454637E007E7928 /* Settable.swift */,
+			);
+			path = Settable;
+			sourceTree = "<group>";
+		};
+		3A949B5E2454637E007E7928 /* Usable */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B5F2454637E007E7928 /* Usable.swift */,
+				3A949B602454637E007E7928 /* Usable(self).swift */,
+				3A949B612454637E007E7928 /* Usable(copy).swift */,
+			);
+			path = Usable;
+			sourceTree = "<group>";
+		};
+		3A949B622454637E007E7928 /* OptionalExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B632454637E007E7928 /* UsableWrapped */,
+			);
+			path = OptionalExtensions;
+			sourceTree = "<group>";
+		};
+		3A949B632454637E007E7928 /* UsableWrapped */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B642454637E007E7928 /* UseWrapped.swift */,
+			);
+			path = UsableWrapped;
+			sourceTree = "<group>";
+		};
+		3A949B652454637E007E7928 /* Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B662454637E007E7928 /* EmptyInitializable.swift */,
+				3A949B672454637E007E7928 /* ClosureInitializable.swift */,
+			);
+			path = Initialization;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		3A949ABD245461DB007E7928 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+			};
+			buildConfigurationList = 3A949AC0245461DB007E7928 /* Build configuration list for PBXProject "Closures" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A949ABC245461DB007E7928;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		3A949AC1245461DB007E7928 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3A949AC2245461DB007E7928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A949AC0245461DB007E7928 /* Build configuration list for PBXProject "Closures" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A949AC1245461DB007E7928 /* Debug */,
+				3A949AC2245461DB007E7928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A949ABD245461DB007E7928 /* Project object */;
+}

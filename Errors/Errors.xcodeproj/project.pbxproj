@@ -1,0 +1,123 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		3A949B2E24546363007E7928 /* IdentifiedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiedError.swift; sourceTree = "<group>"; };
+		3A949B2F24546363007E7928 /* MultipleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleError.swift; sourceTree = "<group>"; };
+		3A949B3024546363007E7928 /* LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedError.swift; sourceTree = "<group>"; };
+		3A949B3124546363007E7928 /* CascadeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadeError.swift; sourceTree = "<group>"; };
+		3A949B3224546363007E7928 /* CategorizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizedError.swift; sourceTree = "<group>"; };
+		3A949B3324546363007E7928 /* DetailedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedError.swift; sourceTree = "<group>"; };
+		3A949B3424546363007E7928 /* DescribedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribedError.swift; sourceTree = "<group>"; };
+		3A949B3624546363007E7928 /* CategorizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizableError.swift; sourceTree = "<group>"; };
+		3A949B3724546363007E7928 /* DetailazableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailazableError.swift; sourceTree = "<group>"; };
+		3A949B3824546363007E7928 /* DescribableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribableError.swift; sourceTree = "<group>"; };
+		3A949B3924546363007E7928 /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
+		3A949B3A24546363007E7928 /* LocalizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableError.swift; sourceTree = "<group>"; };
+		3A949B3B24546363007E7928 /* MultipliableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliableError.swift; sourceTree = "<group>"; };
+		3A949B3C24546363007E7928 /* CascadableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadableError.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3A949AC6245461E5007E7928 = {
+			isa = PBXGroup;
+			children = (
+				3A949B2C24546363007E7928 /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		3A949B2C24546363007E7928 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B3524546363007E7928 /* Protocols */,
+				3A949B2D24546363007E7928 /* Structs */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		3A949B2D24546363007E7928 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B3124546363007E7928 /* CascadeError.swift */,
+				3A949B3224546363007E7928 /* CategorizedError.swift */,
+				3A949B3424546363007E7928 /* DescribedError.swift */,
+				3A949B3324546363007E7928 /* DetailedError.swift */,
+				3A949B2E24546363007E7928 /* IdentifiedError.swift */,
+				3A949B3024546363007E7928 /* LocalizedError.swift */,
+				3A949B2F24546363007E7928 /* MultipleError.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		3A949B3524546363007E7928 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B3C24546363007E7928 /* CascadableError.swift */,
+				3A949B3624546363007E7928 /* CategorizableError.swift */,
+				3A949B3824546363007E7928 /* DescribableError.swift */,
+				3A949B3724546363007E7928 /* DetailazableError.swift */,
+				3A949B3924546363007E7928 /* IdentifiableError.swift */,
+				3A949B3A24546363007E7928 /* LocalizableError.swift */,
+				3A949B3B24546363007E7928 /* MultipliableError.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		3A949AC7245461E5007E7928 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+			};
+			buildConfigurationList = 3A949ACA245461E5007E7928 /* Build configuration list for PBXProject "Errors" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A949AC6245461E5007E7928;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		3A949ACB245461E5007E7928 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3A949ACC245461E5007E7928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A949ACA245461E5007E7928 /* Build configuration list for PBXProject "Errors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A949ACB245461E5007E7928 /* Debug */,
+				3A949ACC245461E5007E7928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A949AC7245461E5007E7928 /* Project object */;
+}

@@ -1,0 +1,137 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		3A949AEB2454622F007E7928 /* Keychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Keychain.xcodeproj; path = Keychain/Keychain.xcodeproj; sourceTree = "<group>"; };
+		3A949B812454647B007E7928 /* UserDefaults.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UserDefaults.xcodeproj; path = UserDefaults/UserDefaults.xcodeproj; sourceTree = "<group>"; };
+		3A949B9A24546573007E7928 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		3A949B9C24546573007E7928 /* OSStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSStatus.swift; sourceTree = "<group>"; };
+		3A949B9E24546574007E7928 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3A949AD024546211007E7928 = {
+			isa = PBXGroup;
+			children = (
+				3A949AEB2454622F007E7928 /* Keychain.xcodeproj */,
+				3A949B812454647B007E7928 /* UserDefaults.xcodeproj */,
+				3A949B9824546515007E7928 /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		3A949AEC2454622F007E7928 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A949B822454647B007E7928 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A949B9824546515007E7928 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B9924546573007E7928 /* DispatchQueue */,
+				3A949B9B24546573007E7928 /* OSStatus */,
+				3A949B9D24546574007E7928 /* UIStoryboard */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		3A949B9924546573007E7928 /* DispatchQueue */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B9A24546573007E7928 /* DispatchQueue.swift */,
+			);
+			path = DispatchQueue;
+			sourceTree = "<group>";
+		};
+		3A949B9B24546573007E7928 /* OSStatus */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B9C24546573007E7928 /* OSStatus.swift */,
+			);
+			path = OSStatus;
+			sourceTree = "<group>";
+		};
+		3A949B9D24546574007E7928 /* UIStoryboard */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B9E24546574007E7928 /* UIStoryboard.swift */,
+			);
+			path = UIStoryboard;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		3A949AD124546211007E7928 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+			};
+			buildConfigurationList = 3A949AD424546211007E7928 /* Build configuration list for PBXProject "Components" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A949AD024546211007E7928;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3A949AEC2454622F007E7928 /* Products */;
+					ProjectRef = 3A949AEB2454622F007E7928 /* Keychain.xcodeproj */;
+				},
+				{
+					ProductGroup = 3A949B822454647B007E7928 /* Products */;
+					ProjectRef = 3A949B812454647B007E7928 /* UserDefaults.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		3A949AD524546211007E7928 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3A949AD624546211007E7928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A949AD424546211007E7928 /* Build configuration list for PBXProject "Components" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A949AD524546211007E7928 /* Debug */,
+				3A949AD624546211007E7928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A949AD124546211007E7928 /* Project object */;
+}
