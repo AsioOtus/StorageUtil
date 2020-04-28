@@ -4,7 +4,7 @@ import os
 
 
 extension Keychain.Logger {
-	enum Category {
+	enum Operation {
 		case saving
 		case loading
 		case deletion
@@ -33,7 +33,7 @@ extension Keychain.Logger {
 			return name
 		}
 		
-		enum Info {
+		enum Result {
 			case saving
 			case loading
 			case deletion
@@ -95,16 +95,12 @@ extension Keychain.Logger {
 
 extension Keychain.Logger {
 	struct Record {
-		private let category: Keychain.Logger.Category
-		private let query: [CFString: Any]
+		fileprivate let operation: Keychain.Logger.Operation
+		fileprivate let query: [CFString: Any]
 		
-		init (_ category: Keychain.Logger.Category, _ query: [CFString: Any]) {
-			self.category = category
+		init (_ operation: Keychain.Logger.Operation, _ query: [CFString: Any]) {
+			self.operation = operation
 			self.query = query
-		}
-		
-		func log (_ info: Keychain.Logger.Category.Info) {
-			Keychain.Logger.log(category, info, query)
 		}
 	}
 }
@@ -123,24 +119,24 @@ extension Keychain {
 			return identifier
 		}
 		
-		private static func log (_ category: Category, _ info: Category.Info, _ query: [CFString: Any]) {
-			guard Keychain.Settings.Logger.isActive && info.level.rawValue >= Keychain.Settings.Logger.level.rawValue else { return }
+		static func log (_ record: Record, _ result: Operation.Result) {
+			log(record.operation, result, record.query)
+		}
+		
+		private static func log (_ operation: Operation, _ result: Operation.Result, _ query: [CFString: Any]) {
+			guard Keychain.Settings.Logger.isActive && result.level.rawValue >= Keychain.Settings.Logger.level.rawValue else { return }
 			
-			var message = "\(keychainIdentifier) – \(category.name)"
+			var message = "\(keychainIdentifier) – \(operation.name)"
 			
-			if let info = info.info {
-				message += " – \(info)"
+			if let result = result.info {
+				message += " – \(result)"
 			}
 			
 			if Keychain.Settings.Logger.logQuery {
 				message += " – \(query)"
 			}
 			
-			log(message, info.level)
-		}
-		
-		private static func log (_ message: String, _ level: OSLogType = .default) {
-			os_log("%{public}@", type: level, message)
+			os_log("%{public}@", type: result.level, message)
 		}
 	}
 }

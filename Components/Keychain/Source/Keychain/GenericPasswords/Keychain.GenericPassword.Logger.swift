@@ -4,7 +4,7 @@ import os
 
 
 extension Keychain.GenericPassword.Logger {
-	enum Category {
+	enum Operation {
 		case saving
 		case loading
 		case deletion
@@ -27,11 +27,12 @@ extension Keychain.GenericPassword.Logger {
 			return name
 		}
 		
-		enum Info {
+		enum Result {
 			case saving
 			case loading
-			case deletion
+			case deletion(Bool)
 			case existance(Bool)
+			case codingError(Keychain.GenericPassword<ItemType>.Error.Category.Coding)
 			case keychainError(Keychain.Error)
 			case error(Error)
 			
@@ -43,10 +44,12 @@ extension Keychain.GenericPassword.Logger {
 					info = nil
 				case .loading:
 					info = nil
-				case .deletion:
-					info = nil
+				case .deletion(let isExisted):
+					info = "Existed – \(isExisted)"
 				case .existance(let isExist):
 					info = String(isExist)
+				case .codingError(let error):
+					info = "ERROR – \(error)"
 				case .keychainError(let error):
 					info = "ERROR – \(error.log)"
 				case .error(let error):
@@ -61,13 +64,15 @@ extension Keychain.GenericPassword.Logger {
 				
 				switch self {
 				case .saving:
-					level = .info
+					level = .default
 				case .loading:
-					level = .info
+					level = .default
 				case .deletion:
-					level = .info
+					level = .default
 				case .existance:
-					level = .info
+					level = .default
+				case .codingError:
+					level = .error
 				case .keychainError:
 					level = .error
 				case .error:
@@ -83,23 +88,15 @@ extension Keychain.GenericPassword.Logger {
 
 
 extension Keychain.GenericPassword.Logger {
-	struct Record<ItemType: Codable> {
-		private let logger: Keychain.GenericPassword<ItemType>.Logger
+	struct Record {
+		fileprivate let operation: Keychain.GenericPassword<ItemType>.Logger.Operation
+		fileprivate let identifier: String
+		fileprivate let query: [CFString: Any]
 		
-		private let category: Keychain.GenericPassword<ItemType>.Logger.Category
-		private let identifier: String
-		private let query: [CFString: Any]
-		
-		init (_ category: Keychain.GenericPassword<ItemType>.Logger.Category, _ identifier: String, _ query: [CFString: Any], _ logger: Keychain.GenericPassword<ItemType>.Logger) {
-			self.logger = logger
-			
-			self.category = category
+		init (_ operation: Keychain.GenericPassword<ItemType>.Logger.Operation, _ identifier: String, _ query: [CFString: Any]) {
+			self.operation = operation
 			self.identifier = identifier
 			self.query = query
-		}
-		
-		func log (_ info: Keychain.GenericPassword<ItemType>.Logger.Category.Info) {
-			logger.log(identifier, category, info, query)
 		}
 	}
 }
@@ -123,10 +120,14 @@ extension Keychain.GenericPassword {
 			self.keychainIdentifier = keychainIdentifier
 		}
 		
-		private func log (_ identifier: String, _ category: Category, _ info: Category.Info, _ query: [CFString: Any]) {
+		func log (_ record: Record, _ result: Operation.Result) {
+			log(record.operation, result, record.identifier, record.query)
+		}
+		
+		private func log (_ operation: Operation, _ info: Operation.Result, _ identifier: String, _ query: [CFString: Any]) {
 			guard Keychain.Settings.GenericPasswords.Logger.isActive && info.level.rawValue >= Keychain.Settings.GenericPasswords.Logger.level.rawValue else { return }
 			
-			var message = "\(identifier) – \(category.name)"
+			var message = "\(identifier) – \(operation.name)"
 			
 			if Keychain.Settings.GenericPasswords.Logger.useKeychainIdentifier {
 				message = "\(fullKeychainIdentifier) – \(message)"
@@ -140,11 +141,7 @@ extension Keychain.GenericPassword {
 				message += " – \(query)"
 			}
 			
-			log(message, info.level)
-		}
-		
-		private func log (_ message: String, _ level: OSLogType = .default) {
-			os_log("%{public}@", type: level, message)
+			os_log("%{public}@", type: info.level, message)
 		}
 	}
 }

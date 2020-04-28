@@ -3,15 +3,13 @@ import Foundation
 extension Keychain {
 	public enum Error: KeychainError {
 		case itemNotFound
-		case itemIsNotData
+		case nilItem
 		case savingFailed(OSStatus)
 		case existingItemFound
 		case loadingFailed(OSStatus)
 		case deletingFailed(OSStatus)
 		case existanceCheckFailed(OSStatus)
-		
-		case encodingFailed(Swift.Error)
-		case decodingFailed(Swift.Error)
+		case classCLearingFailed(Class, OSStatus)
 	}
 }
 
@@ -24,8 +22,8 @@ extension Keychain.Error: Loggable {
 		switch self {
 		case .itemNotFound:
 			log = "Item not found"
-		case .itemIsNotData:
-			log = "Item is not data"
+		case .nilItem:
+			log = "Item is nil"
 		case .savingFailed(let status):
 			log = "Saving failed: \(status.log)"
 		case .existingItemFound:
@@ -36,10 +34,8 @@ extension Keychain.Error: Loggable {
 			log = "Deletion failed: \(status.log)"
 		case .existanceCheckFailed(let status):
 			log = "Existance check failed: \(status.log)"
-		case .encodingFailed(let error):
-			log = "Encoding failed: \(error)"
-		case .decodingFailed(let error):
-			log = "Decoding failed: \(error)"
+		case .classCLearingFailed(let keychainClass, let status):
+			log = "Class clearing failed: \(keychainClass.name) – \(status.log)"
 		}
 		
 		return log

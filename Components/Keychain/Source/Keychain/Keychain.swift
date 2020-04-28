@@ -7,26 +7,24 @@ public struct Keychain { }
 
 
 public extension Keychain {
-	static func save <T: Encodable> (_ query: [CFString: Any], _ object: T) throws {
+	static func save (_ query: [CFString: Any], _ object: Data) throws {
 		let logRecord = Logger.Record(.saving, query)
 		
 		do {
-			let data = try encode(object)
-			let query = query.merging([kSecValueData: data]){ (current, _) in current }
+			let query = query.merging([kSecValueData: object]){ (current, _) in current }
 			
 			let status = SecItemAdd(query as CFDictionary, nil)
-
 			guard status != errSecDuplicateItem else { throw Error.existingItemFound }
 			guard status == errSecSuccess else { throw Error.savingFailed(status) }
 			
-			logRecord.log(.saving)
+			Keychain.Logger.log(logRecord, .saving)
 		} catch {
-			logRecord.log(.error(error))
+			Keychain.Logger.log(logRecord, .error(error))
 			throw error
 		}
 	}
 	
-	static func load <T: Decodable> (_ query: [CFString: Any], _ type: T.Type) throws -> T {
+	static func load (_ query: [CFString: Any]) throws -> AnyObject {
 		let logRecord = Logger.Record(.loading, query)
 		
 		do {
@@ -36,18 +34,16 @@ public extension Keychain {
 			]
 			let query = query.merging(loadingAttributes){ (current, _) in current }
 
-			var item: CFTypeRef?
+			var item: AnyObject?
 			let status = SecItemCopyMatching(query as CFDictionary, &item)
-
 			guard status != errSecItemNotFound else { throw Error.itemNotFound }
 			guard status == errSecSuccess else { throw Error.loadingFailed(status) }
-			guard let data = item as? Data else { throw Error.itemIsNotData }
+			guard let unwrappedItem = item else { throw Error.nilItem }
 			
-			let object = try decode(data, type)
-			logRecord.log(.loading)
-			return object
+			Keychain.Logger.log(logRecord, .loading)
+			return unwrappedItem
 		} catch {
-			logRecord.log(.error(error))
+			Keychain.Logger.log(logRecord, .error(error))
 			throw error
 		}
 	}
@@ -57,15 +53,17 @@ public extension Keychain {
 		
 		do {
 			let status = SecItemDelete(query as CFDictionary)
-			guard status == errSecSuccess || status == errSecItemNotFound else { throw Error.deletingFailed(status) }
-			logRecord.log(.deletion)
+			guard status != errSecItemNotFound else { throw Error.itemNotFound }
+			guard status == errSecSuccess else { throw Error.deletingFailed(status) }
+			
+			Keychain.Logger.log(logRecord, .deletion)
 		} catch {
-			logRecord.log(.error(error))
+			Keychain.Logger.log(logRecord, .error(error))
 			throw error
 		}
 	}
 	
-	static func isExists <T: Decodable> (_ query: [CFString: Any], _ type: T.Type) throws -> Bool {
+	static func isExists (_ query: [CFString: Any]) throws -> Bool {
 		let logRecord = Logger.Record(.existance, query)
 		let isExists: Bool
 		
@@ -76,24 +74,25 @@ public extension Keychain {
 			]
 			let query = query.merging(loadingAttributes){ (current, _) in current }
 			
-			var item: CFTypeRef?
+			var item: AnyObject?
 			let status = SecItemCopyMatching(query as CFDictionary, &item)
-			
 			guard status != errSecItemNotFound else { throw Error.itemNotFound }
 			guard status == errSecSuccess else { throw Error.existanceCheckFailed(status) }
-			guard let data = item as? Data else { throw Error.itemIsNotData }
-			
-			_ = try decode(data, type)
-			
+			guard item == nil else { throw Error.nilItem }
+						
 			isExists = true
-			logRecord.log(.existance(isExists))
+			Keychain.Logger.log(logRecord, .existance(isExists))
 			return isExists
 		} catch Error.itemNotFound {
 			isExists = false
-			logRecord.log(.existance(isExists))
+			Keychain.Logger.log(logRecord, .existance(isExists))
+			return isExists
+		} catch Error.nilItem {
+			isExists = false
+			Keychain.Logger.log(logRecord, .existance(isExists))
 			return isExists
 		} catch {
-			logRecord.log(.error(error))
+			Keychain.Logger.log(logRecord, .error(error))
 			throw error
 		}
 	}
@@ -114,47 +113,29 @@ public extension Keychain {
 			let query = [kSecClass: keychainClass.keychainIdentifier]
 			let status = SecItemDelete(query as CFDictionary)
 			
-			logRecord.log(.clearingClass(keychainClass, status))
+			Keychain.Logger.log(logRecord, .clearingClass(keychainClass, status))
 			
 			deleteResults[keychainClass] = status
 		}
 		
-		logRecord.log(.clearing(deleteResults))
+		Keychain.Logger.log(logRecord, .clearing(deleteResults))
 		
 		return deleteResults
 	}
 	
-	@discardableResult
-	static func clear (_ keychainClass: Keychain.Class) -> OSStatus {
+	static func clear (_ keychainClass: Keychain.Class) throws {
 		let logRecord = Logger.Record(.clearingClass, [:])
 		
-		let query = [kSecClass: keychainClass.keychainIdentifier]
-		let status = SecItemDelete(query as CFDictionary)
-		
-		logRecord.log(.clearingClass(keychainClass, status))
-		
-		return status
-	}
-}
-
-
-
-private extension Keychain {
-	static func encode <T: Encodable> (_ object: T) throws -> Data {
 		do {
-			let data = try JSONEncoder().encode(object)
-			return data
+			let query = [kSecClass: keychainClass.keychainIdentifier]
+			let status = SecItemDelete(query as CFDictionary)
+			
+			guard status == errSecSuccess else { throw Error.classCLearingFailed(keychainClass, status) }
+			
+			Keychain.Logger.log(logRecord, .clearingClass(keychainClass, status))
 		} catch {
-			throw Error.encodingFailed(error)
-		}
-	}
-	
-	static func decode <T: Decodable> (_ data: Data, _ type: T.Type) throws -> T {
-		do {
-			let data = try JSONDecoder().decode(type, from: data)
-			return data
-		} catch {
-			throw Error.decodingFailed(error)
+			Keychain.Logger.log(logRecord, .error(error))
+			throw error
 		}
 	}
 }
