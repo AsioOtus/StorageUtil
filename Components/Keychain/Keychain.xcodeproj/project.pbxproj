@@ -21,6 +21,7 @@
 		3A949C0524546816007E7928 /* KeychainPostfixProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B76245463C4007E7928 /* KeychainPostfixProvidable.swift */; };
 		3A949C0624546816007E7928 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B75245463C4007E7928 /* Loggable.swift */; };
 		3A949C082454750C007E7928 /* Keychain.Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949C072454750C007E7928 /* Keychain.Class.swift */; };
+		3AACB044245864EA00FB3795 /* KeychainPrefixProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AACB043245864EA00FB3795 /* KeychainPrefixProvidable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		3A949BDF245467AE007E7928 /* Keychain_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Keychain_macOS.h; sourceTree = "<group>"; };
 		3A949BE0245467AE007E7928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A949C072454750C007E7928 /* Keychain.Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.Class.swift; sourceTree = "<group>"; };
+		3AACB043245864EA00FB3795 /* KeychainPrefixProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPrefixProvidable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				3A949B74245463C4007E7928 /* KeychainError.swift */,
+				3AACB043245864EA00FB3795 /* KeychainPrefixProvidable.swift */,
 				3A949B76245463C4007E7928 /* KeychainPostfixProvidable.swift */,
 				3A949B75245463C4007E7928 /* Loggable.swift */,
 			);
@@ -230,6 +233,7 @@
 				3A949BFF24546816007E7928 /* Keychain.swift in Sources */,
 				3A949C0324546816007E7928 /* Keychain.GenericPassword.swift in Sources */,
 				3A949C0024546816007E7928 /* Keychain.GenericPassword.Error.swift in Sources */,
+				3AACB044245864EA00FB3795 /* KeychainPrefixProvidable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

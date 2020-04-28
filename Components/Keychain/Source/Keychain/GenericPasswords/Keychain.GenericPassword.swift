@@ -8,38 +8,52 @@ extension Keychain {
 			[kSecClass: kSecClassGenericPassword]
 		}
 		
-		private let savingQuery: [CFString: Any]
-		private let loadingQuery: [CFString: Any]
+		private let baseSavingQuery: [CFString: Any]
+		private let baseLoadingQuery: [CFString: Any]
 		private let accessability: CFString
 		
-		private var fullSavingQuery: [CFString: Any] {
-			let savingQuery = self.savingQuery.merging([kSecAttrAccessible: accessability]){ (current, _) in current }
+		public var savingQuery: [CFString: Any] {
+			let savingQuery = self.baseSavingQuery.merging([kSecAttrAccessible: accessability]){ (current, _) in current }
 			let fullSavingQuery = savingQuery.merging(Self.commonAtributes){ (current, _) in current }
 			return fullSavingQuery
 		}
 		
-		private var fullLoadingQuery: [CFString: Any] {
-			let fullLoadingQuery = loadingQuery.merging(Self.commonAtributes){ (current, _) in current }
+		public var loadingQuery: [CFString: Any] {
+			let fullLoadingQuery = baseLoadingQuery.merging(Self.commonAtributes){ (current, _) in current }
 			return fullLoadingQuery
 		}
 		
 		
 		
-		internal final var identifierPrefix: String { "\(Keychain.Settings.GenericPasswords.appIdentifier!).\(Keychain.self).\(String(describing: Self.self))" }
-		public final let shortIdentifier: String
-		public final var identifier: String { "\(identifierPrefix).\(shortIdentifier)" }
-		
-		private func appendIdentifierPostfix (_ postfixProvider: KeychainPostfixProvidable?) -> String {
-			guard let postfixProvider = postfixProvider, !postfixProvider.postfix.isEmpty else { return identifier }
-			return "\(self.identifier).\(postfixProvider.postfix)"
+		internal final var identifierPrefix: String {
+			guard let prefixProvider = Keychain.Settings.GenericPasswords.prefixProvider else { fatalError("Keychain.Settings.GenericPasswords.prefixProvider is nil") }
+			
+			var prefix = prefixProvider.prefix
+			
+			if let additionalPrefix = prefixProvider.additionalPrefix {
+				prefix += ".\(additionalPrefix)"
+			}
+			
+			return prefix
+		}
+		public final let itemIdentifier: String
+		public final var identifier: String { "\(identifierPrefix).\(itemIdentifier)" }
+		public final func postfixedIdentifier (_ postfixProvider: KeychainPostfixProvidable?) -> String {
+			guard let postfixProvider = postfixProvider else { return identifier }
+			
+			let postfix = postfixProvider.postfix.trimmingCharacters(in: .whitespacesAndNewlines)
+			
+			guard !postfix.isEmpty else { return identifier }
+			
+			return "\(self.identifier).\(postfix)"
 		}
 		
 		
 		
 		public init (_ shortIdentifier: String, savingQuery: [CFString: Any]? = nil, loadingQuery: [CFString: Any]? = nil, accessability: CFString = kSecAttrAccessibleWhenUnlockedThisDeviceOnly) {
-			self.shortIdentifier = shortIdentifier
-			self.savingQuery = savingQuery ?? [:]
-			self.loadingQuery = loadingQuery ?? [:]
+			self.itemIdentifier = shortIdentifier
+			self.baseSavingQuery = savingQuery ?? [:]
+			self.baseLoadingQuery = loadingQuery ?? [:]
 			self.accessability = accessability
 		}
 	}
@@ -49,16 +63,23 @@ extension Keychain {
 
 public extension Keychain.GenericPassword {
 	final func save (_ object: ItemType, _ identifierPostfixProvider: KeychainPostfixProvidable? = nil) throws {
-		let identifier = appendIdentifierPostfix(identifierPostfixProvider)
-		let savingQuery = self.fullSavingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
+		let identifier = postfixedIdentifier(identifierPostfixProvider)
+		let savingQuery = self.savingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 		
 		let logRecord = Logger.Record(.saving, identifier, savingQuery)
 		
-		let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
+		do {
+			let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
+			try Keychain.delete(deletingQuery)
+		}
+		catch Keychain.Error.itemNotFound { }
+		catch {
+			logger.log(logRecord, .error(error))
+			throw Error(identifier, .error(error))
+		}
 		
 		do {
 			let data = try Self.encode(object)
-			try Keychain.delete(deletingQuery)
 			try Keychain.save(savingQuery, data)
 			
 			logger.log(logRecord, .saving)
@@ -75,8 +96,8 @@ public extension Keychain.GenericPassword {
 	}
 	
 	final func load (_ identifierPostfixProvider: KeychainPostfixProvidable? = nil) throws -> ItemType {
-		let identifier = appendIdentifierPostfix(identifierPostfixProvider)
-		let loadingQuery = self.fullLoadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
+		let identifier = postfixedIdentifier(identifierPostfixProvider)
+		let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 
 		let logRecord = Logger.Record(.loading, identifier, loadingQuery)
 
@@ -100,7 +121,7 @@ public extension Keychain.GenericPassword {
 	}
 	
 	final func delete (_ identifierPostfixProvider: KeychainPostfixProvidable? = nil) throws {
-		let identifier = appendIdentifierPostfix(identifierPostfixProvider)
+		let identifier = postfixedIdentifier(identifierPostfixProvider)
 		let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
 		
 		let logRecord = Logger.Record(.deletion, identifier, deletingQuery)
@@ -120,8 +141,8 @@ public extension Keychain.GenericPassword {
 	}
 	
 	final func isExists (_ identifierPostfixProvider: KeychainPostfixProvidable? = nil) throws -> Bool {
-		let identifier = appendIdentifierPostfix(identifierPostfixProvider)
-		let loadingQuery = self.fullLoadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
+		let identifier = postfixedIdentifier(identifierPostfixProvider)
+		let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 		
 		let logRecord = Logger.Record(.existance, identifier, loadingQuery)
 		
