@@ -9,7 +9,6 @@ extension Keychain {
 		public var logger: Logger
 		public let genericPasswords: GenericPasswords
 		
-		internal static let `default` = Settings()
 		public init (
 			logger: Logger = .default,
 			genericPasswords: GenericPasswords
@@ -18,6 +17,7 @@ extension Keychain {
 			self.genericPasswords = genericPasswords
 		}
 		
+		internal static let `default` = Settings()
 		private init () {
 			self.logger = .default
 			self.genericPasswords = .default
@@ -29,22 +29,23 @@ extension Keychain {
 
 extension Keychain.Settings {
 	public class Logger {
-		public var isActive = true
-		public var logQuery = false
-		public var level = OSLogType.info
-		public var appIdentifier: String?
+		public var isActive: Bool
+		public var logQuery: Bool
+		public var level: OSLogType
+		
+		public var keychainIdentifierPrefix: String?
 		
 		public static let `default` = Logger()
 		public init (
 			isActive: Bool = true,
 			logQuery: Bool = false,
 			level: OSLogType = .info,
-			appIdentifier: String? = nil
+			keychainIdentifierPrefix: String? = nil
 		) {
 			self.isActive = isActive
 			self.logQuery = logQuery
 			self.level = level
-			self.appIdentifier = appIdentifier
+			self.keychainIdentifierPrefix = keychainIdentifierPrefix
 		}
 	}
 }
@@ -57,7 +58,6 @@ extension Keychain.Settings {
 		
 		public let prefixProvider: KeychainPrefixProvidable?
 		
-		internal static let `default` = GenericPasswords()
 		public init (
 			prefixProvider: KeychainPrefixProvidable,
 			logger: Logger = .default
@@ -66,33 +66,42 @@ extension Keychain.Settings {
 			self.logger = logger
 		}
 		
+		internal static let `default` = GenericPasswords()
 		private init () {
 			self.prefixProvider = nil
 			self.logger = .default
 		}
+	}
+}
+
+
+
+extension Keychain.Settings.GenericPasswords {
+	public struct Logger {
+		public var isActive: Bool
+		public var logKeychainIdentifier: Bool
+		public var logQuery: Bool
+		public var logValue: Bool
+		public var level: OSLogType
 		
-		public struct Logger {
-			public var isActive = true
-			public var logKeychainIdentifier = false
-			public var logQuery = false
-			public var level = OSLogType.default
-			
-			public var appIdentifier: String?
-			
-			public static let `default` = Logger()
-			public init (
-				isActive: Bool = true,
-				logKeychainIdentifier: Bool = false,
-				logQuery: Bool = false,
-				level: OSLogType = .default,
-				appIdentifier: String? = nil
-			) {
-				self.isActive = isActive
-				self.logKeychainIdentifier = logKeychainIdentifier
-				self.logQuery = logQuery
-				self.level = level
-				self.appIdentifier = appIdentifier
-			}
+		public var keychainIdentifierPrefix: String?
+		
+		public static let `default` = Logger()
+		public init (
+			isActive: Bool = true,
+			logKeychainIdentifier: Bool = false,
+			logQuery: Bool = false,
+			logValue: Bool = false,
+			logAppIdentifier: Bool = true,
+			level: OSLogType = .default,
+			keychainIdentifierPrefix: String? = nil
+		) {
+			self.isActive = isActive
+			self.logKeychainIdentifier = logKeychainIdentifier
+			self.logQuery = logQuery
+			self.logValue = logValue
+			self.level = level
+			self.keychainIdentifierPrefix = keychainIdentifierPrefix
 		}
 	}
 }

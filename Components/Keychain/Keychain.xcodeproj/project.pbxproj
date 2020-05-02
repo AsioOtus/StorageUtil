@@ -22,6 +22,7 @@
 		3A949C0624546816007E7928 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B75245463C4007E7928 /* Loggable.swift */; };
 		3A949C082454750C007E7928 /* Keychain.Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949C072454750C007E7928 /* Keychain.Class.swift */; };
 		3AACB044245864EA00FB3795 /* KeychainPrefixProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AACB043245864EA00FB3795 /* KeychainPrefixProvidable.swift */; };
+		3AD3B4DA245DCA4600056493 /* Keychain.GenericPassword.Logger.Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B4D9245DCA4600056493 /* Keychain.GenericPassword.Logger.Record.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3A949BE0245467AE007E7928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A949C072454750C007E7928 /* Keychain.Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.Class.swift; sourceTree = "<group>"; };
 		3AACB043245864EA00FB3795 /* KeychainPrefixProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPrefixProvidable.swift; sourceTree = "<group>"; };
+		3AD3B4D9245DCA4600056493 /* Keychain.GenericPassword.Logger.Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.GenericPassword.Logger.Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +92,8 @@
 		3A949B6B245463C4007E7928 /* GenericPasswords */ = {
 			isa = PBXGroup;
 			children = (
+				3AD3B4D8245DCA0300056493 /* Logger */,
 				3A949B6C245463C4007E7928 /* Keychain.GenericPassword.Error.swift */,
-				3A949B6D245463C4007E7928 /* Keychain.GenericPassword.Logger.swift */,
 				3A949B6F245463C4007E7928 /* Keychain.GenericPassword.swift */,
 				3A949B6E245463C4007E7928 /* Keychain.ParametricGenericPassword.swift */,
 			);
@@ -140,6 +142,15 @@
 				3A949BE0245467AE007E7928 /* Info.plist */,
 			);
 			path = "Keychain-macOS";
+			sourceTree = "<group>";
+		};
+		3AD3B4D8245DCA0300056493 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B6D245463C4007E7928 /* Keychain.GenericPassword.Logger.swift */,
+				3AD3B4D9245DCA4600056493 /* Keychain.GenericPassword.Logger.Record.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +235,7 @@
 				3A949C0524546816007E7928 /* KeychainPostfixProvidable.swift in Sources */,
 				3A949C0124546816007E7928 /* Keychain.GenericPassword.Logger.swift in Sources */,
 				3A949BFE24546816007E7928 /* Keychain.Settings.swift in Sources */,
+				3AD3B4DA245DCA4600056493 /* Keychain.GenericPassword.Logger.Record.swift in Sources */,
 				3A949BFD24546816007E7928 /* Keychain.Logger.swift in Sources */,
 				3A949BFC24546816007E7928 /* Keychain.Error.swift in Sources */,
 				3A949C0624546816007E7928 /* Loggable.swift in Sources */,

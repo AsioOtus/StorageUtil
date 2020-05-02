@@ -78,7 +78,7 @@ public extension Keychain {
 			let status = SecItemCopyMatching(query as CFDictionary, &item)
 			guard status != errSecItemNotFound else { throw Error.itemNotFound }
 			guard status == errSecSuccess else { throw Error.existanceCheckFailed(status) }
-			guard item == nil else { throw Error.nilItem }
+			guard item != nil else { throw Error.nilItem }
 						
 			isExists = true
 			Keychain.Logger.log(logRecord, .existance(isExists))

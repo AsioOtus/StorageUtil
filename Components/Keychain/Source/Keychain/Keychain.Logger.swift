@@ -112,8 +112,8 @@ extension Keychain {
 		private static var keychainIdentifier: String {
 			var identifier = "Keychain"
 			
-			if let appIdentifier = Keychain.Settings.current.logger.appIdentifier {
-				identifier = "\(appIdentifier).\(identifier)"
+			if let prefix = Keychain.Settings.current.logger.keychainIdentifierPrefix {
+				identifier = "\(prefix).\(identifier)"
 			}
 			
 			return identifier

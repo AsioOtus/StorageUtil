@@ -26,7 +26,7 @@ extension Keychain {
 		
 		
 		internal final var identifierPrefix: String {
-			guard let prefixProvider = Keychain.Settings.current.genericPasswords.prefixProvider else { fatalError("Keychain.Settings.GenericPasswords.prefixProvider is nil") }
+			guard let prefixProvider = Keychain.Settings.current.genericPasswords.prefixProvider else { fatalError("Keychain.Settings.current.genericPasswords.prefixProvider is nil") }
 			
 			var prefix = prefixProvider.prefix
 			
@@ -66,7 +66,7 @@ public extension Keychain.GenericPassword {
 		let identifier = postfixedIdentifier(identifierPostfixProvider)
 		let savingQuery = self.savingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 		
-		let logRecord = Logger.Record(.saving, identifier, savingQuery)
+		let logRecord = Logger.Record(.saving(object), identifier, savingQuery)
 		
 		do {
 			let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
@@ -74,24 +74,33 @@ public extension Keychain.GenericPassword {
 		}
 		catch Keychain.Error.itemNotFound { }
 		catch {
-			logger.log(logRecord, .error(error))
+			
+			logger.log(logRecord.info(.genericError(error)))
 			throw Error(identifier, .error(error))
+			
 		}
 		
 		do {
 			let data = try Self.encode(object)
 			try Keychain.save(savingQuery, data)
 			
-			logger.log(logRecord, .saving)
+			logger.log(logRecord.info(.saving))
+			
 		} catch let error as Error.Category.Coding {
-			logger.log(logRecord, .codingError(error))
+			
+			logger.log(logRecord.info(.codingError(error)))
 			throw Error(identifier, .codingError(error))
+			
 		} catch let error as Keychain.Error {
-			logger.log(logRecord, .keychainError(error))
+			
+			logger.log(logRecord.info(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
+			
 		} catch {
-			logger.log(logRecord, .error(error))
+			
+			logger.log(logRecord.info(.genericError(error)))
 			throw Error(identifier, .error(error))
+			
 		}
 	}
 	
@@ -106,17 +115,25 @@ public extension Keychain.GenericPassword {
 			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }
 			let object = try Self.decode(data, ItemType.self)
 			
-			logger.log(logRecord, .loading)
+			logger.log(logRecord.info(.loading(object)))
+			
 			return object
+			
 		} catch let error as Error.Category.Coding {
-			logger.log(logRecord, .codingError(error))
+			
+			logger.log(logRecord.info(.codingError(error)))
 			throw Error(identifier, .codingError(error))
+			
 		} catch let error as Keychain.Error {
-			logger.log(logRecord, .keychainError(error))
+			
+			logger.log(logRecord.info(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
+			
 		} catch {
-			logger.log(logRecord, .error(error))
+			
+			logger.log(logRecord.info(.genericError(error)))
 			throw Error(identifier, .error(error))
+			
 		}
 	}
 	
@@ -128,15 +145,23 @@ public extension Keychain.GenericPassword {
 		
 		do {
 			try Keychain.delete(deletingQuery)
-			logger.log(logRecord, .deletion(true))
+			
+			logger.log(logRecord.info(.deletion(true)))
+			
 		} catch Keychain.Error.itemNotFound {
-			logger.log(logRecord, .deletion(false))
+			
+			logger.log(logRecord.info(.deletion(false)))
+			
 		} catch let error as Keychain.Error {
-			logger.log(logRecord, .keychainError(error))
+			
+			logger.log(logRecord.info(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
+			
 		} catch {
-			logger.log(logRecord, .error(error))
+			
+			logger.log(logRecord.info(.genericError(error)))
 			throw Error(identifier, .error(error))
+			
 		}
 	}
 	
@@ -148,25 +173,32 @@ public extension Keychain.GenericPassword {
 		
 		do {
 			guard try Keychain.isExists(loadingQuery) else {
-				logger.log(logRecord, .existance(false))
+				logger.log(logRecord.info(.existance(false)))
 				return false
 			}
 			
 			let anyObject = try Keychain.load(loadingQuery)
 			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }
-			_ = try Self.decode(data, ItemType.self)
+			let object = try Self.decode(data, ItemType.self)
 			
-			logger.log(logRecord, .existance(true))
+			logger.log(logRecord.info(.existance(true, object)))
 			return true
+			
 		} catch let error as Error.Category.Coding {
-			logger.log(logRecord, .codingError(error))
+			
+			logger.log(logRecord.info(.codingError(error)))
 			throw Error(identifier, .codingError(error))
+			
 		} catch let error as Keychain.Error {
-			logger.log(logRecord, .keychainError(error))
+			
+			logger.log(logRecord.info(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
+			
 		} catch {
-			logger.log(logRecord, .error(error))
+			
+			logger.log(logRecord.info(.genericError(error)))
 			throw Error(identifier, .error(error))
+			
 		}
 	}
 }

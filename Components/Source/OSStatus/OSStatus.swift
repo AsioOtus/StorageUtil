@@ -10,17 +10,3 @@ extension OSStatus {
 		}
 	}
 }
-
-
-
-extension OSStatus: Loggable {
-	var log: String {
-		var log = "OSStatus – \(self)"
-		
-		if let statusMessage = self.message {
-			log += " – \(statusMessage)"
-		}
-		
-		return log
-	}
-}
