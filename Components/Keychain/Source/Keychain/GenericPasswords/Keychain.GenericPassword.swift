@@ -26,7 +26,7 @@ extension Keychain {
 		
 		
 		internal final var identifierPrefix: String {
-			guard let prefixProvider = Keychain.Settings.GenericPasswords.prefixProvider else { fatalError("Keychain.Settings.GenericPasswords.prefixProvider is nil") }
+			guard let prefixProvider = Keychain.Settings.current.genericPasswords.prefixProvider else { fatalError("Keychain.Settings.GenericPasswords.prefixProvider is nil") }
 			
 			var prefix = prefixProvider.prefix
 			
@@ -147,7 +147,10 @@ public extension Keychain.GenericPassword {
 		let logRecord = Logger.Record(.existance, identifier, loadingQuery)
 		
 		do {
-			guard try Keychain.isExists(loadingQuery) else { return false }
+			guard try Keychain.isExists(loadingQuery) else {
+				logger.log(logRecord, .existance(false))
+				return false
+			}
 			
 			let anyObject = try Keychain.load(loadingQuery)
 			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }

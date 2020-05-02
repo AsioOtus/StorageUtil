@@ -109,7 +109,7 @@ extension Keychain.GenericPassword {
 		private var fullKeychainIdentifier: String {
 			var identifier = keychainIdentifier
 			
-			if let appIdentifier = Keychain.Settings.GenericPasswords.Logger.appIdentifier {
+			if let appIdentifier = Keychain.Settings.current.genericPasswords.logger.appIdentifier {
 				identifier = "\(appIdentifier).\(identifier)"
 			}
 			
@@ -125,11 +125,11 @@ extension Keychain.GenericPassword {
 		}
 		
 		private func log (_ operation: Operation, _ info: Operation.Result, _ identifier: String, _ query: [CFString: Any]) {
-			guard Keychain.Settings.GenericPasswords.Logger.isActive && info.level.rawValue >= Keychain.Settings.GenericPasswords.Logger.level.rawValue else { return }
+			guard Keychain.Settings.current.genericPasswords.logger.isActive && info.level.rawValue >= Keychain.Settings.current.genericPasswords.logger.level.rawValue else { return }
 			
 			var message = "\(identifier) – \(operation.name)"
 			
-			if Keychain.Settings.GenericPasswords.Logger.useKeychainIdentifier {
+			if Keychain.Settings.current.genericPasswords.logger.logKeychainIdentifier {
 				message = "\(fullKeychainIdentifier) – \(message)"
 			}
 			
@@ -137,7 +137,7 @@ extension Keychain.GenericPassword {
 				message += " – \(info)"
 			}
 			
-			if Keychain.Settings.GenericPasswords.Logger.logQuery {
+			if Keychain.Settings.current.genericPasswords.logger.logQuery {
 				message += " – \(query)"
 			}
 			

@@ -112,7 +112,7 @@ extension Keychain {
 		private static var keychainIdentifier: String {
 			var identifier = "Keychain"
 			
-			if let appIdentifier = Keychain.Settings.Logger.appIdentifier {
+			if let appIdentifier = Keychain.Settings.current.logger.appIdentifier {
 				identifier = "\(appIdentifier).\(identifier)"
 			}
 			
@@ -124,7 +124,7 @@ extension Keychain {
 		}
 		
 		private static func log (_ operation: Operation, _ result: Operation.Result, _ query: [CFString: Any]) {
-			guard Keychain.Settings.Logger.isActive && result.level.rawValue >= Keychain.Settings.Logger.level.rawValue else { return }
+			guard Keychain.Settings.current.logger.isActive && result.level.rawValue >= Keychain.Settings.current.logger.level.rawValue else { return }
 			
 			var message = "\(keychainIdentifier) – \(operation.name)"
 			
@@ -132,7 +132,7 @@ extension Keychain {
 				message += " – \(result)"
 			}
 			
-			if Keychain.Settings.Logger.logQuery {
+			if Keychain.Settings.current.logger.logQuery {
 				message += " – \(query)"
 			}
 			
