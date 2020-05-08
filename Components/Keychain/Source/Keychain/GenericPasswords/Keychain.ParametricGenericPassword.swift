@@ -1,5 +1,5 @@
 extension Keychain {
-	open class ParametricGenericPassword<ItemType: Codable, PostfixProviderType: KeychainPostfixProvidable>: GenericPassword<ItemType> {
+	open class ParametricGenericPassword<ItemType: Codable, PostfixProviderType: KeychainGenericPasswordsPostfixProvidable>: GenericPassword<ItemType> {
 		public final func save (_ object: ItemType, _ postfixProvider: PostfixProviderType) throws {
 			try super.save(object, postfixProvider)
 		}

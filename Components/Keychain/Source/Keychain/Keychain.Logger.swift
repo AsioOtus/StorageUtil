@@ -55,9 +55,9 @@ extension Keychain.Logger {
 				case .existance(let isExist):
 					info = String(isExist)
 				case .clearingClass(let keychainClass, let status):
-					info = "\(keychainClass.name) – \(status.log)"
+					info = "\(keychainClass.name) – \(status.keychainLog)"
 				case .clearing(let result):
-					info = String(describing: result.map{ ($0.name, $1.log) })
+					info = String(describing: result.map{ ($0.name, $1.keychainLog) })
 				case .error(let error):
 					info = "ERROR – \(String(describing: error))"
 				}

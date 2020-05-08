@@ -15,8 +15,8 @@ extension Keychain {
 
 
 
-extension Keychain.Error: Loggable {
-	public var log: String {
+extension Keychain.Error: KeychainLoggable {
+	public var keychainLog: String {
 		let log: String
 		
 		switch self {
@@ -25,17 +25,17 @@ extension Keychain.Error: Loggable {
 		case .nilItem:
 			log = "Item is nil"
 		case .savingFailed(let status):
-			log = "Saving failed: \(status.log)"
+			log = "Saving failed: \(status.keychainLog)"
 		case .existingItemFound:
 			log = "Existing item found"
 		case .loadingFailed(let status):
-			log = "Loading failed: \(status.log)"
+			log = "Loading failed: \(status.keychainLog)"
 		case .deletingFailed(let status):
-			log = "Deletion failed: \(status.log)"
+			log = "Deletion failed: \(status.keychainLog)"
 		case .existanceCheckFailed(let status):
-			log = "Existance check failed: \(status.log)"
+			log = "Existance check failed: \(status.keychainLog)"
 		case .classCLearingFailed(let keychainClass, let status):
-			log = "Class clearing failed: \(keychainClass.name) – \(status.log)"
+			log = "Class clearing failed: \(keychainClass.name) – \(status.keychainLog)"
 		}
 		
 		return log

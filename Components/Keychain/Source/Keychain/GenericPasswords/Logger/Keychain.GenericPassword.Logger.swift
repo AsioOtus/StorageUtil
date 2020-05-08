@@ -1,5 +1,4 @@
 import Foundation
-import os
 
 
 
@@ -26,25 +25,28 @@ extension Keychain.GenericPassword {
 				recordInfo.level.rawValue >= Keychain.Settings.current.genericPasswords.logger.level.rawValue
 			else { return }
 			
-			var message = "\(recordInfo.identifier) – \(recordInfo.operation)"
 			
-			if Keychain.Settings.current.genericPasswords.logger.logKeychainIdentifier {
-				message = "\(fullKeychainIdentifier) – \(message)"
+			let keychainIdentifier = Keychain.Settings.current.genericPasswords.logger.logKeychainIdentifier ? fullKeychainIdentifier : nil
+			let value = Keychain.Settings.current.genericPasswords.logger.logValue ? recordInfo.value : nil
+			let query = Keychain.Settings.current.genericPasswords.logger.logQuery ? recordInfo.query : nil
+			
+			let logRecordInfo = Keychain.GenericPasswordLogRecordInfo(
+				keychainIdentifier: keychainIdentifier,
+				identifier: recordInfo.identifier,
+				operation: recordInfo.operation,
+				value: value,
+				query: query,
+				error: recordInfo.error,
+				level: recordInfo.level
+			)
+			
+			log(logRecordInfo)
+		}
+		
+		private func log (_ logRecordInfo: Keychain.GenericPasswordLogRecordInfo) {
+			if let loggerProvider = Keychain.Settings.current.genericPasswords.logger.loggerProvidable {
+				loggerProvider.log(logRecordInfo)
 			}
-			
-			if Keychain.Settings.current.genericPasswords.logger.logValue, let value = recordInfo.value {
-				message += " – \(value)"
-			}
-			
-			if let errorInfo = recordInfo.error {
-				message += " – \(errorInfo)"
-			}
-			
-			if Keychain.Settings.current.genericPasswords.logger.logQuery {
-				message += " – \(recordInfo.query)"
-			}
-			
-			os_log("%{public}@", type: recordInfo.level, message)
 		}
 	}
 }

@@ -97,7 +97,11 @@ extension Keychain.GenericPassword.Logger.Record {
 			let value: String?
 			
 			if case .saving(let item) = self {
-				value = String(describing: item)
+				if let loggableItem = item as? KeychainLoggable {
+					value = loggableItem.keychainLog
+				} else {
+					value = String(describing: item)
+				}
 			} else {
 				value = nil
 			}
@@ -123,14 +127,22 @@ extension Keychain.GenericPassword.Logger.Record {
 			case .saving:
 				value = nil
 			case .loading(let item):
-				value = String(describing: item)
+				if let loggableItem = item as? KeychainLoggable {
+					value = loggableItem.keychainLog
+				} else {
+					value = String(describing: item)
+				}
 			case .deletion(let isExisted):
 				value = String(isExisted)
 			case .existance(let isExist, let item):
 				value = String(isExist)
 				
 				if let item = item, let unwrappedValue = value {
-					value = "\(unwrappedValue) – \(String(describing: item))"
+					if let loggableItem = item as? KeychainLoggable {
+						value = "\(unwrappedValue) – \(loggableItem.keychainLog)"
+					} else {
+						value = "\(unwrappedValue) – \(String(describing: item))"
+					}
 				}
 			}
 			
@@ -154,7 +166,7 @@ extension Keychain.GenericPassword.Logger.Record {
 			case .codingError(let error):
 				info = String(describing: error)
 			case .keychainError(let error):
-				info = error.log
+				info = error.keychainLog
 			case .genericError(let error):
 				info = String(describing: error)
 			}

@@ -1,11 +1,11 @@
-public protocol KeychainPrefixProvidable {
+public protocol KeychainGenericPasswordPrefixProvidable {
 	var prefix: String { get }
 	var additionalPrefix: String? { get }
 }
 
 
 
-extension String: KeychainPrefixProvidable {
+extension String: KeychainGenericPasswordPrefixProvidable {
 	public var prefix: String { self }
 	public var additionalPrefix: String? { nil }
 }

@@ -56,10 +56,10 @@ extension Keychain.Settings {
 	public class GenericPasswords {
 		public var logger: Logger
 		
-		public let prefixProvider: KeychainPrefixProvidable?
+		public let prefixProvider: KeychainGenericPasswordsPrefixProvidable?
 		
 		public init (
-			prefixProvider: KeychainPrefixProvidable,
+			prefixProvider: KeychainGenericPasswordsPrefixProvidable,
 			logger: Logger = .default
 		) {
 			self.prefixProvider = prefixProvider
@@ -86,15 +86,17 @@ extension Keychain.Settings.GenericPasswords {
 		
 		public var keychainIdentifierPrefix: String?
 		
+		public var loggerProvidable: KeychainGenericPasswordLoggerProvidable?
+		
 		public static let `default` = Logger()
 		public init (
 			isActive: Bool = true,
-			logKeychainIdentifier: Bool = false,
+			logKeychainIdentifier: Bool = true,
 			logQuery: Bool = false,
 			logValue: Bool = false,
-			logAppIdentifier: Bool = true,
 			level: OSLogType = .default,
-			keychainIdentifierPrefix: String? = nil
+			keychainIdentifierPrefix: String? = nil,
+			loggerProvidable: KeychainGenericPasswordLoggerProvidable? = nil
 		) {
 			self.isActive = isActive
 			self.logKeychainIdentifier = logKeychainIdentifier
@@ -102,6 +104,7 @@ extension Keychain.Settings.GenericPasswords {
 			self.logValue = logValue
 			self.level = level
 			self.keychainIdentifierPrefix = keychainIdentifierPrefix
+			self.loggerProvidable = loggerProvidable
 		}
 	}
 }
