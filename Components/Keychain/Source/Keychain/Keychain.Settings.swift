@@ -3,23 +3,23 @@ import os
 
 
 extension Keychain {
-	public class Settings {
+	public final class Settings {
 		public static var current: Settings = .default
 		
-		public var logger: Logger
+		public var logging: Logging
 		public let genericPasswords: GenericPasswords
 		
 		public init (
-			logger: Logger = .default,
+			logging: Logging = .default,
 			genericPasswords: GenericPasswords
 		) {
-			self.logger = logger
+			self.logging = logging
 			self.genericPasswords = genericPasswords
 		}
 		
 		internal static let `default` = Settings()
 		private init () {
-			self.logger = .default
+			self.logging = .default
 			self.genericPasswords = .default
 		}
 	}
@@ -28,24 +28,35 @@ extension Keychain {
 
 
 extension Keychain.Settings {
-	public class Logger {
-		public var isActive: Bool
-		public var logQuery: Bool
+	public final class Logging {
+		public var enable: Bool
 		public var level: OSLogType
 		
-		public var keychainIdentifierPrefix: String?
+		public var enableKeychainIdentifierLogging: Bool
+		public var enableQueryLogging: Bool
+		public var enableValuesLogging: Bool
 		
-		public static let `default` = Logger()
+		public var loggingProvider: KeychainLoggingProvider?
+		
+		public static let `default` = Logging()
 		public init (
-			isActive: Bool = true,
-			logQuery: Bool = false,
-			level: OSLogType = .info,
-			keychainIdentifierPrefix: String? = nil
+			enable: Bool = true,
+			level: OSLogType = .default,
+			
+			enableKeychainIdentifierLogging: Bool = true,
+			enableQueryLogging: Bool = false,
+			enableValuesLogging: Bool = false,
+			
+			loggingProvider: KeychainLoggingProvider? = nil
 		) {
-			self.isActive = isActive
-			self.logQuery = logQuery
+			self.enable = enable
 			self.level = level
-			self.keychainIdentifierPrefix = keychainIdentifierPrefix
+			
+			self.enableKeychainIdentifierLogging = enableKeychainIdentifierLogging
+			self.enableQueryLogging = enableQueryLogging
+			self.enableValuesLogging = enableValuesLogging
+			
+			self.loggingProvider = loggingProvider
 		}
 	}
 }
@@ -53,23 +64,23 @@ extension Keychain.Settings {
 
 	
 extension Keychain.Settings {
-	public class GenericPasswords {
-		public var logger: Logger
+	public final class GenericPasswords {
+		public var logging: Logging
 		
 		public let prefixProvider: KeychainGenericPasswordsPrefixProvidable?
 		
 		public init (
 			prefixProvider: KeychainGenericPasswordsPrefixProvidable,
-			logger: Logger = .default
+			logging: Logging = .default
 		) {
 			self.prefixProvider = prefixProvider
-			self.logger = logger
+			self.logging = logging
 		}
 		
 		internal static let `default` = GenericPasswords()
 		private init () {
 			self.prefixProvider = nil
-			self.logger = .default
+			self.logging = .default
 		}
 	}
 }
@@ -77,34 +88,35 @@ extension Keychain.Settings {
 
 
 extension Keychain.Settings.GenericPasswords {
-	public struct Logger {
-		public var isActive: Bool
-		public var logKeychainIdentifier: Bool
-		public var logQuery: Bool
-		public var logValue: Bool
+	public final class Logging {
+		public var enable: Bool
 		public var level: OSLogType
 		
-		public var keychainIdentifierPrefix: String?
+		public var enableKeychainIdentifierLogging: Bool
+		public var enableQueryLogging: Bool
+		public var enableValuesLogging: Bool
 		
-		public var loggerProvidable: KeychainGenericPasswordLoggerProvidable?
+		public var loggingProvider: KeychainGenericPasswordsLoggingProvider?
 		
-		public static let `default` = Logger()
+		public static let `default` = Logging()
 		public init (
-			isActive: Bool = true,
-			logKeychainIdentifier: Bool = true,
-			logQuery: Bool = false,
-			logValue: Bool = false,
+			enable: Bool = true,
 			level: OSLogType = .default,
-			keychainIdentifierPrefix: String? = nil,
-			loggerProvidable: KeychainGenericPasswordLoggerProvidable? = nil
+			
+			enableKeychainIdentifierLogging: Bool = true,
+			enableQueryLogging: Bool = false,
+			enableValuesLogging: Bool = false,
+			
+			loggerProvidable: KeychainGenericPasswordsLoggingProvider? = nil
 		) {
-			self.isActive = isActive
-			self.logKeychainIdentifier = logKeychainIdentifier
-			self.logQuery = logQuery
-			self.logValue = logValue
+			self.enable = enable
 			self.level = level
-			self.keychainIdentifierPrefix = keychainIdentifierPrefix
-			self.loggerProvidable = loggerProvidable
+			
+			self.enableKeychainIdentifierLogging = enableKeychainIdentifierLogging
+			self.enableQueryLogging = enableQueryLogging
+			self.enableValuesLogging = enableValuesLogging
+			
+			self.loggingProvider = loggerProvidable
 		}
 	}
 }

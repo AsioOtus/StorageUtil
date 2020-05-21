@@ -1,10 +1,10 @@
 import os
 
-extension Keychain.GenericPassword.Logger {
+public extension Keychain.GenericPassword.Logger {
 	struct Record {
-		let operation: Operation
 		let identifier: String
 		let query: [CFString: Any]
+		let operation: Operation
 		
 		init (_ operation: Operation, _ identifier: String, _ query: [CFString: Any]) {
 			self.operation = operation
@@ -12,58 +12,16 @@ extension Keychain.GenericPassword.Logger {
 			self.query = query
 		}
 		
-		func info (_ success: Success) -> Info {
-			let info = Info(
+		func commit (_ resolving: Resolving) -> Commit {
+			let commit = Commit(
 				identifier: identifier,
-				operation: operation.name,
-				value: value(from: success),
-				query: String(describing: query),
-				error: nil,
-				level: .default
+				query: query,
+				operation: operation,
+				resolving: resolving
 			)
 			
-			return info
+			return commit
 		}
-		
-		func info (_ failure: Failure) -> Info {
-			let info = Info(
-				identifier: identifier,
-				operation: operation.name,
-				value: operation.value,
-				query: String(describing: query),
-				error: failure.info,
-				level: .error
-			)
-			
-			return info
-		}
-		
-		private func value (from success: Success) -> String? {
-			var value = operation.value
-			
-			if let successValue = success.value {
-				if let unwrappedValue = value {
-					value = "\(unwrappedValue) – \(successValue)"
-				} else {
-					value = successValue
-				}
-			}
-			
-			return value
-		}
-	}
-}
-
-
-
-extension Keychain.GenericPassword.Logger.Record {
-	struct Info {
-		let identifier: String
-		let operation: String
-		let value: String?
-		let query: String
-		let error: String?
-		let level: OSLogType
 	}
 }
 
@@ -93,15 +51,11 @@ extension Keychain.GenericPassword.Logger.Record {
 			return name
 		}
 		
-		var value: String? {
-			let value: String?
+		var value: ItemType? {
+			let value: ItemType?
 			
 			if case .saving(let item) = self {
-				if let loggableItem = item as? KeychainLoggable {
-					value = loggableItem.keychainLog
-				} else {
-					value = String(describing: item)
-				}
+				value = item
 			} else {
 				value = nil
 			}
@@ -114,39 +68,103 @@ extension Keychain.GenericPassword.Logger.Record {
 
 
 extension Keychain.GenericPassword.Logger.Record {
-	enum Success {
+	enum Resolving {
 		case saving
 		case loading(ItemType)
 		case deletion(Bool)
 		case existance(Bool, ItemType? = nil)
 		
-		var value: String? {
-			var value: String?
+		case codingError(Keychain.GenericPassword<ItemType>.Error.Category.Coding)
+		case keychainError(Keychain.Error)
+		case genericError(Error)
+		
+		
+		
+		var value: ItemType? {
+			let value: ItemType?
 			
 			switch self {
-			case .saving:
-				value = nil
 			case .loading(let item):
-				if let loggableItem = item as? KeychainLoggable {
-					value = loggableItem.keychainLog
-				} else {
-					value = String(describing: item)
-				}
-			case .deletion(let isExisted):
-				value = String(isExisted)
-			case .existance(let isExist, let item):
-				value = String(isExist)
-				
-				if let item = item, let unwrappedValue = value {
-					if let loggableItem = item as? KeychainLoggable {
-						value = "\(unwrappedValue) – \(loggableItem.keychainLog)"
-					} else {
-						value = "\(unwrappedValue) – \(String(describing: item))"
-					}
-				}
+				value = item
+			case .existance(_, let item):
+				value = item
+			default:
+				value = nil
 			}
 			
 			return value
+		}
+		
+		var isExists: Bool? {
+			let isExists: Bool?
+			
+			switch self {
+			case .deletion(let isExisted):
+				isExists = isExisted
+			case .existance(let existance, _):
+				isExists = existance
+			default:
+				isExists = nil
+			}
+			
+			return isExists
+		}
+		
+		var errorType: String? {
+			let errorType: String?
+			
+			switch self {
+			case .codingError:
+				errorType = "CODING ERROR"
+			case .keychainError:
+				errorType = "KEYCHAIN ERROR"
+			case .genericError:
+				errorType = "ERROR"
+			default:
+				errorType = nil
+			}
+			
+			return errorType
+		}
+		
+		var error: Error? {
+			let error: Error?
+			
+			switch self {
+			case .codingError(let codingError):
+				error = codingError
+			case .keychainError(let keychainError):
+				error = keychainError
+			case .genericError(let genericError):
+				error = genericError
+			default:
+				error = nil
+			}
+			
+			return error
+		}
+		
+		var level: OSLogType {
+			let level: OSLogType
+			
+			switch self {
+			case .saving:
+				level = .info
+			case .loading:
+				level = .default
+			case .deletion:
+				level = .info
+			case .existance:
+				level = .default
+			case .codingError:
+				level = .error
+			case .keychainError:
+				level = .error
+			case .genericError:
+				level = .error
+			}
+			
+			return level
 		}
 	}
 }
@@ -154,28 +172,24 @@ extension Keychain.GenericPassword.Logger.Record {
 
 
 extension Keychain.GenericPassword.Logger.Record {
-	enum Failure {
-		case codingError(Keychain.GenericPassword<ItemType>.Error.Category.Coding)
-		case keychainError(Keychain.Error)
-		case genericError(Error)
+	struct Commit {
+		let identifier: String
+		let query: [CFString: Any]
+		let operation: Operation
+		let resolving: Resolving
 		
-		var info: String? {
-			var info: String?
+		var value: ItemType? {
+			let value: ItemType?
 			
-			switch self {
-			case .codingError(let error):
-				info = String(describing: error)
-			case .keychainError(let error):
-				info = error.keychainLog
-			case .genericError(let error):
-				info = String(describing: error)
+			if let operationValue = operation.value {
+				value = operationValue
+			} else if let resolvingValue = resolving.value {
+				value = resolvingValue
+			} else {
+				value = nil
 			}
 			
-			if let unwrappedInfo = info {
-				info = "ERROR – \(unwrappedInfo)"
-			}
-			
-			return info
+			return value
 		}
 	}
 }

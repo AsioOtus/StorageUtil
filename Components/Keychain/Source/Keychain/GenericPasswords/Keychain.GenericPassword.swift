@@ -2,7 +2,7 @@ import Foundation
 
 extension Keychain {
 	open class GenericPassword <ItemType: Codable> {
-		private lazy var logger = Logger("\(Keychain.self).\(String(describing: Self.self))")
+		private lazy var logger = Logger(String(describing: Self.self), enableValueLogging)
 		
 		private static var commonAtributes: [CFString: Any] {
 			[kSecClass: kSecClassGenericPassword]
@@ -11,6 +11,7 @@ extension Keychain {
 		private let baseSavingQuery: [CFString: Any]
 		private let baseLoadingQuery: [CFString: Any]
 		private let accessability: CFString
+		private let enableValueLogging: Bool
 		
 		public var savingQuery: [CFString: Any] {
 			let savingQuery = self.baseSavingQuery.merging([kSecAttrAccessible: accessability]){ (current, _) in current }
@@ -44,11 +45,13 @@ extension Keychain {
 		
 		
 		
-		public init (_ shortIdentifier: String, savingQuery: [CFString: Any]? = nil, loadingQuery: [CFString: Any]? = nil, accessability: CFString = kSecAttrAccessibleWhenUnlockedThisDeviceOnly) {
+		public init (_ shortIdentifier: String, savingQuery: [CFString: Any]? = nil, loadingQuery: [CFString: Any]? = nil, accessability: CFString = kSecAttrAccessibleWhenUnlockedThisDeviceOnly, enableValueLogging: Bool = false) {
 			self.itemIdentifier = shortIdentifier
 			self.baseSavingQuery = savingQuery ?? [:]
 			self.baseLoadingQuery = loadingQuery ?? [:]
 			self.accessability = accessability
+			
+			self.enableValueLogging = enableValueLogging
 		}
 	}
 }
@@ -69,7 +72,7 @@ public extension Keychain.GenericPassword {
 		catch Keychain.Error.itemNotFound { }
 		catch {
 			
-			logger.log(logRecord.info(.genericError(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			throw Error(identifier, .error(error))
 			
 		}
@@ -78,21 +81,21 @@ public extension Keychain.GenericPassword {
 			let data = try Self.encode(object)
 			try Keychain.save(savingQuery, data)
 			
-			logger.log(logRecord.info(.saving))
+			logger.log(logRecord.commit(.saving))
 			
 		} catch let error as Error.Category.Coding {
 			
-			logger.log(logRecord.info(.codingError(error)))
+			logger.log(logRecord.commit(.codingError(error)))
 			throw Error(identifier, .codingError(error))
 			
 		} catch let error as Keychain.Error {
 			
-			logger.log(logRecord.info(.keychainError(error)))
+			logger.log(logRecord.commit(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
 			
 		} catch {
 			
-			logger.log(logRecord.info(.genericError(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			throw Error(identifier, .error(error))
 			
 		}
@@ -109,23 +112,23 @@ public extension Keychain.GenericPassword {
 			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }
 			let object = try Self.decode(data, ItemType.self)
 			
-			logger.log(logRecord.info(.loading(object)))
+			logger.log(logRecord.commit(.loading(object)))
 			
 			return object
 			
 		} catch let error as Error.Category.Coding {
 			
-			logger.log(logRecord.info(.codingError(error)))
+			logger.log(logRecord.commit(.codingError(error)))
 			throw Error(identifier, .codingError(error))
 			
 		} catch let error as Keychain.Error {
 			
-			logger.log(logRecord.info(.keychainError(error)))
+			logger.log(logRecord.commit(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
 			
 		} catch {
 			
-			logger.log(logRecord.info(.genericError(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			throw Error(identifier, .error(error))
 			
 		}
@@ -140,20 +143,20 @@ public extension Keychain.GenericPassword {
 		do {
 			try Keychain.delete(deletingQuery)
 			
-			logger.log(logRecord.info(.deletion(true)))
+			logger.log(logRecord.commit(.deletion(true)))
 			
 		} catch Keychain.Error.itemNotFound {
 			
-			logger.log(logRecord.info(.deletion(false)))
+			logger.log(logRecord.commit(.deletion(false)))
 			
 		} catch let error as Keychain.Error {
 			
-			logger.log(logRecord.info(.keychainError(error)))
+			logger.log(logRecord.commit(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
 			
 		} catch {
 			
-			logger.log(logRecord.info(.genericError(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			throw Error(identifier, .error(error))
 			
 		}
@@ -167,7 +170,7 @@ public extension Keychain.GenericPassword {
 		
 		do {
 			guard try Keychain.isExists(loadingQuery) else {
-				logger.log(logRecord.info(.existance(false)))
+				logger.log(logRecord.commit(.existance(false)))
 				return false
 			}
 			
@@ -175,22 +178,22 @@ public extension Keychain.GenericPassword {
 			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }
 			let object = try Self.decode(data, ItemType.self)
 			
-			logger.log(logRecord.info(.existance(true, object)))
+			logger.log(logRecord.commit(.existance(true, object)))
 			return true
 			
 		} catch let error as Error.Category.Coding {
 			
-			logger.log(logRecord.info(.codingError(error)))
+			logger.log(logRecord.commit(.codingError(error)))
 			throw Error(identifier, .codingError(error))
 			
 		} catch let error as Keychain.Error {
 			
-			logger.log(logRecord.info(.keychainError(error)))
+			logger.log(logRecord.commit(.keychainError(error)))
 			throw Error(identifier, .keychainError(error))
 			
 		} catch {
 			
-			logger.log(logRecord.info(.genericError(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			throw Error(identifier, .error(error))
 			
 		}
@@ -211,8 +214,8 @@ private extension Keychain.GenericPassword {
 	
 	static func decode <T: Decodable> (_ data: Data, _ type: T.Type) throws -> T {
 		do {
-			let data = try JSONDecoder().decode(type, from: data)
-			return data
+			let object = try JSONDecoder().decode(type, from: data)
+			return object
 		} catch {
 			throw Error.Category.Coding.decodingFailed(error)
 		}

@@ -13,8 +13,8 @@ extension OSStatus {
 
 
 
-extension OSStatus: KeychainLoggable {
-	public var keychainLog: String {
+extension OSStatus: KeychainDescribable {
+	public var keychainDescription: String {
 		var log = "OSStatus – \(self)"
 		
 		if let statusMessage = self.message {

@@ -24,21 +24,21 @@ extension Keychain.GenericPassword {
 
 
 
-extension Keychain.GenericPassword.Error: KeychainLoggable {
-	public var keychainLog: String { "\(identifier) – \(category.keychainLog)" }
+extension Keychain.GenericPassword.Error: CustomStringConvertible {
+	public var description: String { "\(identifier) – \(category.description)" }
 }
 
 
 
-extension Keychain.GenericPassword.Error.Category: KeychainLoggable {
-	public var keychainLog: String {
+extension Keychain.GenericPassword.Error.Category: CustomStringConvertible {
+	public var description: String {
 		let log: String
 		
 		switch self {
 		case .codingError(let error):
-			log = "Coding error: \(error.keychainLog)"
+			log = "Coding error: \(error)"
 		case .keychainError(let error):
-			log = "Keychain error: \(error.keychainLog)"
+			log = "Keychain error: \(error)"
 		case .error(let error):
 			log = "Error: \(error)"
 		}
@@ -49,8 +49,8 @@ extension Keychain.GenericPassword.Error.Category: KeychainLoggable {
 
 
 
-extension Keychain.GenericPassword.Error.Category.Coding: KeychainLoggable {
-	public var keychainLog: String {
+extension Keychain.GenericPassword.Error.Category.Coding: CustomStringConvertible {
+	public var description: String {
 		let log: String
 		
 		switch self {
