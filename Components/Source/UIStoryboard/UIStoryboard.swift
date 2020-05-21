@@ -11,11 +11,11 @@ extension UIStoryboard {
 
 extension UIStoryboard {
 	func instantiateViewController <T: UIViewController> (_ type: T.Type) -> T {
-		instantiateViewController(withIdentifier: type.storyboardId) as! T
+		instantiateViewController(withIdentifier: String(describing: type.self)) as! T
 	}
 	
 	subscript <T: UIViewController> (_ type: T.Type) -> T {
-		instantiateViewController(withIdentifier: String(describing: type.self)) as! T
+		instantiateViewController(type)
 	}
 }
 
