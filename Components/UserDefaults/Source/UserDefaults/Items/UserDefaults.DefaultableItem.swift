@@ -1,31 +1,58 @@
 import Foundation
 
 extension UserDefaults {
-	open class DefautableItem <T: Codable>: UserDefaults.Item<T> {		
-		let defaultValue: T
+	open class DefautableItem <ItemType: Codable>: UserDefaults.Item<ItemType> {		
+		let defaultValue: ItemType
 		
-		public init (_ shortKey: String, defaultValue: T, userDefaultsInstance: UserDefaults = .standard) {
+		init (_ shortKey: String, defaultValue: ItemType, userDefaultsInstance: UserDefaults = .standard) {
 			self.defaultValue = defaultValue
 			super.init(shortKey, userDefaultsInstance)
 		}
+	}
+}
+
+
+
+public extension UserDefaults.DefautableItem {
+	func loadOrDefault () -> ItemType {
+		let object = load()
+		return object ?? defaultValue
+	}
+	
+	@discardableResult
+	func saveDefault () -> Bool {
+		let isSavingSucceeded = save(defaultValue)
+		return isSavingSucceeded
+	}
+	
+	@discardableResult
+	func saveDefaultIfNotExist () -> Bool {
+		guard !isExists() else { return true }
 		
-		func loadOrDefault (_ keyPostfix: String? = nil) -> T {
-			let object = load(keyPostfix)
-			return object ?? defaultValue
-		}
+		let isSavingSucceeded = saveDefault()
+		return isSavingSucceeded
+	}
+}
+
+
+
+extension UserDefaults.DefautableItem {
+	func loadOrDefault (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> ItemType {
+		let object = load(keyPostfixProvider)
+		return object ?? defaultValue
+	}
+	
+	@discardableResult
+	func saveDefault (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> Bool {
+		let isSavingSucceeded = save(defaultValue, keyPostfixProvider)
+		return isSavingSucceeded
+	}
+	
+	@discardableResult
+	func saveDefaultIfNotExist (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> Bool {
+		guard !isExists(keyPostfixProvider) else { return true }
 		
-		@discardableResult
-		func saveDefault (_ keyPostfix: String? = nil) -> Bool {
-			let isSavingSucceeded = save(defaultValue, keyPostfix)
-			return isSavingSucceeded
-		}
-		
-		@discardableResult
-		func saveDefaultIfNotExist (_ keyPostfix: String? = nil) -> Bool {
-			guard !isExists(keyPostfix) else { return true }
-			
-			let isSavingSucceeded = saveDefault(keyPostfix)
-			return isSavingSucceeded
-		}
+		let isSavingSucceeded = saveDefault(keyPostfixProvider)
+		return isSavingSucceeded
 	}
 }

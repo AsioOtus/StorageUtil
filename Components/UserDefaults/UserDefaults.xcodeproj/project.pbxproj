@@ -8,7 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		3A949BEF245467D1007E7928 /* UserDefaults_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A949BED245467D1007E7928 /* UserDefaults_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A949C0A245477A1007E7928 /* UserDefaults.Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949C09245477A1007E7928 /* UserDefaults.Logger.swift */; };
+		3AD3B5182460942600056493 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B86245464AF007E7928 /* UserDefaults.swift */; };
+		3AD3B5192460942600056493 /* UserDefaults.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B8A245464AF007E7928 /* UserDefaults.Error.swift */; };
+		3AD3B51B2460942600056493 /* UserDefaults.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B89245464AF007E7928 /* UserDefaults.Item.swift */; };
+		3AD3B51C2460942600056493 /* UserDefaults.DefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B88245464AF007E7928 /* UserDefaults.DefaultableItem.swift */; };
+		3AD3B51D2460942600056493 /* UserDefaultsItemPostfixProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B50B2460938000056493 /* UserDefaultsItemPostfixProvidable.swift */; };
+		3AD3B51F2460945100056493 /* UserDefaults.Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B51E2460945100056493 /* UserDefaults.Settings.swift */; };
+		3AD3B5212460954400056493 /* UserDefaultsItemPrefixProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5202460954400056493 /* UserDefaultsItemPrefixProvidable.swift */; };
+		3AD3B5242460993A00056493 /* UserDefaults.ParametricItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5232460993A00056493 /* UserDefaults.ParametricItem.swift */; };
+		3AD3B52624609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52524609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift */; };
+		3AD3B52824609D1200056493 /* UserDefaults.Item.Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52724609D1200056493 /* UserDefaults.Item.Logger.swift */; };
+		3AD3B52A2460A0CC00056493 /* UserDefaultsLoggerProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5292460A0CC00056493 /* UserDefaultsLoggerProvidable.swift */; };
+		3AD3B52C2460A1C200056493 /* UserDefaults.Item.Logger.Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52B2460A1C200056493 /* UserDefaults.Item.Logger.Record.swift */; };
+		3AD3B52E2460A21700056493 /* UserDefaultsLoggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52D2460A21700056493 /* UserDefaultsLoggable.swift */; };
+		3AD3B5302460A7E000056493 /* UserDefaults.ItemLogRecordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52F2460A7E000056493 /* UserDefaults.ItemLogRecordInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,7 +32,16 @@
 		3A949BEA245467D1007E7928 /* UserDefaults_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UserDefaults_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A949BED245467D1007E7928 /* UserDefaults_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaults_macOS.h; sourceTree = "<group>"; };
 		3A949BEE245467D1007E7928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A949C09245477A1007E7928 /* UserDefaults.Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Logger.swift; sourceTree = "<group>"; };
+		3AD3B50B2460938000056493 /* UserDefaultsItemPostfixProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsItemPostfixProvidable.swift; sourceTree = "<group>"; };
+		3AD3B51E2460945100056493 /* UserDefaults.Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Settings.swift; sourceTree = "<group>"; };
+		3AD3B5202460954400056493 /* UserDefaultsItemPrefixProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsItemPrefixProvidable.swift; sourceTree = "<group>"; };
+		3AD3B5232460993A00056493 /* UserDefaults.ParametricItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.ParametricItem.swift; sourceTree = "<group>"; };
+		3AD3B52524609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.ParametricDefaultableItem.swift; sourceTree = "<group>"; };
+		3AD3B52724609D1200056493 /* UserDefaults.Item.Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.swift; sourceTree = "<group>"; };
+		3AD3B5292460A0CC00056493 /* UserDefaultsLoggerProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLoggerProvidable.swift; sourceTree = "<group>"; };
+		3AD3B52B2460A1C200056493 /* UserDefaults.Item.Logger.Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.Record.swift; sourceTree = "<group>"; };
+		3AD3B52D2460A21700056493 /* UserDefaultsLoggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLoggable.swift; sourceTree = "<group>"; };
+		3AD3B52F2460A7E000056493 /* UserDefaults.ItemLogRecordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.ItemLogRecordInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				3A949B85245464AF007E7928 /* UserDefaults */,
+				3AD3B50A2460936700056493 /* Protocols */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -55,7 +78,7 @@
 			children = (
 				3A949B86245464AF007E7928 /* UserDefaults.swift */,
 				3A949B8A245464AF007E7928 /* UserDefaults.Error.swift */,
-				3A949C09245477A1007E7928 /* UserDefaults.Logger.swift */,
+				3AD3B51E2460945100056493 /* UserDefaults.Settings.swift */,
 				3A949B87245464AF007E7928 /* Items */,
 			);
 			path = UserDefaults;
@@ -66,6 +89,9 @@
 			children = (
 				3A949B89245464AF007E7928 /* UserDefaults.Item.swift */,
 				3A949B88245464AF007E7928 /* UserDefaults.DefaultableItem.swift */,
+				3AD3B5232460993A00056493 /* UserDefaults.ParametricItem.swift */,
+				3AD3B52524609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift */,
+				3AD3B5222460989800056493 /* Logger */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -85,6 +111,27 @@
 				3A949BEE245467D1007E7928 /* Info.plist */,
 			);
 			path = "UserDefaults-macOS";
+			sourceTree = "<group>";
+		};
+		3AD3B50A2460936700056493 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3B50B2460938000056493 /* UserDefaultsItemPostfixProvidable.swift */,
+				3AD3B5202460954400056493 /* UserDefaultsItemPrefixProvidable.swift */,
+				3AD3B5292460A0CC00056493 /* UserDefaultsLoggerProvidable.swift */,
+				3AD3B52D2460A21700056493 /* UserDefaultsLoggable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3AD3B5222460989800056493 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3B52724609D1200056493 /* UserDefaults.Item.Logger.swift */,
+				3AD3B52B2460A1C200056493 /* UserDefaults.Item.Logger.Record.swift */,
+				3AD3B52F2460A7E000056493 /* UserDefaults.ItemLogRecordInfo.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +213,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A949C0A245477A1007E7928 /* UserDefaults.Logger.swift in Sources */,
+				3AD3B52A2460A0CC00056493 /* UserDefaultsLoggerProvidable.swift in Sources */,
+				3AD3B5192460942600056493 /* UserDefaults.Error.swift in Sources */,
+				3AD3B51D2460942600056493 /* UserDefaultsItemPostfixProvidable.swift in Sources */,
+				3AD3B52624609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift in Sources */,
+				3AD3B51F2460945100056493 /* UserDefaults.Settings.swift in Sources */,
+				3AD3B51C2460942600056493 /* UserDefaults.DefaultableItem.swift in Sources */,
+				3AD3B5182460942600056493 /* UserDefaults.swift in Sources */,
+				3AD3B52824609D1200056493 /* UserDefaults.Item.Logger.swift in Sources */,
+				3AD3B5242460993A00056493 /* UserDefaults.ParametricItem.swift in Sources */,
+				3AD3B5212460954400056493 /* UserDefaultsItemPrefixProvidable.swift in Sources */,
+				3AD3B5302460A7E000056493 /* UserDefaults.ItemLogRecordInfo.swift in Sources */,
+				3AD3B51B2460942600056493 /* UserDefaults.Item.swift in Sources */,
+				3AD3B52E2460A21700056493 /* UserDefaultsLoggable.swift in Sources */,
+				3AD3B52C2460A1C200056493 /* UserDefaults.Item.Logger.Record.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
