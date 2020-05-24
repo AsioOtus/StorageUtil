@@ -107,7 +107,7 @@ extension Keychain.Settings.GenericPasswords {
 			enableQueryLogging: Bool = false,
 			enableValuesLogging: Bool = false,
 			
-			loggerProvidable: KeychainGenericPasswordsLoggingProvider? = nil
+			loggingProvider: KeychainGenericPasswordsLoggingProvider? = nil
 		) {
 			self.enable = enable
 			self.level = level
@@ -116,7 +116,7 @@ extension Keychain.Settings.GenericPasswords {
 			self.enableQueryLogging = enableQueryLogging
 			self.enableValuesLogging = enableValuesLogging
 			
-			self.loggingProvider = loggerProvidable
+			self.loggingProvider = loggingProvider
 		}
 	}
 }
