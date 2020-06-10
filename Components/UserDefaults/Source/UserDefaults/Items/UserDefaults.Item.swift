@@ -2,20 +2,20 @@ import Foundation
 
 extension UserDefaults {
 	open class Item <ItemType: Codable> {
-		private lazy var logger = Logger("UserDefaults.\(String(describing: Self.self))")
+		private lazy var logger = Logger(String(describing: Self.self))
 		
 		private let userDefaultsInstance: UserDefaults
 		
 		
 		
 		final var keyPrefix: String {
-			guard let prefixProvider = UserDefaults.Settings.current.items.prefixProvider else { fatalError("UserDefaults.Settings.current.items.prefixProvider is nil") }
+			guard let prefixProvider = UserDefaults.Settings.current.items.itemKeyPrefixProvider else { fatalError("UserDefaults.Settings.current.items.prefixProvider is nil") }
 			let prefix = prefixProvider.userDefaultsItemPrefix
 			return prefix
 		}
 		public final let itemKey: String
 		public final var key: String { "\(keyPrefix).\(itemKey)" }
-		func postfixedKey (_ postfixProvider: UserDefaultsItemPostfixProvidable?) -> String {
+		public final func postfixedKey (_ postfixProvider: UserDefaultsItemKeyPostfixProvider?) -> String {
 			guard let postfixProvider = postfixProvider else { return key }
 			
 			let postfix = postfixProvider.userDefaultsItemPostfix.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -39,56 +39,92 @@ extension UserDefaults {
 public extension UserDefaults.Item {
 	@discardableResult
 	func save (_ object: ItemType) -> Bool {
+		save(object, nil)
+	}
+	
+	func load () -> ItemType? {
+		load(nil)
+	}
+	
+	func delete () {
+		delete(nil)
+	}
+	
+	func isExists () -> Bool {
+		isExists(nil)
+	}
+}
+
+
+
+internal extension UserDefaults.Item {
+	@discardableResult
+	func save (_ object: ItemType, _ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> Bool {
+		let key = postfixedKey(keyPostfixProvider)
 		let logRecord = Logger.Record(.saving(object), key)
 		
 		do {
-			try userDefaultsInstance.save(object, key)
+			let data = try Self.encode(object)
+			userDefaultsInstance.set(data, forKey: key)
 			
-			logger.log(logRecord.info(.saving))
+			logger.log(logRecord.commit(.saving))
 			
 			return true
 		} catch {
-			logger.log(logRecord.info(.error(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			
 			return false
 		}
 	}
 	
-	func load () -> ItemType? {
+	func load (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> ItemType? {
+		let key = postfixedKey(keyPostfixProvider)
 		let logRecord = Logger.Record(.loading, key)
 		
 		do {
-			let object = try userDefaultsInstance.load(key, ItemType.self)
+			guard let data = userDefaultsInstance.data(forKey: key) else { throw Error.itemNotFound }
+			let object = try Self.decode(data, ItemType.self)
 			
-			logger.log(logRecord.info(.loading(object)))
+			logger.log(logRecord.commit(.loading(object)))
 			
 			return object
 		} catch {
-			logger.log(logRecord.info(.error(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			
 			return nil
 		}
 	}
 	
-	func delete () {
+	func delete (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) {
+		let key = postfixedKey(keyPostfixProvider)
 		let logRecord = Logger.Record(.deletion, key)
 		
-		userDefaultsInstance.delete(key)
+		userDefaultsInstance.removeObject(forKey: key)
 		
-		logger.log(logRecord.info(.deletion))
+		logger.log(logRecord.commit(.deletion))
 	}
 	
-	func isExists () -> Bool {
+	func isExists (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> Bool {
+		let key = postfixedKey(keyPostfixProvider)
 		let logRecord = Logger.Record(.existance, key)
 		
 		do {
-			let isExists = try userDefaultsInstance.isExists(key, ItemType.self)
+			let object: ItemType?
+			let isExists: Bool
 			
-			logger.log(logRecord.info(.existance(isExists)))
+			if let data = userDefaultsInstance.data(forKey: key) {
+				object = try Self.decode(data, ItemType.self)
+				isExists = true
+			} else {
+				object = nil
+				isExists = false
+			}
+			
+			logger.log(logRecord.commit(.existance(isExists, object)))
 			
 			return isExists
 		} catch {
-			logger.log(logRecord.info(.error(error)))
+			logger.log(logRecord.commit(.genericError(error)))
 			
 			return false
 		}
@@ -97,65 +133,22 @@ public extension UserDefaults.Item {
 
 
 
-extension UserDefaults.Item {
-	@discardableResult
-	func save (_ object: ItemType, _ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> Bool {
-		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record(.saving(object), key)
-		
+private extension UserDefaults.Item {
+	static func encode <T: Encodable> (_ object: T) throws -> Data {
 		do {
-			try userDefaultsInstance.save(object, key)
-			
-			logger.log(logRecord.info(.saving))
-			
-			return true
+			let data = try JSONEncoder().encode(object)
+			return data
 		} catch {
-			logger.log(logRecord.info(.error(error)))
-			
-			return false
+			throw Error.encodingFailed(error)
 		}
 	}
 	
-	func load (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> ItemType? {
-		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record(.loading, key)
-		
+	static func decode <T: Decodable> (_ data: Data, _ type: T.Type) throws -> T {
 		do {
-			let object = try userDefaultsInstance.load(key, ItemType.self)
-			
-			logger.log(logRecord.info(.loading(object)))
-			
-			return object
+			let data = try JSONDecoder().decode(type, from: data)
+			return data
 		} catch {
-			logger.log(logRecord.info(.error(error)))
-			
-			return nil
-		}
-	}
-	
-	func delete (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) {
-		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record(.deletion, key)
-		
-		userDefaultsInstance.delete(key)
-		
-		logger.log(logRecord.info(.deletion))
-	}
-	
-	func isExists (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> Bool {
-		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record(.existance, key)
-		
-		do {
-			let isExists = try userDefaultsInstance.isExists(key, ItemType.self)
-			
-			logger.log(logRecord.info(.existance(isExists)))
-			
-			return isExists
-		} catch {
-			logger.log(logRecord.info(.error(error)))
-			
-			return false
+			throw Error.decodingFailed(error)
 		}
 	}
 }

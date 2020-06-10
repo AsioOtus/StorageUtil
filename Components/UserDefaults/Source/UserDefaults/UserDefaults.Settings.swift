@@ -26,22 +26,22 @@ extension UserDefaults {
 
 extension UserDefaults.Settings {
 	public struct Items {
-		public var logger: Logger
+		public var logging: Logging
 		
-		public let prefixProvider: UserDefaultsItemPrefixProvidable?
+		public let itemKeyPrefixProvider: UserDefaultsItemKeyPrefixProvider?
 		
 		public init (
-			prefixProvider: UserDefaultsItemPrefixProvidable,
-			logger: Logger = .default
+			itemKeyPrefixProvider: UserDefaultsItemKeyPrefixProvider,
+			logging: Logging = .default
 		) {
-			self.prefixProvider = prefixProvider
-			self.logger = logger
+			self.itemKeyPrefixProvider = itemKeyPrefixProvider
+			self.logging = logging
 		}
 		
 		internal static let `default` = Items()
 		private init () {
-			self.prefixProvider = nil
-			self.logger = .default
+			self.itemKeyPrefixProvider = nil
+			self.logging = .default
 		}
 	}
 }
@@ -49,34 +49,32 @@ extension UserDefaults.Settings {
 
 
 extension UserDefaults.Settings.Items {
-	public struct Logger {
-		public var isActive: Bool
-		public var logUserDefaultsIdentifier: Bool
-		public var logValue: Bool
+	public struct Logging {
+		public var enable: Bool
 		public var level: OSLogType
 		
-		public var userDefaultsIdentifierPrefix: String?
+		public var enableUserDefaultsIdentifierLogging: Bool
+		public var enableValuesLogging: Bool
+				
+		public var loggingProvider: UserDefaultsLoggingProvider?
 		
-		public var useOsLogger: Bool
-		public var loggerProvidable: UserDefaultsLoggerProvidable?
-		
-		public static let `default` = Logger()
+		public static let `default` = Logging()
 		public init (
-			isActive: Bool = true,
-			logUserDefaultsIdentifier: Bool = true,
-			logValue: Bool = false,
+			enable: Bool = true,
 			level: OSLogType = .default,
-			userDefaultsIdentifierPrefix: String? = nil,
-			useOsLogger: Bool = false,
-			loggerProvidable: UserDefaultsLoggerProvidable? = nil
+			
+			enableUserDefaultsIdentifierLogging: Bool = true,
+			enableValuesLogging: Bool = false,
+			
+			loggingProvider: UserDefaultsLoggingProvider? = nil
 		) {
-			self.isActive = isActive
-			self.logUserDefaultsIdentifier = logUserDefaultsIdentifier
-			self.logValue = logValue
+			self.enable = enable
 			self.level = level
-			self.userDefaultsIdentifierPrefix = userDefaultsIdentifierPrefix
-			self.useOsLogger = useOsLogger
-			self.loggerProvidable = loggerProvidable
+			
+			self.enableUserDefaultsIdentifierLogging = enableUserDefaultsIdentifierLogging
+			self.enableValuesLogging = enableValuesLogging
+			
+			self.loggingProvider = loggingProvider
 		}
 	}
 }

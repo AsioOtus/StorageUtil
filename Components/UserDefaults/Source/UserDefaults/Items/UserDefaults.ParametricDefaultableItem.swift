@@ -1,27 +1,62 @@
 import Foundation
 
 extension UserDefaults {
-	open class ParametricDefautableItem <ItemType: Codable, PostfixProviderType: UserDefaultsItemPostfixProvidable>: UserDefaults.DefautableItem<ItemType> {
-		public func postfixedKey (_ postfixProvider: PostfixProviderType?) -> String {
-			let postfixedKey = super.postfixedKey(postfixProvider)
+	open class ParametricDefautableItem <
+		ItemType: Codable,
+		DefaultValueProvider: UserDefaultsDefaultValueProvider,
+		KeyPostfixProviderType: UserDefaultsItemKeyPostfixProvider
+	>
+		: UserDefaults.DefautableItem<ItemType, DefaultValueProvider>
+		where DefaultValueProvider.DefaultValueType == ItemType
+	{
+		public func postfixedKey (_ keyPostfixProvider: KeyPostfixProviderType?) -> String {
+			let postfixedKey = super.postfixedKey(keyPostfixProvider)
 			return postfixedKey
 		}
-		
-		public func loadOrDefault (_ keyPostfixProvider: PostfixProviderType? = nil) -> ItemType {
-			let object = super.loadOrDefault(keyPostfixProvider)
-			return object
-		}
-		
-		@discardableResult
-		public func saveDefault (_ keyPostfixProvider: PostfixProviderType? = nil) -> Bool {
-			let isSavingSucceeded = super.saveDefault(keyPostfixProvider)
-			return isSavingSucceeded
-		}
-		
-		@discardableResult
-		public func saveDefaultIfNotExist (_ keyPostfixProvider: PostfixProviderType? = nil) -> Bool {
-			let isSavingSucceeded = super.saveDefaultIfNotExist(keyPostfixProvider)
-			return isSavingSucceeded
-		}
+	}
+}
+
+
+
+extension UserDefaults.ParametricDefautableItem {
+	@discardableResult
+	public func save (_ object: ItemType, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		let isSavingSucceeded = super.save(object, keyPostfixProvider)
+		return isSavingSucceeded
+	}
+	
+	public func load (_ keyPostfixProvider: KeyPostfixProviderType) -> ItemType? {
+		let object = super.load(keyPostfixProvider)
+		return object
+	}
+	
+	public func delete (_ keyPostfixProvider: KeyPostfixProviderType) {
+		super.delete(keyPostfixProvider)
+	}
+	
+	public func isExists (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		let isItemExists = super.isExists(keyPostfixProvider)
+		return isItemExists
+	}
+}
+
+
+
+extension UserDefaults.ParametricDefautableItem {
+	public func loadOrDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> ItemType {
+		let object = super.loadOrDefault(keyPostfixProvider)
+		return object
+	}
+	
+	@discardableResult
+	public func saveDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		let isSavingSucceeded = super.saveDefault(keyPostfixProvider)
+		return isSavingSucceeded
+	}
+	
+	@discardableResult
+	public func saveDefaultIfNotExist (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		let isSavingSucceeded = super.saveDefaultIfNotExist(keyPostfixProvider)
+		return isSavingSucceeded
 	}
 }

@@ -3,28 +3,28 @@ import Foundation
 
 
 extension UserDefaults {
-	open class ParametricItem<ItemType: Codable, PostfixProviderType: UserDefaultsItemPostfixProvidable>: UserDefaults.Item<ItemType> {
-		public func postfixedKey (_ postfixProvider: PostfixProviderType?) -> String {
-			let postfixedKey = super.postfixedKey(postfixProvider)
+	open class ParametricItem<ItemType: Codable, KeyPostfixProviderType: UserDefaultsItemKeyPostfixProvider>: UserDefaults.Item<ItemType> {
+		public func postfixedKey (_ keyPostfixProvider: KeyPostfixProviderType?) -> String {
+			let postfixedKey = super.postfixedKey(keyPostfixProvider)
 			return postfixedKey
 		}
 		
 		@discardableResult
-		public func save (_ object: ItemType, _ keyPostfixProvider: PostfixProviderType? = nil) -> Bool {
+		public func save (_ object: ItemType, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 			let isSavingSucceeded = super.save(object, keyPostfixProvider)
 			return isSavingSucceeded
 		}
 		
-		public func load (_ keyPostfixProvider: PostfixProviderType? = nil) -> ItemType? {
+		public func load (_ keyPostfixProvider: KeyPostfixProviderType) -> ItemType? {
 			let object = super.load(keyPostfixProvider)
 			return object
 		}
 		
-		public func delete (_ keyPostfixProvider: PostfixProviderType? = nil) {
+		public func delete (_ keyPostfixProvider: KeyPostfixProviderType) {
 			super.delete(keyPostfixProvider)
 		}
 		
-		public func isExists (_ keyPostfixProvider: PostfixProviderType? = nil) -> Bool {
+		public func isExists (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 			let isItemExists = super.isExists(keyPostfixProvider)
 			return isItemExists
 		}

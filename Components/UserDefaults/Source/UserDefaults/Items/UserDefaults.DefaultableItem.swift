@@ -1,11 +1,15 @@
 import Foundation
 
+
+
 extension UserDefaults {
-	open class DefautableItem <ItemType: Codable>: UserDefaults.Item<ItemType> {		
-		let defaultValue: ItemType
+	open class DefautableItem <ItemType: Codable, DefaultValueProvider: UserDefaultsDefaultValueProvider>: UserDefaults.Item<ItemType> where DefaultValueProvider.DefaultValueType == ItemType {
+		public let defaultValueProvider: DefaultValueProvider
 		
-		init (_ shortKey: String, defaultValue: ItemType, userDefaultsInstance: UserDefaults = .standard) {
-			self.defaultValue = defaultValue
+		public var `default`: ItemType { defaultValueProvider.defaultValue }
+		
+		public init (_ shortKey: String, defaultValueProvider: DefaultValueProvider, userDefaultsInstance: UserDefaults = .standard) {
+			self.defaultValueProvider = defaultValueProvider
 			super.init(shortKey, userDefaultsInstance)
 		}
 	}
@@ -15,41 +19,36 @@ extension UserDefaults {
 
 public extension UserDefaults.DefautableItem {
 	func loadOrDefault () -> ItemType {
-		let object = load()
-		return object ?? defaultValue
+		loadOrDefault(nil)
 	}
 	
 	@discardableResult
 	func saveDefault () -> Bool {
-		let isSavingSucceeded = save(defaultValue)
-		return isSavingSucceeded
+		saveDefault(nil)
 	}
 	
 	@discardableResult
 	func saveDefaultIfNotExist () -> Bool {
-		guard !isExists() else { return true }
-		
-		let isSavingSucceeded = saveDefault()
-		return isSavingSucceeded
+		saveDefaultIfNotExist(nil)
 	}
 }
 
 
 
-extension UserDefaults.DefautableItem {
-	func loadOrDefault (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> ItemType {
+internal extension UserDefaults.DefautableItem {
+	func loadOrDefault (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> ItemType {
 		let object = load(keyPostfixProvider)
-		return object ?? defaultValue
+		return object ?? defaultValueProvider.defaultValue
 	}
 	
 	@discardableResult
-	func saveDefault (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> Bool {
-		let isSavingSucceeded = save(defaultValue, keyPostfixProvider)
+	func saveDefault (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> Bool {
+		let isSavingSucceeded = save(defaultValueProvider.defaultValue, keyPostfixProvider)
 		return isSavingSucceeded
 	}
 	
 	@discardableResult
-	func saveDefaultIfNotExist (_ keyPostfixProvider: UserDefaultsItemPostfixProvidable? = nil) -> Bool {
+	func saveDefaultIfNotExist (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> Bool {
 		guard !isExists(keyPostfixProvider) else { return true }
 		
 		let isSavingSucceeded = saveDefault(keyPostfixProvider)
