@@ -9,7 +9,7 @@ public struct DefaultKeychainGenericPasswordsLoggingProvider: KeychainGenericPas
 		self.prefix = prefix
 	}
 	
-	public func log <T: Codable> (_ info: Keychain.GenericPassword<T>.Logger.Record.Info) {
+	public func log <T: Codable> (_ info: Keychain.GenericPassword<T>.Logger.Record.Commit.Info) {
 		let log = OSLog(subsystem: "Keychain.GenericPassword<\(String(describing: T.self))>", category: "Keychain")
 		
 		let prefix = self.prefix ?? ""

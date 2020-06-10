@@ -1,6 +1,6 @@
 import os
 
-public extension Keychain.Logger.Record {
+public extension Keychain.Logger.Record.Commit {
 	struct Info {
 		public let keychainIdentifier: String?
 		public let operation: String

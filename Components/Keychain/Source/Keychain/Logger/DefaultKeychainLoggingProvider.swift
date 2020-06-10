@@ -9,7 +9,7 @@ public struct DefaultKeychainLoggingProvider: KeychainLoggingProvider {
 		self.prefix = prefix
 	}
 	
-	public func log (_ info: Keychain.Logger.Record.Info) {
+	public func log (_ info: Keychain.Logger.Record.Commit.Info) {
 		let log = OSLog(subsystem: "Keychain", category: "Keychain")
 		
 		let prefix = self.prefix ?? ""

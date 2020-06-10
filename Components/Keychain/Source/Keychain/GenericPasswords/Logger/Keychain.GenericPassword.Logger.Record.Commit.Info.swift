@@ -1,6 +1,6 @@
-import os
+import os.log
 
-public extension Keychain.GenericPassword.Logger.Record {
+public extension Keychain.GenericPassword.Logger.Record.Commit {
 	struct Info {
 		public let keychainIdentifier: String?
 		public let identifier: String

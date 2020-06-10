@@ -27,13 +27,13 @@ extension Keychain {
 		
 		
 		internal final var identifierPrefix: String {
-			guard let prefixProvider = Keychain.Settings.current.genericPasswords.prefixProvider else { fatalError("Keychain.Settings.current.genericPasswords.prefixProvider is nil") }
+			guard let prefixProvider = Keychain.Settings.current.genericPasswords.itemIdentifierPrefixProvider else { fatalError("Keychain.Settings.current.genericPasswords.prefixProvider is nil") }
 			let prefix = prefixProvider.keychainGenericPasswordsPrefix
 			return prefix
 		}
 		public final let itemIdentifier: String
 		public final var identifier: String { "\(identifierPrefix).\(itemIdentifier)" }
-		public final func postfixedIdentifier (_ postfixProvider: KeychainGenericPasswordsPostfixProvidable?) -> String {
+		public final func postfixedIdentifier (_ postfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider?) -> String {
 			guard let postfixProvider = postfixProvider else { return identifier }
 			
 			let postfix = postfixProvider.keychainGenericPasswordsPostfix.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -59,7 +59,27 @@ extension Keychain {
 
 
 public extension Keychain.GenericPassword {
-	final func save (_ object: ItemType, _ identifierPostfixProvider: KeychainGenericPasswordsPostfixProvidable? = nil) throws {
+	func save (_ object: ItemType) throws {
+		try save(object, nil)
+	}
+	
+	func load () throws -> ItemType {
+		try load(nil)
+	}
+	
+	func delete () throws {
+		try delete(nil)
+	}
+	
+	func isExists () throws -> Bool {
+		try isExists(nil)
+	}
+}
+
+
+
+internal extension Keychain.GenericPassword {
+	func save (_ object: ItemType, _ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws {
 		let identifier = postfixedIdentifier(identifierPostfixProvider)
 		let savingQuery = self.savingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 		
@@ -101,7 +121,7 @@ public extension Keychain.GenericPassword {
 		}
 	}
 	
-	final func load (_ identifierPostfixProvider: KeychainGenericPasswordsPostfixProvidable? = nil) throws -> ItemType {
+	func load (_ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws -> ItemType {
 		let identifier = postfixedIdentifier(identifierPostfixProvider)
 		let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 
@@ -134,7 +154,7 @@ public extension Keychain.GenericPassword {
 		}
 	}
 	
-	final func delete (_ identifierPostfixProvider: KeychainGenericPasswordsPostfixProvidable? = nil) throws {
+	func delete (_ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws {
 		let identifier = postfixedIdentifier(identifierPostfixProvider)
 		let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
 		
@@ -162,7 +182,7 @@ public extension Keychain.GenericPassword {
 		}
 	}
 	
-	final func isExists (_ identifierPostfixProvider: KeychainGenericPasswordsPostfixProvidable? = nil) throws -> Bool {
+	func isExists (_ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws -> Bool {
 		let identifier = postfixedIdentifier(identifierPostfixProvider)
 		let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 		

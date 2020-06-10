@@ -67,19 +67,19 @@ extension Keychain.Settings {
 	public final class GenericPasswords {
 		public var logging: Logging
 		
-		public let prefixProvider: KeychainGenericPasswordsPrefixProvidable?
+		public let itemIdentifierPrefixProvider: KeychainGenericPasswordsItemIdentifierPrefixProvider?
 		
 		public init (
-			prefixProvider: KeychainGenericPasswordsPrefixProvidable,
+			itemIdentifierPrefixProvider: KeychainGenericPasswordsItemIdentifierPrefixProvider,
 			logging: Logging = .default
 		) {
-			self.prefixProvider = prefixProvider
+			self.itemIdentifierPrefixProvider = itemIdentifierPrefixProvider
 			self.logging = logging
 		}
 		
 		internal static let `default` = GenericPasswords()
 		private init () {
-			self.prefixProvider = nil
+			self.itemIdentifierPrefixProvider = nil
 			self.logging = .default
 		}
 	}
