@@ -4,9 +4,7 @@ import os
 
 
 extension UserDefaults {
-	public struct Settings {
-		public static var current: Settings = .default
-		
+	public struct Settings {		
 		public let items: Items
 		
 		public init (
@@ -52,8 +50,6 @@ extension UserDefaults.Settings.Items {
 	public struct Logging {
 		public var enable: Bool
 		public var level: OSLogType
-		
-		public var enableUserDefaultsIdentifierLogging: Bool
 		public var enableValuesLogging: Bool
 				
 		public var loggingProvider: UserDefaultsLoggingProvider?
@@ -62,16 +58,12 @@ extension UserDefaults.Settings.Items {
 		public init (
 			enable: Bool = true,
 			level: OSLogType = .default,
-			
-			enableUserDefaultsIdentifierLogging: Bool = true,
 			enableValuesLogging: Bool = false,
 			
 			loggingProvider: UserDefaultsLoggingProvider? = nil
 		) {
 			self.enable = enable
 			self.level = level
-			
-			self.enableUserDefaultsIdentifierLogging = enableUserDefaultsIdentifierLogging
 			self.enableValuesLogging = enableValuesLogging
 			
 			self.loggingProvider = loggingProvider

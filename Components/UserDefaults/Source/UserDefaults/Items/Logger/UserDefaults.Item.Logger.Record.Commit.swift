@@ -1,5 +1,5 @@
 extension UserDefaults.Item.Logger.Record {
-	public struct Commit {
+	struct Commit {
 		let record: UserDefaults.Item<ItemType>.Logger.Record
 		let resolution: Resolution
 		
@@ -17,23 +17,22 @@ extension UserDefaults.Item.Logger.Record {
 			return value
 		}
 		
-		func info (userDefaultsIdentifier: String) -> Info? {
+		func info (userDefaultsItemIdentifier: String) -> Info? {
 			guard
-				UserDefaults.Settings.current.items.logging.enable &&
-				resolution.level.rawValue >= UserDefaults.Settings.current.items.logging.level.rawValue
+				UserDefaults.settings.items.logging.enable &&
+				resolution.level.rawValue >= UserDefaults.settings.items.logging.level.rawValue
 			else { return nil }
 			
-			let userDefaultsIdentifier = UserDefaults.Settings.current.items.logging.enableUserDefaultsIdentifierLogging ? userDefaultsIdentifier : nil
-			let isExists = UserDefaults.Settings.current.items.logging.enableValuesLogging ? resolution.isExists : nil
-			let value = UserDefaults.Settings.current.items.logging.enableValuesLogging ? self.value : nil
+			let isExists = UserDefaults.settings.items.logging.enableValuesLogging ? resolution.isExists : nil
+			let value = UserDefaults.settings.items.logging.enableValuesLogging ? self.value : nil
 			
 			let info = Info(
-				userDefaultsIdentifier: userDefaultsIdentifier,
 				key: record.key,
 				operation: record.operation.name,
 				existance: isExists,
 				value: value,
 				error: resolution.error,
+				userDefaultsItemIdentifier: userDefaultsItemIdentifier,
 				level: resolution.level
 			)
 			

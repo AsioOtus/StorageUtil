@@ -9,7 +9,7 @@ extension UserDefaults {
 		
 		
 		final var keyPrefix: String {
-			guard let prefixProvider = UserDefaults.Settings.current.items.itemKeyPrefixProvider else { fatalError("UserDefaults.Settings.current.items.prefixProvider is nil") }
+			guard let prefixProvider = UserDefaults.settings.items.itemKeyPrefixProvider else { fatalError("UserDefaults.settings.items.prefixProvider is nil") }
 			let prefix = prefixProvider.userDefaultsItemPrefix
 			return prefix
 		}

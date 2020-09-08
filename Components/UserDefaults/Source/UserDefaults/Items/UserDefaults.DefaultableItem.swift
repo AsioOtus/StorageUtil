@@ -5,6 +5,7 @@ import Foundation
 extension UserDefaults {
 	open class DefautableItem <ItemType: Codable, DefaultValueProvider: UserDefaultsDefaultValueProvider>: UserDefaults.Item<ItemType> where DefaultValueProvider.DefaultValueType == ItemType {
 		public let defaultValueProvider: DefaultValueProvider
+		private lazy var accessQueue = DispatchQueue(label: "\(Self.self).\(key).accessQueue")
 		
 		public var `default`: ItemType { defaultValueProvider.defaultValue }
 		
@@ -49,9 +50,11 @@ internal extension UserDefaults.DefautableItem {
 	
 	@discardableResult
 	func saveDefaultIfNotExist (_ keyPostfixProvider: UserDefaultsItemKeyPostfixProvider? = nil) -> Bool {
-		guard !isExists(keyPostfixProvider) else { return true }
-		
-		let isSavingSucceeded = saveDefault(keyPostfixProvider)
-		return isSavingSucceeded
+		accessQueue.sync {
+			guard !isExists(keyPostfixProvider) else { return true }
+			
+			let isSavingSucceeded = saveDefault(keyPostfixProvider)
+			return isSavingSucceeded
+		}
 	}
 }

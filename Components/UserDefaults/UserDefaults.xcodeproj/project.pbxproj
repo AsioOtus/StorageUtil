@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A16FEC924F43A0F00CBA263 /* UserDefaults.DynamicDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16FEC824F43A0F00CBA263 /* UserDefaults.DynamicDefaultValueProvider.swift */; };
 		3A3701AC247C036D00100BEB /* UserDefaults.Item.Logger.Record.Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AB247C036D00100BEB /* UserDefaults.Item.Logger.Record.Commit.swift */; };
 		3A3701AE247C03CC00100BEB /* UserDefaults.Item.Logger.Record.Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AD247C03CC00100BEB /* UserDefaults.Item.Logger.Record.Resolution.swift */; };
 		3A3701B0247C04D000100BEB /* UserDefaults.Item.Logger.Record.Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AF247C04D000100BEB /* UserDefaults.Item.Logger.Record.Operation.swift */; };
-		3A3701B2247C05C800100BEB /* UserDefaults.Item.Logger.Record.Commit.Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B1247C05C800100BEB /* UserDefaults.Item.Logger.Record.Commit.Info.swift */; };
+		3A3701B2247C05C800100BEB /* UserDefaults.Item.Logger.Record.Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B1247C05C800100BEB /* UserDefaults.Item.Logger.Record.Info.swift */; };
 		3A3701B4247C0C6300100BEB /* DefaultUserDefaultsLoggingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B3247C0C6300100BEB /* DefaultUserDefaultsLoggingProvider.swift */; };
 		3A3701B6247EB4E300100BEB /* UserDefaultsDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B5247EB4E300100BEB /* UserDefaultsDefaultValueProvider.swift */; };
 		3A3701B8247EC05500100BEB /* UserDefaults.StandardDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B7247EC05500100BEB /* UserDefaults.StandardDefaultValueProvider.swift */; };
+		3A70234C24912D0500A226AF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70234B24912D0500A226AF /* UserDefaults.swift */; };
 		3A949BEF245467D1007E7928 /* UserDefaults_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A949BED245467D1007E7928 /* UserDefaults_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AD3B5192460942600056493 /* UserDefaults.Item.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B8A245464AF007E7928 /* UserDefaults.Item.Error.swift */; };
 		3AD3B51B2460942600056493 /* UserDefaults.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B89245464AF007E7928 /* UserDefaults.Item.swift */; };
@@ -30,13 +32,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A16FEC824F43A0F00CBA263 /* UserDefaults.DynamicDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.DynamicDefaultValueProvider.swift; sourceTree = "<group>"; };
 		3A3701AB247C036D00100BEB /* UserDefaults.Item.Logger.Record.Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.Record.Commit.swift; sourceTree = "<group>"; };
 		3A3701AD247C03CC00100BEB /* UserDefaults.Item.Logger.Record.Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.Record.Resolution.swift; sourceTree = "<group>"; };
 		3A3701AF247C04D000100BEB /* UserDefaults.Item.Logger.Record.Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.Record.Operation.swift; sourceTree = "<group>"; };
-		3A3701B1247C05C800100BEB /* UserDefaults.Item.Logger.Record.Commit.Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.Record.Commit.Info.swift; sourceTree = "<group>"; };
+		3A3701B1247C05C800100BEB /* UserDefaults.Item.Logger.Record.Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Logger.Record.Info.swift; sourceTree = "<group>"; };
 		3A3701B3247C0C6300100BEB /* DefaultUserDefaultsLoggingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserDefaultsLoggingProvider.swift; sourceTree = "<group>"; };
 		3A3701B5247EB4E300100BEB /* UserDefaultsDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDefaultValueProvider.swift; sourceTree = "<group>"; };
 		3A3701B7247EC05500100BEB /* UserDefaults.StandardDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.StandardDefaultValueProvider.swift; sourceTree = "<group>"; };
+		3A70234B24912D0500A226AF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		3A949B88245464AF007E7928 /* UserDefaults.DefaultableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.DefaultableItem.swift; sourceTree = "<group>"; };
 		3A949B89245464AF007E7928 /* UserDefaults.Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.swift; sourceTree = "<group>"; };
 		3A949B8A245464AF007E7928 /* UserDefaults.Item.Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Item.Error.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				3AD3B51E2460945100056493 /* UserDefaults.Settings.swift */,
+				3A70234B24912D0500A226AF /* UserDefaults.swift */,
 				3A949B87245464AF007E7928 /* Items */,
 			);
 			path = UserDefaults;
@@ -100,7 +105,7 @@
 				3A949B89245464AF007E7928 /* UserDefaults.Item.swift */,
 				3AD3B52524609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift */,
 				3AD3B5232460993A00056493 /* UserDefaults.ParametricItem.swift */,
-				3A3701B7247EC05500100BEB /* UserDefaults.StandardDefaultValueProvider.swift */,
+				3AFBE50A2507CBA6000C089B /* DefaultValueProviders */,
 				3AD3B5222460989800056493 /* Logger */,
 			);
 			path = Items;
@@ -139,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3701B3247C0C6300100BEB /* DefaultUserDefaultsLoggingProvider.swift */,
-				3A3701B1247C05C800100BEB /* UserDefaults.Item.Logger.Record.Commit.Info.swift */,
+				3A3701B1247C05C800100BEB /* UserDefaults.Item.Logger.Record.Info.swift */,
 				3A3701AB247C036D00100BEB /* UserDefaults.Item.Logger.Record.Commit.swift */,
 				3A3701AF247C04D000100BEB /* UserDefaults.Item.Logger.Record.Operation.swift */,
 				3A3701AD247C03CC00100BEB /* UserDefaults.Item.Logger.Record.Resolution.swift */,
@@ -147,6 +152,15 @@
 				3AD3B52724609D1200056493 /* UserDefaults.Item.Logger.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		3AFBE50A2507CBA6000C089B /* DefaultValueProviders */ = {
+			isa = PBXGroup;
+			children = (
+				3A3701B7247EC05500100BEB /* UserDefaults.StandardDefaultValueProvider.swift */,
+				3A16FEC824F43A0F00CBA263 /* UserDefaults.DynamicDefaultValueProvider.swift */,
+			);
+			path = DefaultValueProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,15 +249,17 @@
 				3AD3B52624609B9500056493 /* UserDefaults.ParametricDefaultableItem.swift in Sources */,
 				3AD3B51F2460945100056493 /* UserDefaults.Settings.swift in Sources */,
 				3AD3B51C2460942600056493 /* UserDefaults.DefaultableItem.swift in Sources */,
+				3A16FEC924F43A0F00CBA263 /* UserDefaults.DynamicDefaultValueProvider.swift in Sources */,
 				3AD3B52824609D1200056493 /* UserDefaults.Item.Logger.swift in Sources */,
 				3AD3B5242460993A00056493 /* UserDefaults.ParametricItem.swift in Sources */,
 				3A3701AE247C03CC00100BEB /* UserDefaults.Item.Logger.Record.Resolution.swift in Sources */,
 				3A3701B8247EC05500100BEB /* UserDefaults.StandardDefaultValueProvider.swift in Sources */,
 				3AD3B5212460954400056493 /* UserDefaultsItemKeyPrefixProvider.swift in Sources */,
 				3AD3B51B2460942600056493 /* UserDefaults.Item.swift in Sources */,
-				3A3701B2247C05C800100BEB /* UserDefaults.Item.Logger.Record.Commit.Info.swift in Sources */,
+				3A3701B2247C05C800100BEB /* UserDefaults.Item.Logger.Record.Info.swift in Sources */,
 				3A3701B0247C04D000100BEB /* UserDefaults.Item.Logger.Record.Operation.swift in Sources */,
 				3A3701AC247C036D00100BEB /* UserDefaults.Item.Logger.Record.Commit.swift in Sources */,
+				3A70234C24912D0500A226AF /* UserDefaults.swift in Sources */,
 				3AD3B52E2460A21700056493 /* UserDefaultsDescribable.swift in Sources */,
 				3A3701B4247C0C6300100BEB /* DefaultUserDefaultsLoggingProvider.swift in Sources */,
 				3AD3B52C2460A1C200056493 /* UserDefaults.Item.Logger.Record.swift in Sources */,
