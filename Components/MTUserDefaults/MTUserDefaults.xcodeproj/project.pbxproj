@@ -1,0 +1,731 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A16FEC924F43A0F00CBA263 /* MTUserDefaults.DynamicDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16FEC824F43A0F00CBA263 /* MTUserDefaults.DynamicDefaultValueProvider.swift */; };
+		3A3701AC247C036D00100BEB /* MTUserDefaults.Item.Logger.Record.Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AB247C036D00100BEB /* MTUserDefaults.Item.Logger.Record.Commit.swift */; };
+		3A3701AE247C03CC00100BEB /* MTUserDefaults.Item.Logger.Record.Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AD247C03CC00100BEB /* MTUserDefaults.Item.Logger.Record.Resolution.swift */; };
+		3A3701B0247C04D000100BEB /* MTUserDefaults.Item.Logger.Record.Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AF247C04D000100BEB /* MTUserDefaults.Item.Logger.Record.Operation.swift */; };
+		3A3701B2247C05C800100BEB /* MTUserDefaults.Item.Logger.Record.Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B1247C05C800100BEB /* MTUserDefaults.Item.Logger.Record.Info.swift */; };
+		3A3701B4247C0C6300100BEB /* StandardMTUserDefaultsLoggingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B3247C0C6300100BEB /* StandardMTUserDefaultsLoggingProvider.swift */; };
+		3A3701B6247EB4E300100BEB /* MTUserDefaultsDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B5247EB4E300100BEB /* MTUserDefaultsDefaultValueProvider.swift */; };
+		3A3701B8247EC05500100BEB /* MTUserDefaults.StandardDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B7247EC05500100BEB /* MTUserDefaults.StandardDefaultValueProvider.swift */; };
+		3A70234C24912D0500A226AF /* MTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70234B24912D0500A226AF /* MTUserDefaults.swift */; };
+		3A949BEF245467D1007E7928 /* MTUserDefaults_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A949BED245467D1007E7928 /* MTUserDefaults_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AD3B5192460942600056493 /* MTUserDefaults.Item.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B8A245464AF007E7928 /* MTUserDefaults.Item.Error.swift */; };
+		3AD3B51B2460942600056493 /* MTUserDefaults.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B89245464AF007E7928 /* MTUserDefaults.Item.swift */; };
+		3AD3B51C2460942600056493 /* MTUserDefaults.DefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B88245464AF007E7928 /* MTUserDefaults.DefaultableItem.swift */; };
+		3AD3B51D2460942600056493 /* MTUserDefaultsItemKeyPostfixProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B50B2460938000056493 /* MTUserDefaultsItemKeyPostfixProvider.swift */; };
+		3AD3B51F2460945100056493 /* MTUserDefaults.Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B51E2460945100056493 /* MTUserDefaults.Settings.swift */; };
+		3AD3B5212460954400056493 /* MTUserDefaultsItemKeyPrefixProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5202460954400056493 /* MTUserDefaultsItemKeyPrefixProvider.swift */; };
+		3AD3B5242460993A00056493 /* MTUserDefaults.ParametricItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5232460993A00056493 /* MTUserDefaults.ParametricItem.swift */; };
+		3AD3B52624609B9500056493 /* MTUserDefaults.ParametricDefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52524609B9500056493 /* MTUserDefaults.ParametricDefaultableItem.swift */; };
+		3AD3B52824609D1200056493 /* MTUserDefaults.Item.Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52724609D1200056493 /* MTUserDefaults.Item.Logger.swift */; };
+		3AD3B52A2460A0CC00056493 /* MTUserDefaultsLoggingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5292460A0CC00056493 /* MTUserDefaultsLoggingProvider.swift */; };
+		3AD3B52C2460A1C200056493 /* MTUserDefaults.Item.Logger.Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52B2460A1C200056493 /* MTUserDefaults.Item.Logger.Record.swift */; };
+		3AD3B52E2460A21700056493 /* MTUserDefaultsDescribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52D2460A21700056493 /* MTUserDefaultsDescribable.swift */; };
+		3AFBE5142507D0A2000C089B /* MTUserDefaults_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BEA245467D1007E7928 /* MTUserDefaults_macOS.framework */; };
+		3AFBE51B2507D134000C089B /* Item_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBE51A2507D134000C089B /* Item_macOSTests.swift */; };
+		3AFBE5472507D2F7000C089B /* MTUserDefaults.Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B51E2460945100056493 /* MTUserDefaults.Settings.swift */; };
+		3AFBE5482507D2F7000C089B /* MTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70234B24912D0500A226AF /* MTUserDefaults.swift */; };
+		3AFBE5492507D2F7000C089B /* MTUserDefaults.DefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B88245464AF007E7928 /* MTUserDefaults.DefaultableItem.swift */; };
+		3AFBE54A2507D2F7000C089B /* MTUserDefaults.Item.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B8A245464AF007E7928 /* MTUserDefaults.Item.Error.swift */; };
+		3AFBE54B2507D2F7000C089B /* MTUserDefaults.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B89245464AF007E7928 /* MTUserDefaults.Item.swift */; };
+		3AFBE54C2507D2F7000C089B /* MTUserDefaults.ParametricDefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52524609B9500056493 /* MTUserDefaults.ParametricDefaultableItem.swift */; };
+		3AFBE54D2507D2F7000C089B /* MTUserDefaults.ParametricItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5232460993A00056493 /* MTUserDefaults.ParametricItem.swift */; };
+		3AFBE54E2507D2F7000C089B /* MTUserDefaults.StandardDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B7247EC05500100BEB /* MTUserDefaults.StandardDefaultValueProvider.swift */; };
+		3AFBE54F2507D2F7000C089B /* MTUserDefaults.DynamicDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16FEC824F43A0F00CBA263 /* MTUserDefaults.DynamicDefaultValueProvider.swift */; };
+		3AFBE5502507D2F7000C089B /* StandardMTUserDefaultsLoggingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B3247C0C6300100BEB /* StandardMTUserDefaultsLoggingProvider.swift */; };
+		3AFBE5512507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B1247C05C800100BEB /* MTUserDefaults.Item.Logger.Record.Info.swift */; };
+		3AFBE5522507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AB247C036D00100BEB /* MTUserDefaults.Item.Logger.Record.Commit.swift */; };
+		3AFBE5532507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AF247C04D000100BEB /* MTUserDefaults.Item.Logger.Record.Operation.swift */; };
+		3AFBE5542507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AD247C03CC00100BEB /* MTUserDefaults.Item.Logger.Record.Resolution.swift */; };
+		3AFBE5552507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52B2460A1C200056493 /* MTUserDefaults.Item.Logger.Record.swift */; };
+		3AFBE5562507D2F7000C089B /* MTUserDefaults.Item.Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52724609D1200056493 /* MTUserDefaults.Item.Logger.swift */; };
+		3AFBE5572507D2F7000C089B /* MTUserDefaultsDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B5247EB4E300100BEB /* MTUserDefaultsDefaultValueProvider.swift */; };
+		3AFBE5582507D2F7000C089B /* MTUserDefaultsDescribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B52D2460A21700056493 /* MTUserDefaultsDescribable.swift */; };
+		3AFBE5592507D2F7000C089B /* MTUserDefaultsItemKeyPostfixProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B50B2460938000056493 /* MTUserDefaultsItemKeyPostfixProvider.swift */; };
+		3AFBE55A2507D2F7000C089B /* MTUserDefaultsItemKeyPrefixProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5202460954400056493 /* MTUserDefaultsItemKeyPrefixProvider.swift */; };
+		3AFBE55B2507D2F7000C089B /* MTUserDefaultsLoggingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B5292460A0CC00056493 /* MTUserDefaultsLoggingProvider.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3AFBE5152507D0A2000C089B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949B7B2454647B007E7928 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A949BE9245467D1007E7928;
+			remoteInfo = "UserDefaults-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3A16FEC824F43A0F00CBA263 /* MTUserDefaults.DynamicDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.DynamicDefaultValueProvider.swift; sourceTree = "<group>"; };
+		3A3701AB247C036D00100BEB /* MTUserDefaults.Item.Logger.Record.Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Logger.Record.Commit.swift; sourceTree = "<group>"; };
+		3A3701AD247C03CC00100BEB /* MTUserDefaults.Item.Logger.Record.Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Logger.Record.Resolution.swift; sourceTree = "<group>"; };
+		3A3701AF247C04D000100BEB /* MTUserDefaults.Item.Logger.Record.Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Logger.Record.Operation.swift; sourceTree = "<group>"; };
+		3A3701B1247C05C800100BEB /* MTUserDefaults.Item.Logger.Record.Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Logger.Record.Info.swift; sourceTree = "<group>"; };
+		3A3701B3247C0C6300100BEB /* StandardMTUserDefaultsLoggingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardMTUserDefaultsLoggingProvider.swift; sourceTree = "<group>"; };
+		3A3701B5247EB4E300100BEB /* MTUserDefaultsDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaultsDefaultValueProvider.swift; sourceTree = "<group>"; };
+		3A3701B7247EC05500100BEB /* MTUserDefaults.StandardDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.StandardDefaultValueProvider.swift; sourceTree = "<group>"; };
+		3A70234B24912D0500A226AF /* MTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.swift; sourceTree = "<group>"; };
+		3A949B88245464AF007E7928 /* MTUserDefaults.DefaultableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.DefaultableItem.swift; sourceTree = "<group>"; };
+		3A949B89245464AF007E7928 /* MTUserDefaults.Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.swift; sourceTree = "<group>"; };
+		3A949B8A245464AF007E7928 /* MTUserDefaults.Item.Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Error.swift; sourceTree = "<group>"; };
+		3A949BEA245467D1007E7928 /* MTUserDefaults_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MTUserDefaults_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A949BED245467D1007E7928 /* MTUserDefaults_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTUserDefaults_macOS.h; sourceTree = "<group>"; };
+		3A949BEE245467D1007E7928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AD3B50B2460938000056493 /* MTUserDefaultsItemKeyPostfixProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaultsItemKeyPostfixProvider.swift; sourceTree = "<group>"; };
+		3AD3B51E2460945100056493 /* MTUserDefaults.Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Settings.swift; sourceTree = "<group>"; };
+		3AD3B5202460954400056493 /* MTUserDefaultsItemKeyPrefixProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaultsItemKeyPrefixProvider.swift; sourceTree = "<group>"; };
+		3AD3B5232460993A00056493 /* MTUserDefaults.ParametricItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.ParametricItem.swift; sourceTree = "<group>"; };
+		3AD3B52524609B9500056493 /* MTUserDefaults.ParametricDefaultableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.ParametricDefaultableItem.swift; sourceTree = "<group>"; };
+		3AD3B52724609D1200056493 /* MTUserDefaults.Item.Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Logger.swift; sourceTree = "<group>"; };
+		3AD3B5292460A0CC00056493 /* MTUserDefaultsLoggingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaultsLoggingProvider.swift; sourceTree = "<group>"; };
+		3AD3B52B2460A1C200056493 /* MTUserDefaults.Item.Logger.Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.Item.Logger.Record.swift; sourceTree = "<group>"; };
+		3AD3B52D2460A21700056493 /* MTUserDefaultsDescribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaultsDescribable.swift; sourceTree = "<group>"; };
+		3AFBE50F2507D0A2000C089B /* MTUserDefaults_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTUserDefaults_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AFBE5132507D0A2000C089B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AFBE51A2507D134000C089B /* Item_macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item_macOSTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A949BE7245467D1007E7928 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AFBE50C2507D0A2000C089B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AFBE5142507D0A2000C089B /* MTUserDefaults_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A949B7A2454647B007E7928 = {
+			isa = PBXGroup;
+			children = (
+				3A949B84245464AF007E7928 /* Source */,
+				3A949BEC245467D1007E7928 /* MTUserDefaults-macOS */,
+				3AFBE5102507D0A2000C089B /* MTUserDefaults_macOSTests */,
+				3A949BEB245467D1007E7928 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A949B84245464AF007E7928 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B85245464AF007E7928 /* UserDefaults */,
+				3AD3B50A2460936700056493 /* Protocols */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		3A949B85245464AF007E7928 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3B51E2460945100056493 /* MTUserDefaults.Settings.swift */,
+				3A70234B24912D0500A226AF /* MTUserDefaults.swift */,
+				3A949B87245464AF007E7928 /* Items */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		3A949B87245464AF007E7928 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B88245464AF007E7928 /* MTUserDefaults.DefaultableItem.swift */,
+				3A949B8A245464AF007E7928 /* MTUserDefaults.Item.Error.swift */,
+				3A949B89245464AF007E7928 /* MTUserDefaults.Item.swift */,
+				3AD3B52524609B9500056493 /* MTUserDefaults.ParametricDefaultableItem.swift */,
+				3AD3B5232460993A00056493 /* MTUserDefaults.ParametricItem.swift */,
+				3AFBE50A2507CBA6000C089B /* DefaultValueProviders */,
+				3AD3B5222460989800056493 /* Logger */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		3A949BEB245467D1007E7928 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A949BEA245467D1007E7928 /* MTUserDefaults_macOS.framework */,
+				3AFBE50F2507D0A2000C089B /* MTUserDefaults_macOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A949BEC245467D1007E7928 /* MTUserDefaults-macOS */ = {
+			isa = PBXGroup;
+			children = (
+				3A949BED245467D1007E7928 /* MTUserDefaults_macOS.h */,
+				3A949BEE245467D1007E7928 /* Info.plist */,
+			);
+			path = "MTUserDefaults-macOS";
+			sourceTree = "<group>";
+		};
+		3AD3B50A2460936700056493 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3A3701B5247EB4E300100BEB /* MTUserDefaultsDefaultValueProvider.swift */,
+				3AD3B52D2460A21700056493 /* MTUserDefaultsDescribable.swift */,
+				3AD3B50B2460938000056493 /* MTUserDefaultsItemKeyPostfixProvider.swift */,
+				3AD3B5202460954400056493 /* MTUserDefaultsItemKeyPrefixProvider.swift */,
+				3AD3B5292460A0CC00056493 /* MTUserDefaultsLoggingProvider.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3AD3B5222460989800056493 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				3A3701B3247C0C6300100BEB /* StandardMTUserDefaultsLoggingProvider.swift */,
+				3A3701B1247C05C800100BEB /* MTUserDefaults.Item.Logger.Record.Info.swift */,
+				3A3701AB247C036D00100BEB /* MTUserDefaults.Item.Logger.Record.Commit.swift */,
+				3A3701AF247C04D000100BEB /* MTUserDefaults.Item.Logger.Record.Operation.swift */,
+				3A3701AD247C03CC00100BEB /* MTUserDefaults.Item.Logger.Record.Resolution.swift */,
+				3AD3B52B2460A1C200056493 /* MTUserDefaults.Item.Logger.Record.swift */,
+				3AD3B52724609D1200056493 /* MTUserDefaults.Item.Logger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		3AFBE50A2507CBA6000C089B /* DefaultValueProviders */ = {
+			isa = PBXGroup;
+			children = (
+				3A3701B7247EC05500100BEB /* MTUserDefaults.StandardDefaultValueProvider.swift */,
+				3A16FEC824F43A0F00CBA263 /* MTUserDefaults.DynamicDefaultValueProvider.swift */,
+			);
+			path = DefaultValueProviders;
+			sourceTree = "<group>";
+		};
+		3AFBE5102507D0A2000C089B /* MTUserDefaults_macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				3AFBE5132507D0A2000C089B /* Info.plist */,
+				3AFBE51A2507D134000C089B /* Item_macOSTests.swift */,
+			);
+			path = MTUserDefaults_macOSTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3A949BE5245467D1007E7928 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A949BEF245467D1007E7928 /* MTUserDefaults_macOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3A949BE9245467D1007E7928 /* MTUserDefaults-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A949BF0245467D1007E7928 /* Build configuration list for PBXNativeTarget "MTUserDefaults-macOS" */;
+			buildPhases = (
+				3A949BE5245467D1007E7928 /* Headers */,
+				3A949BE6245467D1007E7928 /* Sources */,
+				3A949BE7245467D1007E7928 /* Frameworks */,
+				3A949BE8245467D1007E7928 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MTUserDefaults-macOS";
+			productName = "UserDefaults-macOS";
+			productReference = 3A949BEA245467D1007E7928 /* MTUserDefaults_macOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3AFBE50E2507D0A2000C089B /* MTUserDefaults_macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AFBE5172507D0A2000C089B /* Build configuration list for PBXNativeTarget "MTUserDefaults_macOSTests" */;
+			buildPhases = (
+				3AFBE50B2507D0A2000C089B /* Sources */,
+				3AFBE50C2507D0A2000C089B /* Frameworks */,
+				3AFBE50D2507D0A2000C089B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3AFBE5162507D0A2000C089B /* PBXTargetDependency */,
+			);
+			name = MTUserDefaults_macOSTests;
+			productName = UserDefaults_macOSTests;
+			productReference = 3AFBE50F2507D0A2000C089B /* MTUserDefaults_macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A949B7B2454647B007E7928 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1140;
+				TargetAttributes = {
+					3A949BE9245467D1007E7928 = {
+						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1140;
+					};
+					3AFBE50E2507D0A2000C089B = {
+						CreatedOnToolsVersion = 11.6;
+					};
+				};
+			};
+			buildConfigurationList = 3A949B7E2454647B007E7928 /* Build configuration list for PBXProject "MTUserDefaults" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A949B7A2454647B007E7928;
+			productRefGroup = 3A949BEB245467D1007E7928 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A949BE9245467D1007E7928 /* MTUserDefaults-macOS */,
+				3AFBE50E2507D0A2000C089B /* MTUserDefaults_macOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A949BE8245467D1007E7928 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AFBE50D2507D0A2000C089B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A949BE6245467D1007E7928 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A3701B6247EB4E300100BEB /* MTUserDefaultsDefaultValueProvider.swift in Sources */,
+				3AD3B52A2460A0CC00056493 /* MTUserDefaultsLoggingProvider.swift in Sources */,
+				3AD3B5192460942600056493 /* MTUserDefaults.Item.Error.swift in Sources */,
+				3AD3B51D2460942600056493 /* MTUserDefaultsItemKeyPostfixProvider.swift in Sources */,
+				3AD3B52624609B9500056493 /* MTUserDefaults.ParametricDefaultableItem.swift in Sources */,
+				3AD3B51F2460945100056493 /* MTUserDefaults.Settings.swift in Sources */,
+				3AD3B51C2460942600056493 /* MTUserDefaults.DefaultableItem.swift in Sources */,
+				3A16FEC924F43A0F00CBA263 /* MTUserDefaults.DynamicDefaultValueProvider.swift in Sources */,
+				3AD3B52824609D1200056493 /* MTUserDefaults.Item.Logger.swift in Sources */,
+				3AD3B5242460993A00056493 /* MTUserDefaults.ParametricItem.swift in Sources */,
+				3A3701AE247C03CC00100BEB /* MTUserDefaults.Item.Logger.Record.Resolution.swift in Sources */,
+				3A3701B8247EC05500100BEB /* MTUserDefaults.StandardDefaultValueProvider.swift in Sources */,
+				3AD3B5212460954400056493 /* MTUserDefaultsItemKeyPrefixProvider.swift in Sources */,
+				3AD3B51B2460942600056493 /* MTUserDefaults.Item.swift in Sources */,
+				3A3701B2247C05C800100BEB /* MTUserDefaults.Item.Logger.Record.Info.swift in Sources */,
+				3A3701B0247C04D000100BEB /* MTUserDefaults.Item.Logger.Record.Operation.swift in Sources */,
+				3A3701AC247C036D00100BEB /* MTUserDefaults.Item.Logger.Record.Commit.swift in Sources */,
+				3A70234C24912D0500A226AF /* MTUserDefaults.swift in Sources */,
+				3AD3B52E2460A21700056493 /* MTUserDefaultsDescribable.swift in Sources */,
+				3A3701B4247C0C6300100BEB /* StandardMTUserDefaultsLoggingProvider.swift in Sources */,
+				3AD3B52C2460A1C200056493 /* MTUserDefaults.Item.Logger.Record.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AFBE50B2507D0A2000C089B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AFBE55B2507D2F7000C089B /* MTUserDefaultsLoggingProvider.swift in Sources */,
+				3AFBE5572507D2F7000C089B /* MTUserDefaultsDefaultValueProvider.swift in Sources */,
+				3AFBE5552507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.swift in Sources */,
+				3AFBE5482507D2F7000C089B /* MTUserDefaults.swift in Sources */,
+				3AFBE5522507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Commit.swift in Sources */,
+				3AFBE5492507D2F7000C089B /* MTUserDefaults.DefaultableItem.swift in Sources */,
+				3AFBE5472507D2F7000C089B /* MTUserDefaults.Settings.swift in Sources */,
+				3AFBE54B2507D2F7000C089B /* MTUserDefaults.Item.swift in Sources */,
+				3AFBE54C2507D2F7000C089B /* MTUserDefaults.ParametricDefaultableItem.swift in Sources */,
+				3AFBE5562507D2F7000C089B /* MTUserDefaults.Item.Logger.swift in Sources */,
+				3AFBE5502507D2F7000C089B /* StandardMTUserDefaultsLoggingProvider.swift in Sources */,
+				3AFBE54D2507D2F7000C089B /* MTUserDefaults.ParametricItem.swift in Sources */,
+				3AFBE5582507D2F7000C089B /* MTUserDefaultsDescribable.swift in Sources */,
+				3AFBE55A2507D2F7000C089B /* MTUserDefaultsItemKeyPrefixProvider.swift in Sources */,
+				3AFBE51B2507D134000C089B /* Item_macOSTests.swift in Sources */,
+				3AFBE5592507D2F7000C089B /* MTUserDefaultsItemKeyPostfixProvider.swift in Sources */,
+				3AFBE54E2507D2F7000C089B /* MTUserDefaults.StandardDefaultValueProvider.swift in Sources */,
+				3AFBE5512507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Info.swift in Sources */,
+				3AFBE5532507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Operation.swift in Sources */,
+				3AFBE5542507D2F7000C089B /* MTUserDefaults.Item.Logger.Record.Resolution.swift in Sources */,
+				3AFBE54A2507D2F7000C089B /* MTUserDefaults.Item.Error.swift in Sources */,
+				3AFBE54F2507D2F7000C089B /* MTUserDefaults.DynamicDefaultValueProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3AFBE5162507D0A2000C089B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A949BE9245467D1007E7928 /* MTUserDefaults-macOS */;
+			targetProxy = 3AFBE5152507D0A2000C089B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3A949B7F2454647B007E7928 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3A949B802454647B007E7928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		3A949BF1245467D1007E7928 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3HY2N64MXA;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "MTUserDefaults-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "AO.MTUserDefaults-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3A949BF2245467D1007E7928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3HY2N64MXA;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "MTUserDefaults-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "AO.MTUserDefaults-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3AFBE5182507D0A2000C089B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3HY2N64MXA;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = MTUserDefaults_macOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "AO.MTUserDefaults-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3AFBE5192507D0A2000C089B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3HY2N64MXA;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = MTUserDefaults_macOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "AO.MTUserDefaults-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A949B7E2454647B007E7928 /* Build configuration list for PBXProject "MTUserDefaults" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A949B7F2454647B007E7928 /* Debug */,
+				3A949B802454647B007E7928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A949BF0245467D1007E7928 /* Build configuration list for PBXNativeTarget "MTUserDefaults-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A949BF1245467D1007E7928 /* Debug */,
+				3A949BF2245467D1007E7928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AFBE5172507D0A2000C089B /* Build configuration list for PBXNativeTarget "MTUserDefaults_macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AFBE5182507D0A2000C089B /* Debug */,
+				3AFBE5192507D0A2000C089B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A949B7B2454647B007E7928 /* Project object */;
+}
