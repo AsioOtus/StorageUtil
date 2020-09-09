@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		3A1166E424DD9E7A007E0CD6 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		3A949AFA2454629C007E7928 /* Kit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kit.swift; sourceTree = "<group>"; };
 		3A949AFB2454629C007E7928 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3A949AFC2454629C007E7928 /* Seal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seal.swift; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 				3A949B0B2454629C007E7928 /* Data.swift */,
 				3A949B0C2454629C007E7928 /* FixedWidthInteger.swift */,
 				3A949B0E2454629C007E7928 /* Numeric.swift */,
+				3A1166E424DD9E7A007E0CD6 /* Optional.swift */,
 				3A949B102454629C007E7928 /* Set.swift */,
 				3A949B0D2454629C007E7928 /* String.swift */,
 			);
