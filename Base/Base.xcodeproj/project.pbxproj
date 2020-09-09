@@ -40,6 +40,9 @@
 		3A949B1C2454629C007E7928 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		3A949B1D2454629C007E7928 /* HashableByIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableByIdentifier.swift; sourceTree = "<group>"; };
 		3A949B1F2454629C007E7928 /* RandomableElementConforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomableElementConforming.swift; sourceTree = "<group>"; };
+		3A9A2A4A2508D269000ABDC2 /* OnceProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnceProcessor.swift; sourceTree = "<group>"; };
+		3A9A2A4E2508D3F5000ABDC2 /* SingleProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProcessor.swift; sourceTree = "<group>"; };
+		3A9A2A4F2508D653000ABDC2 /* MTTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -67,11 +70,14 @@
 		3A949AF92454629C007E7928 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A949AFA2454629C007E7928 /* Kit.swift */,
-				3A949AFB2454629C007E7928 /* Event.swift */,
-				3A949AFC2454629C007E7928 /* Seal.swift */,
-				3A949AFD2454629C007E7928 /* Unowned.swift */,
 				3A949AFE2454629C007E7928 /* DelegatedCall.swift */,
+				3A949AFB2454629C007E7928 /* Event.swift */,
+				3A949AFA2454629C007E7928 /* Kit.swift */,
+				3A9A2A4F2508D653000ABDC2 /* MTTimer.swift */,
+				3A9A2A4A2508D269000ABDC2 /* OnceProcessor.swift */,
+				3A949AFC2454629C007E7928 /* Seal.swift */,
+				3A9A2A4E2508D3F5000ABDC2 /* SingleProcessor.swift */,
+				3A949AFD2454629C007E7928 /* Unowned.swift */,
 				3A949AFF2454629C007E7928 /* Weak.swift */,
 			);
 			path = Classes;
