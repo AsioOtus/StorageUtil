@@ -45,7 +45,7 @@
                BlueprintIdentifier = "3A949BE9245467D1007E7928"
                BuildableName = "MTUserDefaults_macOS.framework"
                BlueprintName = "MTUserDefaults-macOS"
-               ReferencedContainer = "container:Components/UserDefaults/MTUserDefaults.xcodeproj">
+               ReferencedContainer = "container:Components/MTUserDefaults/MTUserDefaults.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

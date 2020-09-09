@@ -10,8 +10,8 @@
 		3A949B28245462BD007E7928 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B27245462BD007E7928 /* main.swift */; };
 		3A949BF6245467E0007E7928 /* Keychain_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF4245467E0007E7928 /* Keychain_macOS.framework */; };
 		3A949BF7245467E0007E7928 /* Keychain_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF4245467E0007E7928 /* Keychain_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A949BF8245467E0007E7928 /* UserDefaults_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF5245467E0007E7928 /* UserDefaults_macOS.framework */; };
-		3A949BF9245467E0007E7928 /* UserDefaults_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF5245467E0007E7928 /* UserDefaults_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A9A2A4C2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */; };
+		3A9A2A4D2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,8 +30,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3A9A2A4D2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Embed Frameworks */,
 				3A949BF7245467E0007E7928 /* Keychain_macOS.framework in Embed Frameworks */,
-				3A949BF9245467E0007E7928 /* UserDefaults_macOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +48,7 @@
 		3A949B27245462BD007E7928 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3A949BF4245467E0007E7928 /* Keychain_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Keychain_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A949BF5245467E0007E7928 /* UserDefaults_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UserDefaults_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MTUserDefaults_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A9A2A4C2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Frameworks */,
 				3A949BF6245467E0007E7928 /* Keychain_macOS.framework in Frameworks */,
-				3A949BF8245467E0007E7928 /* UserDefaults_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +132,7 @@
 		3A949BF3245467E0007E7928 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */,
 				3A949BF4245467E0007E7928 /* Keychain_macOS.framework */,
 				3A949BF5245467E0007E7928 /* UserDefaults_macOS.framework */,
 			);
