@@ -1,11 +1,4 @@
 public extension Settable {
-    mutating func setSelf (in block: (inout Self) throws -> Void) rethrows -> Self {
-		try block(&self)
-		return self
-	}
-}
-
-public extension Settable {
     mutating func setSelf <T1> (
 		_ name: Any = "",
 		with a: inout T1,

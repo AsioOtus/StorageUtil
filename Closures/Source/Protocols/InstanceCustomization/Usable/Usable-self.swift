@@ -1,10 +1,4 @@
 public extension Usable {
-    mutating func useSelf (_ name: Any = "", in block: (inout Self) throws -> Void) rethrows {
-		try block(&self)
-	}
-}
-
-public extension Usable {
     mutating func useSelf <T1> (
 		_ name: Any = "",
 		with a: inout T1,

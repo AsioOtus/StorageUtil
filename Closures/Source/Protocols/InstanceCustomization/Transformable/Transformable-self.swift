@@ -1,11 +1,4 @@
 public extension Transformable {
-    mutating func transformSelf<T> (in block: (inout Self) throws -> T) rethrows -> T {
-		let result = try block(&self)
-		return result
-	}
-}
-
-public extension Transformable {
     mutating func transformSelf <T, T1> (
 		_ name: Any = "",
 		with a: inout T1,

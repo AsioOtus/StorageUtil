@@ -1,11 +1,3 @@
-public extension Transformable {	
-    func transformCopy<T> (in block: (inout Self) throws -> T) rethrows -> T {
-		var selfCopy = self
-		let result = try block(&selfCopy)
-		return result
-	}
-}
-
 public extension Transformable {
     func transformCopy <T, T1> (
 		_ name: Any = "",
