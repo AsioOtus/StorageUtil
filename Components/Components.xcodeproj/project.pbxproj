@@ -6,9 +6,33 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		3AA61310250821DB00A54E2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949B812454647B007E7928 /* MTUserDefaults.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A949BEA245467D1007E7928;
+			remoteInfo = "MTUserDefaults-macOS";
+		};
+		3AA61312250821DB00A54E2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949B812454647B007E7928 /* MTUserDefaults.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AFBE50F2507D0A2000C089B;
+			remoteInfo = MTUserDefaults_macOSTests;
+		};
+		3ABBEB9D2507DBCA00629A62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949AEB2454622F007E7928 /* Keychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A949BDC245467AE007E7928;
+			remoteInfo = "Keychain-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		3A949AEB2454622F007E7928 /* Keychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Keychain.xcodeproj; path = Keychain/Keychain.xcodeproj; sourceTree = "<group>"; };
-		3A949B812454647B007E7928 /* UserDefaults.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UserDefaults.xcodeproj; path = UserDefaults/UserDefaults.xcodeproj; sourceTree = "<group>"; };
+		3A949B812454647B007E7928 /* MTUserDefaults.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTUserDefaults.xcodeproj; path = UserDefaults/MTUserDefaults.xcodeproj; sourceTree = "<group>"; };
 		3A949B9A24546573007E7928 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		3A949B9C24546573007E7928 /* OSStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSStatus.swift; sourceTree = "<group>"; };
 		3A949B9E24546574007E7928 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
@@ -19,7 +43,7 @@
 			isa = PBXGroup;
 			children = (
 				3A949AEB2454622F007E7928 /* Keychain.xcodeproj */,
-				3A949B812454647B007E7928 /* UserDefaults.xcodeproj */,
+				3A949B812454647B007E7928 /* MTUserDefaults.xcodeproj */,
 				3A949B9824546515007E7928 /* Source */,
 			);
 			sourceTree = "<group>";
@@ -27,13 +51,7 @@
 		3A949AEC2454622F007E7928 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3A949B822454647B007E7928 /* Products */ = {
-			isa = PBXGroup;
-			children = (
+				3ABBEB9E2507DBCA00629A62 /* Keychain_macOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +90,15 @@
 			path = UIStoryboard;
 			sourceTree = "<group>";
 		};
+		3AA6130B250821DB00A54E2B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3AA61311250821DB00A54E2B /* MTUserDefaults_macOS.framework */,
+				3AA61313250821DB00A54E2B /* MTUserDefaults_macOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXProject section */
@@ -96,8 +123,8 @@
 					ProjectRef = 3A949AEB2454622F007E7928 /* Keychain.xcodeproj */;
 				},
 				{
-					ProductGroup = 3A949B822454647B007E7928 /* Products */;
-					ProjectRef = 3A949B812454647B007E7928 /* UserDefaults.xcodeproj */;
+					ProductGroup = 3AA6130B250821DB00A54E2B /* Products */;
+					ProjectRef = 3A949B812454647B007E7928 /* MTUserDefaults.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -105,6 +132,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3AA61311250821DB00A54E2B /* MTUserDefaults_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MTUserDefaults_macOS.framework;
+			remoteRef = 3AA61310250821DB00A54E2B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AA61313250821DB00A54E2B /* MTUserDefaults_macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MTUserDefaults_macOSTests.xctest;
+			remoteRef = 3AA61312250821DB00A54E2B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3ABBEB9E2507DBCA00629A62 /* Keychain_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Keychain_macOS.framework;
+			remoteRef = 3ABBEB9D2507DBCA00629A62 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin XCBuildConfiguration section */
 		3A949AD524546211007E7928 /* Debug */ = {
