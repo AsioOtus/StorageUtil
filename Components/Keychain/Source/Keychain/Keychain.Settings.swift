@@ -4,8 +4,6 @@ import os
 
 extension Keychain {
 	public final class Settings {
-		public static var current: Settings = .default
-		
 		public var logging: Logging
 		public let genericPasswords: GenericPasswords
 		
@@ -32,7 +30,6 @@ extension Keychain.Settings {
 		public var enable: Bool
 		public var level: OSLogType
 		
-		public var enableKeychainIdentifierLogging: Bool
 		public var enableQueryLogging: Bool
 		public var enableValuesLogging: Bool
 		
@@ -43,7 +40,6 @@ extension Keychain.Settings {
 			enable: Bool = true,
 			level: OSLogType = .default,
 			
-			enableKeychainIdentifierLogging: Bool = true,
 			enableQueryLogging: Bool = false,
 			enableValuesLogging: Bool = false,
 			
@@ -52,7 +48,6 @@ extension Keychain.Settings {
 			self.enable = enable
 			self.level = level
 			
-			self.enableKeychainIdentifierLogging = enableKeychainIdentifierLogging
 			self.enableQueryLogging = enableQueryLogging
 			self.enableValuesLogging = enableValuesLogging
 			

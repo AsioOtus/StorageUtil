@@ -9,12 +9,16 @@ public struct DefaultKeychainLoggingProvider: KeychainLoggingProvider {
 		self.prefix = prefix
 	}
 	
-	public func log (_ info: Keychain.Logger.Record.Commit.Info) {
-		let log = OSLog(subsystem: "Keychain", category: "Keychain")
+	public func log (_ info: Keychain.Logger.Record.Info) {
+		let log = OSLog(subsystem: info.keychainIdentifier, category: "Keychain")
 		
 		let prefix = self.prefix ?? ""
-		let preparedPrefix = !info.defaultMessage.isEmpty && !prefix.isEmpty ? prefix + "." : ""
+		let preparedPrefix = !info.keychainIdentifier.isEmpty && !prefix.isEmpty
+			? "\(prefix)."
+			: ""
 		
-		os_log("%{public}@%{public}@", log: log, type: info.level, preparedPrefix, info.defaultMessage)
+		let message = "\(preparedPrefix)\(info.keychainIdentifier) – \(info.defaultMessage)"
+		
+		os_log("%{public}@", log: log, type: info.level, message)
 	}
 }

@@ -4,10 +4,10 @@ extension Keychain.GenericPassword.Logger.Record {
 	enum Resolution {
 		case saving
 		case loading(ItemType)
-		case deletion(Bool)
+		case deletion
 		case existance(Bool, ItemType? = nil)
 		
-		case codingError(Keychain.GenericPassword<ItemType>.Error.Category.Coding)
+		case codingError(Keychain.GenericPassword<ItemType>.Error.Coding)
 		case keychainError(Keychain.Error)
 		case genericError(Error)
 		
@@ -32,8 +32,6 @@ extension Keychain.GenericPassword.Logger.Record {
 			let isExists: Bool?
 			
 			switch self {
-			case .deletion(let isExisted):
-				isExists = isExisted
 			case .existance(let existance, _):
 				isExists = existance
 			default:

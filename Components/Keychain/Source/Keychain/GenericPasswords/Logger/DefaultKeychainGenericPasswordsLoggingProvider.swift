@@ -9,12 +9,16 @@ public struct DefaultKeychainGenericPasswordsLoggingProvider: KeychainGenericPas
 		self.prefix = prefix
 	}
 	
-	public func log <T: Codable> (_ info: Keychain.GenericPassword<T>.Logger.Record.Commit.Info) {
-		let log = OSLog(subsystem: "Keychain.GenericPassword<\(String(describing: T.self))>", category: "Keychain")
+	public func log <T: Codable> (_ info: Keychain.GenericPassword<T>.Logger.Record.Info) {
+		let log = OSLog(subsystem: info.keychainIdentifier, category: "default")
 		
 		let prefix = self.prefix ?? ""
-		let preparedPrefix = !info.defaultMessage.isEmpty && !prefix.isEmpty ? prefix + "." : ""
+		let preparedPrefix = !info.keychainIdentifier.isEmpty && !prefix.isEmpty
+			? "\(prefix)."
+			: ""
 		
-		os_log("%{public}@%{public}@", log: log, type: info.level, preparedPrefix, info.defaultMessage)
+		let message = "\(preparedPrefix)\(info.keychainIdentifier) – \(info.defaultMessage)"
+		
+		os_log("%{public}@", log: log, type: info.level, message)
 	}
 }

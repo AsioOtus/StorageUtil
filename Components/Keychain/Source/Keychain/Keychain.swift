@@ -2,7 +2,9 @@ import Foundation
 
 
 
-public struct Keychain { }
+public struct Keychain {	
+	public static var settings: Settings = .default
+}
 
 
 
@@ -56,7 +58,7 @@ public extension Keychain {
 			guard status != errSecItemNotFound else { throw Error.itemNotFound }
 			guard status == errSecSuccess else { throw Error.deletingFailed(status) }
 			
-			Keychain.Logger.log(logRecord.commit(.deletion(true)))
+			Keychain.Logger.log(logRecord.commit(.deletion))
 		} catch {
 			Keychain.Logger.log(logRecord.commit(.error(error)))
 			throw error

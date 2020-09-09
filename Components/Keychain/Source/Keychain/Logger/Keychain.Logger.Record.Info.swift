@@ -1,22 +1,19 @@
 import os
 
-public extension Keychain.Logger.Record.Commit {
+public extension Keychain.Logger.Record {
 	struct Info {
-		public let keychainIdentifier: String?
 		public let operation: String
 		public let existance: Bool?
 		public let value: AnyObject?
 		public let errorType: String?
 		public let error: Error?
 		public let query: [CFString: Any]?
+		
+		public let keychainIdentifier: String
 		public let level: OSLogType
 		
 		public var defaultMessage: String {
 			var message = operation
-			
-			if let keychainIdentifier = keychainIdentifier {
-				message = "\(keychainIdentifier) – \(message)"
-			}
 			
 			if let existance = existance {
 				message += " – \(existance)"

@@ -1,10 +1,3 @@
-//
-//  Keychain_macOS.h
-//  Keychain-macOS
-//
-//  Created by Anton on 25/04/2020.
-//
-
 #import <Foundation/Foundation.h>
 
 //! Project version number for Keychain_macOS.

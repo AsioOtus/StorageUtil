@@ -12,12 +12,12 @@ extension Keychain.GenericPassword {
 			case codingError(Coding)
 			case keychainError(Keychain.Error)
 			case error(Swift.Error)
-			
-			public enum Coding: KeychainError {
-				case itemIsNotData
-				case encodingFailed(Swift.Error)
-				case decodingFailed(Swift.Error)
-			}
+		}
+		
+		public enum Coding: KeychainError {
+			case itemIsNotData
+			case encodingFailed(Swift.Error)
+			case decodingFailed(Swift.Error)
 		}
 	}
 }
@@ -49,13 +49,13 @@ extension Keychain.GenericPassword.Error.Category: CustomStringConvertible {
 
 
 
-extension Keychain.GenericPassword.Error.Category.Coding: CustomStringConvertible {
+extension Keychain.GenericPassword.Error.Coding: CustomStringConvertible {
 	public var description: String {
 		let log: String
 		
 		switch self {
 		case .itemIsNotData:
-			log = "Item is not data"
+			log = "Item cannot be interpreted as Data"
 		case .encodingFailed(let error):
 			log = "Encoding failed: \(error)"
 		case .decodingFailed(let error):

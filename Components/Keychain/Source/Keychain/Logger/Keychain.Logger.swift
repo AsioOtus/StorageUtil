@@ -7,7 +7,7 @@ extension Keychain {
 			
 			if
 				let commitInfo = commitInfo,
-				let loggingProvider = Keychain.Settings.current.logging.loggingProvider
+				let loggingProvider = Keychain.settings.logging.loggingProvider
 			{
 				loggingProvider.log(commitInfo)
 			}

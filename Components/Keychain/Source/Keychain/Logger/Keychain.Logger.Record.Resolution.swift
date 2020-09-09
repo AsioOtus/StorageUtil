@@ -4,7 +4,7 @@ extension Keychain.Logger.Record {
 	enum Resolution {
 		case saving
 		case loading(AnyObject)
-		case deletion(Bool)
+		case deletion
 		case existance(Bool, AnyObject? = nil)
 		
 		case clearingClass(Keychain.Class, OSStatus)
@@ -33,8 +33,6 @@ extension Keychain.Logger.Record {
 			let isExists: Bool?
 			
 			switch self {
-			case .deletion(let isExisted):
-				isExists = isExisted
 			case .existance(let existance, _):
 				isExists = existance
 			default:

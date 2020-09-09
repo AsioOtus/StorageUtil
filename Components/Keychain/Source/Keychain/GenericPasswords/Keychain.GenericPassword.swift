@@ -2,7 +2,8 @@ import Foundation
 
 extension Keychain {
 	open class GenericPassword <ItemType: Codable> {
-		private lazy var logger = Logger(String(describing: Self.self), enableValueLogging)
+		private let logger: Logger
+		private lazy var accessQueue = DispatchQueue(label: "\(identifier).accessQueue")
 		
 		private static var commonAtributes: [CFString: Any] {
 			[kSecClass: kSecClassGenericPassword]
@@ -11,7 +12,6 @@ extension Keychain {
 		private let baseSavingQuery: [CFString: Any]
 		private let baseLoadingQuery: [CFString: Any]
 		private let accessability: CFString
-		private let enableValueLogging: Bool
 		
 		public var savingQuery: [CFString: Any] {
 			let savingQuery = self.baseSavingQuery.merging([kSecAttrAccessible: accessability]){ (current, _) in current }
@@ -27,7 +27,7 @@ extension Keychain {
 		
 		
 		internal final var identifierPrefix: String {
-			guard let prefixProvider = Keychain.Settings.current.genericPasswords.itemIdentifierPrefixProvider else { fatalError("Keychain.Settings.current.genericPasswords.prefixProvider is nil") }
+			guard let prefixProvider = Keychain.settings.genericPasswords.itemIdentifierPrefixProvider else { fatalError("Keychain.Settings.current.genericPasswords.prefixProvider is nil") }
 			let prefix = prefixProvider.keychainGenericPasswordsPrefix
 			return prefix
 		}
@@ -50,8 +50,8 @@ extension Keychain {
 			self.baseSavingQuery = savingQuery ?? [:]
 			self.baseLoadingQuery = loadingQuery ?? [:]
 			self.accessability = accessability
-			
-			self.enableValueLogging = enableValueLogging
+						
+			self.logger = Logger(String(describing: Self.self), enableValueLogging)
 		}
 	}
 }
@@ -80,142 +80,105 @@ public extension Keychain.GenericPassword {
 
 internal extension Keychain.GenericPassword {
 	func save (_ object: ItemType, _ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws {
-		let identifier = postfixedIdentifier(identifierPostfixProvider)
-		let savingQuery = self.savingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
-		
-		let logRecord = Logger.Record(.saving(object), identifier, savingQuery)
-		
-		do {
-			let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
-			try Keychain.delete(deletingQuery)
-		}
-		catch Keychain.Error.itemNotFound { }
-		catch {
+		try accessQueue.sync {
+			let identifier = postfixedIdentifier(identifierPostfixProvider)
+			let savingQuery = self.savingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 			
-			logger.log(logRecord.commit(.genericError(error)))
-			throw Error(identifier, .error(error))
+			let logRecord = Logger.Record(.saving(object), identifier, savingQuery)
 			
-		}
-		
-		do {
-			let data = try Self.encode(object)
-			try Keychain.save(savingQuery, data)
+			do {
+				let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
+				try Keychain.delete(deletingQuery)
+			}
+			catch Keychain.Error.itemNotFound { }
+			catch {
+				logger.log(logRecord.commit(.genericError(error)))
+				throw Error(identifier, .error(error))
+			}
 			
-			logger.log(logRecord.commit(.saving))
-			
-		} catch let error as Error.Category.Coding {
-			
-			logger.log(logRecord.commit(.codingError(error)))
-			throw Error(identifier, .codingError(error))
-			
-		} catch let error as Keychain.Error {
-			
-			logger.log(logRecord.commit(.keychainError(error)))
-			throw Error(identifier, .keychainError(error))
-			
-		} catch {
-			
-			logger.log(logRecord.commit(.genericError(error)))
-			throw Error(identifier, .error(error))
-			
+			do {
+				let data = try Self.encode(object)
+				try Keychain.save(savingQuery, data)
+				
+				logger.log(logRecord.commit(.saving))
+			} catch {
+				let (error, resolution) = Self.convert(error)
+				
+				logger.log(logRecord.commit(resolution))
+				throw Error(identifier, error)
+			}
 		}
 	}
 	
 	func load (_ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws -> ItemType {
-		let identifier = postfixedIdentifier(identifierPostfixProvider)
-		let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
+		try accessQueue.sync {
+			let identifier = postfixedIdentifier(identifierPostfixProvider)
+			let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
 
-		let logRecord = Logger.Record(.loading, identifier, loadingQuery)
+			let logRecord = Logger.Record(.loading, identifier, loadingQuery)
 
-		do {
-			let anyObject = try Keychain.load(loadingQuery)
-			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }
-			let object = try Self.decode(data, ItemType.self)
-			
-			logger.log(logRecord.commit(.loading(object)))
-			
-			return object
-			
-		} catch let error as Error.Category.Coding {
-			
-			logger.log(logRecord.commit(.codingError(error)))
-			throw Error(identifier, .codingError(error))
-			
-		} catch let error as Keychain.Error {
-			
-			logger.log(logRecord.commit(.keychainError(error)))
-			throw Error(identifier, .keychainError(error))
-			
-		} catch {
-			
-			logger.log(logRecord.commit(.genericError(error)))
-			throw Error(identifier, .error(error))
-			
+			do {
+				let anyObject = try Keychain.load(loadingQuery)
+				guard let data = anyObject as? Data else { throw Error.Coding.itemIsNotData }
+				let object = try Self.decode(data, ItemType.self)
+				
+				logger.log(logRecord.commit(.loading(object)))
+				
+				return object
+			} catch {
+				let (error, resolution) = Self.convert(error)
+				
+				logger.log(logRecord.commit(resolution))
+				throw Error(identifier, error)
+			}
 		}
 	}
 	
 	func delete (_ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws {
-		let identifier = postfixedIdentifier(identifierPostfixProvider)
-		let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
-		
-		let logRecord = Logger.Record(.deletion, identifier, deletingQuery)
-		
-		do {
-			try Keychain.delete(deletingQuery)
+		try accessQueue.sync {
+			let identifier = postfixedIdentifier(identifierPostfixProvider)
+			let deletingQuery = Self.commonAtributes.merging([kSecAttrService: identifier]){ (current, _) in current }
 			
-			logger.log(logRecord.commit(.deletion(true)))
+			let logRecord = Logger.Record(.deletion, identifier, deletingQuery)
 			
-		} catch Keychain.Error.itemNotFound {
-			
-			logger.log(logRecord.commit(.deletion(false)))
-			
-		} catch let error as Keychain.Error {
-			
-			logger.log(logRecord.commit(.keychainError(error)))
-			throw Error(identifier, .keychainError(error))
-			
-		} catch {
-			
-			logger.log(logRecord.commit(.genericError(error)))
-			throw Error(identifier, .error(error))
-			
+			do {
+				try Keychain.delete(deletingQuery)
+				
+				logger.log(logRecord.commit(.deletion))
+			} catch {
+				let (error, resolution) = Self.convert(error)
+				
+				logger.log(logRecord.commit(resolution))
+				throw Error(identifier, error)
+			}
 		}
 	}
 	
 	func isExists (_ identifierPostfixProvider: KeychainGenericPasswordsItemIdentifierPostfixProvider? = nil) throws -> Bool {
-		let identifier = postfixedIdentifier(identifierPostfixProvider)
-		let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
-		
-		let logRecord = Logger.Record(.existance, identifier, loadingQuery)
-		
-		do {
-			guard try Keychain.isExists(loadingQuery) else {
-				logger.log(logRecord.commit(.existance(false)))
-				return false
+		try accessQueue.sync {
+			let identifier = postfixedIdentifier(identifierPostfixProvider)
+			let loadingQuery = self.loadingQuery.merging([kSecAttrService: identifier]){ (current, _) in current }
+			
+			let logRecord = Logger.Record(.existance, identifier, loadingQuery)
+			
+			do {
+				guard try Keychain.isExists(loadingQuery) else {
+					logger.log(logRecord.commit(.existance(false)))
+					return false
+				}
+				
+				let anyObject = try Keychain.load(loadingQuery)
+				guard let data = anyObject as? Data else { throw Error.Coding.itemIsNotData }
+				let object = try Self.decode(data, ItemType.self)
+				
+				logger.log(logRecord.commit(.existance(true, object)))
+				return true
+			} catch {
+				let (error, resolution) = Self.convert(error)
+				
+				logger.log(logRecord.commit(resolution))
+				throw Error(identifier, error)
 			}
-			
-			let anyObject = try Keychain.load(loadingQuery)
-			guard let data = anyObject as? Data else { throw Error.Category.Coding.itemIsNotData }
-			let object = try Self.decode(data, ItemType.self)
-			
-			logger.log(logRecord.commit(.existance(true, object)))
-			return true
-			
-		} catch let error as Error.Category.Coding {
-			
-			logger.log(logRecord.commit(.codingError(error)))
-			throw Error(identifier, .codingError(error))
-			
-		} catch let error as Keychain.Error {
-			
-			logger.log(logRecord.commit(.keychainError(error)))
-			throw Error(identifier, .keychainError(error))
-			
-		} catch {
-			
-			logger.log(logRecord.commit(.genericError(error)))
-			throw Error(identifier, .error(error))
-			
 		}
 	}
 }
@@ -228,7 +191,7 @@ private extension Keychain.GenericPassword {
 			let data = try JSONEncoder().encode(object)
 			return data
 		} catch {
-			throw Error.Category.Coding.encodingFailed(error)
+			throw Error.Coding.encodingFailed(error)
 		}
 	}
 	
@@ -237,7 +200,22 @@ private extension Keychain.GenericPassword {
 			let object = try JSONDecoder().decode(type, from: data)
 			return object
 		} catch {
-			throw Error.Category.Coding.decodingFailed(error)
+			throw Error.Coding.decodingFailed(error)
 		}
+	}
+	
+	static func convert (_ error: Swift.Error) -> (Error.Category, Logger.Record.Resolution) {
+		let result: (Error.Category, Logger.Record.Resolution)
+		
+		switch error {
+		case let error as Error.Coding:
+			result = (.codingError(error), .codingError(error))
+		case let error as Keychain.Error:
+			result = (.keychainError(error), .keychainError(error))
+		default:
+			result = (.error(error), .genericError(error))
+		}
+		
+		return result
 	}
 }

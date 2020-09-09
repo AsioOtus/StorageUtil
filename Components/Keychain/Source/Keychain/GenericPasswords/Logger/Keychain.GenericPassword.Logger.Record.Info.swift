@@ -1,8 +1,7 @@
 import os.log
 
-public extension Keychain.GenericPassword.Logger.Record.Commit {
+public extension Keychain.GenericPassword.Logger.Record {
 	struct Info {
-		public let keychainIdentifier: String?
 		public let identifier: String
 		public let operation: String
 		public let existance: Bool?
@@ -10,14 +9,12 @@ public extension Keychain.GenericPassword.Logger.Record.Commit {
 		public let errorType: String?
 		public let error: Error?
 		public let query: [CFString: Any]?
+		
+		public let keychainIdentifier: String
 		public let level: OSLogType
 		
 		public var defaultMessage: String {
 			var message = "\(identifier) – \(operation)"
-			
-			if let keychainIdentifier = keychainIdentifier {
-				message = "\(keychainIdentifier) – \(message)"
-			}
 			
 			if let existance = existance {
 				message += " – \(existance)"
