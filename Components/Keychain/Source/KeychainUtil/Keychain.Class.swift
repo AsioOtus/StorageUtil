@@ -1,4 +1,8 @@
-extension Keychain {
+import Foundation
+
+
+
+extension KeychainUtil {
 	public enum Class: CaseIterable {
 		case genericPassword
 		case internetPassword

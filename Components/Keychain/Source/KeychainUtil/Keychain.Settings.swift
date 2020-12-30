@@ -2,7 +2,7 @@ import os
 
 
 
-extension Keychain {
+extension KeychainUtil {
 	public final class Settings {
 		public var logging: Logging
 		public let genericPasswords: GenericPasswords
@@ -25,7 +25,7 @@ extension Keychain {
 
 
 
-extension Keychain.Settings {
+extension KeychainUtil.Settings {
 	public final class Logging {
 		public var enable: Bool
 		public var level: OSLogType
@@ -58,7 +58,7 @@ extension Keychain.Settings {
 
 
 	
-extension Keychain.Settings {
+extension KeychainUtil.Settings {
 	public final class GenericPasswords {
 		public var logging: Logging
 		
@@ -82,7 +82,7 @@ extension Keychain.Settings {
 
 
 
-extension Keychain.Settings.GenericPasswords {
+extension KeychainUtil.Settings.GenericPasswords {
 	public final class Logging {
 		public var enable: Bool
 		public var level: OSLogType

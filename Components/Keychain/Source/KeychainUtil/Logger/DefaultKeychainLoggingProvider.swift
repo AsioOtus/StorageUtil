@@ -1,6 +1,6 @@
 import os.log
 
-public struct DefaultKeychainGenericPasswordsLoggingProvider: KeychainGenericPasswordsLoggingProvider {
+public struct DefaultKeychainLoggingProvider: KeychainLoggingProvider {
 	public static let defaultInstance = Self(prefix: nil)
 	
 	public var prefix: String?
@@ -9,8 +9,8 @@ public struct DefaultKeychainGenericPasswordsLoggingProvider: KeychainGenericPas
 		self.prefix = prefix
 	}
 	
-	public func log <T: Codable> (_ info: Keychain.GenericPassword<T>.Logger.Record.Info) {
-		let log = OSLog(subsystem: info.keychainIdentifier, category: "default")
+	public func log (_ info: KeychainUtil.Logger.Record.Info) {
+		let log = OSLog(subsystem: info.keychainIdentifier, category: "KeychainUtil")
 		
 		let prefix = self.prefix ?? ""
 		let preparedPrefix = !info.keychainIdentifier.isEmpty && !prefix.isEmpty

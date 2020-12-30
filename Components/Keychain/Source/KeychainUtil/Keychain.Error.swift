@@ -1,6 +1,6 @@
 import Foundation
 
-extension Keychain {
+extension KeychainUtil {
 	public enum Error: KeychainError {
 		case itemNotFound
 		case nilItem
@@ -16,7 +16,7 @@ extension Keychain {
 
 
 
-extension Keychain.Error: CustomStringConvertible {
+extension KeychainUtil.Error: CustomStringConvertible {
 	public var description: String {
 		let log: String
 		

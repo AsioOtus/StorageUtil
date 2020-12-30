@@ -1,4 +1,8 @@
-public extension Keychain.GenericPassword.Logger {
+import Foundation
+
+
+
+public extension KeychainUtil.GenericPassword.Logger {
 	struct Record {
 		let identifier: String
 		let query: [CFString: Any]

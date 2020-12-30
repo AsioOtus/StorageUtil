@@ -1,23 +1,27 @@
 import os.log
 
-extension Keychain.GenericPassword.Logger.Record {
+extension KeychainUtil.GenericPassword.Logger.Record {
 	enum Resolution {
+		case overwriting
 		case saving
-		case loading(ItemType)
+		case loading(Item)
+		case loadingOptional(Item?)
 		case deletion
-		case existance(Bool, ItemType? = nil)
+		case existance(Bool, Item? = nil)
 		
-		case codingError(Keychain.GenericPassword<ItemType>.Error.Coding)
-		case keychainError(Keychain.Error)
+		case codingError(KeychainUtil.GenericPasswordError.Category.Coding)
+		case keychainError(KeychainUtil.Error)
 		case genericError(Error)
 		
 		
 		
-		var value: ItemType? {
-			let value: ItemType?
+		var value: Item? {
+			let value: Item?
 			
 			switch self {
 			case .loading(let item):
+				value = item
+			case .loadingOptional(let item):
 				value = item
 			case .existance(_, let item):
 				value = item
@@ -79,9 +83,13 @@ extension Keychain.GenericPassword.Logger.Record {
 			let level: OSLogType
 			
 			switch self {
+			case .overwriting:
+				level = .info
 			case .saving:
 				level = .info
 			case .loading:
+				level = .default
+			case .loadingOptional:
 				level = .default
 			case .deletion:
 				level = .info

@@ -1,6 +1,7 @@
+import Foundation
 import os
 
-public extension Keychain.Logger.Record {
+public extension KeychainUtil.Logger.Record {
 	struct Info {
 		public let operation: String
 		public let existance: Bool?

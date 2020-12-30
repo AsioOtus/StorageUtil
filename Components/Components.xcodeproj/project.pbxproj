@@ -7,43 +7,60 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		3A79D07C2508CFB5000E8137 /* PBXContainerItemProxy */ = {
+		3A65C36E256BA48B00C4A9C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3A79D0772508CFB5000E8137 /* MTUserDefaults.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A949BEA245467D1007E7928;
-			remoteInfo = "MTUserDefaults-macOS";
-		};
-		3A79D07E2508CFB5000E8137 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A79D0772508CFB5000E8137 /* MTUserDefaults.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AFBE50F2507D0A2000C089B;
-			remoteInfo = MTUserDefaults_macOSTests;
-		};
-		3ABBEB9D2507DBCA00629A62 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A949AEB2454622F007E7928 /* Keychain.xcodeproj */;
+			containerPortal = 3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3A949BDC245467AE007E7928;
-			remoteInfo = "Keychain-macOS";
+			remoteInfo = "KeychainUtil-macOS";
+		};
+		3A81C33025627F590048D103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A949BEA245467D1007E7928;
+			remoteInfo = "UserDefaultsUtil-macOS";
+		};
+		3A81C33225627F590048D103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AFBE50F2507D0A2000C089B;
+			remoteInfo = UserDefaultsUtil_macOSTests;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A79D0772508CFB5000E8137 /* MTUserDefaults.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTUserDefaults.xcodeproj; path = MTUserDefaults/MTUserDefaults.xcodeproj; sourceTree = "<group>"; };
-		3A949AEB2454622F007E7928 /* Keychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Keychain.xcodeproj; path = Keychain/Keychain.xcodeproj; sourceTree = "<group>"; };
+		3A33E6A825763C5A00D5B20A /* OverlappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlappingViewController.swift; sourceTree = "<group>"; };
+		3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UserDefaultsUtil.xcodeproj; path = UserDefaultsUtil/UserDefaultsUtil.xcodeproj; sourceTree = "<group>"; };
+		3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainUtil.xcodeproj; path = Keychain/KeychainUtil.xcodeproj; sourceTree = "<group>"; };
 		3A949B9A24546573007E7928 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		3A949B9C24546573007E7928 /* OSStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSStatus.swift; sourceTree = "<group>"; };
 		3A949B9E24546574007E7928 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		3A79D0782508CFB5000E8137 /* Products */ = {
+		3A33E6A425763C3800D5B20A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3A79D07D2508CFB5000E8137 /* MTUserDefaults_macOS.framework */,
-				3A79D07F2508CFB5000E8137 /* MTUserDefaults_macOSTests.xctest */,
+				3A33E6A825763C5A00D5B20A /* OverlappingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A65C36B256BA48B00C4A9C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A65C36F256BA48B00C4A9C2 /* KeychainUtil_macOS.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A81C32B25627F590048D103 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A81C33125627F590048D103 /* UserDefaultsUtil_macOS.framework */,
+				3A81C33325627F590048D103 /* UserDefaultsUtil_macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -51,18 +68,10 @@
 		3A949AD024546211007E7928 = {
 			isa = PBXGroup;
 			children = (
-				3A949AEB2454622F007E7928 /* Keychain.xcodeproj */,
-				3A79D0772508CFB5000E8137 /* MTUserDefaults.xcodeproj */,
+				3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */,
+				3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */,
 				3A949B9824546515007E7928 /* Source */,
 			);
-			sourceTree = "<group>";
-		};
-		3A949AEC2454622F007E7928 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3ABBEB9E2507DBCA00629A62 /* Keychain_macOS.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		3A949B9824546515007E7928 /* Source */ = {
@@ -71,6 +80,7 @@
 				3A949B9924546573007E7928 /* DispatchQueue */,
 				3A949B9B24546573007E7928 /* OSStatus */,
 				3A949B9D24546574007E7928 /* UIStoryboard */,
+				3A33E6A425763C3800D5B20A /* ViewControllers */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -105,7 +115,7 @@
 		3A949AD124546211007E7928 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 			};
 			buildConfigurationList = 3A949AD424546211007E7928 /* Build configuration list for PBXProject "Components" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -119,12 +129,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3A949AEC2454622F007E7928 /* Products */;
-					ProjectRef = 3A949AEB2454622F007E7928 /* Keychain.xcodeproj */;
+					ProductGroup = 3A65C36B256BA48B00C4A9C2 /* Products */;
+					ProjectRef = 3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */;
 				},
 				{
-					ProductGroup = 3A79D0782508CFB5000E8137 /* Products */;
-					ProjectRef = 3A79D0772508CFB5000E8137 /* MTUserDefaults.xcodeproj */;
+					ProductGroup = 3A81C32B25627F590048D103 /* Products */;
+					ProjectRef = 3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -134,25 +144,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3A79D07D2508CFB5000E8137 /* MTUserDefaults_macOS.framework */ = {
+		3A65C36F256BA48B00C4A9C2 /* KeychainUtil_macOS.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = MTUserDefaults_macOS.framework;
-			remoteRef = 3A79D07C2508CFB5000E8137 /* PBXContainerItemProxy */;
+			path = KeychainUtil_macOS.framework;
+			remoteRef = 3A65C36E256BA48B00C4A9C2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3A79D07F2508CFB5000E8137 /* MTUserDefaults_macOSTests.xctest */ = {
+		3A81C33125627F590048D103 /* UserDefaultsUtil_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UserDefaultsUtil_macOS.framework;
+			remoteRef = 3A81C33025627F590048D103 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A81C33325627F590048D103 /* UserDefaultsUtil_macOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = MTUserDefaults_macOSTests.xctest;
-			remoteRef = 3A79D07E2508CFB5000E8137 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3ABBEB9E2507DBCA00629A62 /* Keychain_macOS.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Keychain_macOS.framework;
-			remoteRef = 3ABBEB9D2507DBCA00629A62 /* PBXContainerItemProxy */;
+			path = UserDefaultsUtil_macOSTests.xctest;
+			remoteRef = 3A81C33225627F590048D103 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -161,12 +171,66 @@
 		3A949AD524546211007E7928 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		3A949AD624546211007E7928 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Release;
 		};

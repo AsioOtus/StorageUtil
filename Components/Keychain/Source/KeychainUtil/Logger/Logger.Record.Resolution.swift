@@ -1,14 +1,14 @@
 import os.log
 
-extension Keychain.Logger.Record {
+extension KeychainUtil.Logger.Record {
 	enum Resolution {
 		case saving
 		case loading(AnyObject)
 		case deletion
 		case existance(Bool, AnyObject? = nil)
 		
-		case clearingClass(Keychain.Class, OSStatus)
-		case clearing([Keychain.Class: OSStatus])
+		case clearingClass(KeychainUtil.Class, OSStatus)
+		case clearing([KeychainUtil.Class: OSStatus])
 		
 		case error(Error)
 		
@@ -42,8 +42,8 @@ extension Keychain.Logger.Record {
 			return isExists
 		}
 		
-		var clearingStatus: [Keychain.Class: OSStatus]? {
-			let status: [Keychain.Class: OSStatus]?
+		var clearingStatus: [KeychainUtil.Class: OSStatus]? {
+			let status: [KeychainUtil.Class: OSStatus]?
 			
 			switch self {
 			case .clearingClass(let keychainClass, let clearingStatus):

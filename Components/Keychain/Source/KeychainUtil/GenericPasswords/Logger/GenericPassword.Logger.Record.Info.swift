@@ -1,11 +1,12 @@
+import Foundation
 import os.log
 
-public extension Keychain.GenericPassword.Logger.Record {
+public extension KeychainUtil.GenericPassword.Logger.Record {
 	struct Info {
 		public let identifier: String
 		public let operation: String
 		public let existance: Bool?
-		public let value: ItemType?
+		public let value: Item?
 		public let errorType: String?
 		public let error: Error?
 		public let query: [CFString: Any]?

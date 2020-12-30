@@ -1,13 +1,13 @@
 import Foundation
 
-extension Keychain {
+extension KeychainUtil {
 	public struct Logger {
 		static func log (_ commit: Record.Commit) {
-			let commitInfo = commit.info(keychainIdentifier: "Keychain")
+			let commitInfo = commit.info(keychainIdentifier: "KeychainUtil")
 			
 			if
 				let commitInfo = commitInfo,
-				let loggingProvider = Keychain.settings.logging.loggingProvider
+				let loggingProvider = KeychainUtil.settings.logging.loggingProvider
 			{
 				loggingProvider.log(commitInfo)
 			}

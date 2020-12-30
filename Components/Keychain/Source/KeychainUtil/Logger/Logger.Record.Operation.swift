@@ -1,11 +1,15 @@
-extension Keychain.Logger.Record {
+import Foundation
+
+
+
+extension KeychainUtil.Logger.Record {
 	enum Operation {
 		case saving(Data)
 		case loading
 		case deletion
 		case existance
 		
-		case clearingClass(Keychain.Class)
+		case clearingClass(KeychainUtil.Class)
 		case clearing
 		
 		var name: String {

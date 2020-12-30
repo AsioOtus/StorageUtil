@@ -2,13 +2,14 @@ import Foundation
 
 
 
-public struct Keychain {	
+public struct KeychainUtil {
 	public static var settings: Settings = .default
+	internal static let accessQueue = DispatchQueue(label: "KeychainUtil.AccessQueue")
 }
 
 
 
-public extension Keychain {
+public extension KeychainUtil {
 	static func save (_ query: [CFString: Any], _ object: Data) throws {
 		let logRecord = Logger.Record(.saving(object), query)
 		
@@ -19,9 +20,9 @@ public extension Keychain {
 			guard status != errSecDuplicateItem else { throw Error.existingItemFound }
 			guard status == errSecSuccess else { throw Error.savingFailed(status) }
 			
-			Keychain.Logger.log(logRecord.commit(.saving))
+			KeychainUtil.Logger.log(logRecord.commit(.saving))
 		} catch {
-			Keychain.Logger.log(logRecord.commit(.error(error)))
+			KeychainUtil.Logger.log(logRecord.commit(.error(error)))
 			throw error
 		}
 	}
@@ -42,10 +43,10 @@ public extension Keychain {
 			guard status == errSecSuccess else { throw Error.loadingFailed(status) }
 			guard let unwrappedItem = item else { throw Error.nilItem }
 			
-			Keychain.Logger.log(logRecord.commit(.loading(unwrappedItem)))
+			KeychainUtil.Logger.log(logRecord.commit(.loading(unwrappedItem)))
 			return unwrappedItem
 		} catch {
-			Keychain.Logger.log(logRecord.commit(.error(error)))
+			KeychainUtil.Logger.log(logRecord.commit(.error(error)))
 			throw error
 		}
 	}
@@ -58,9 +59,9 @@ public extension Keychain {
 			guard status != errSecItemNotFound else { throw Error.itemNotFound }
 			guard status == errSecSuccess else { throw Error.deletingFailed(status) }
 			
-			Keychain.Logger.log(logRecord.commit(.deletion))
+			KeychainUtil.Logger.log(logRecord.commit(.deletion))
 		} catch {
-			Keychain.Logger.log(logRecord.commit(.error(error)))
+			KeychainUtil.Logger.log(logRecord.commit(.error(error)))
 			throw error
 		}
 	}
@@ -83,18 +84,18 @@ public extension Keychain {
 			guard item != nil else { throw Error.nilItem }
 						
 			isExists = true
-			Keychain.Logger.log(logRecord.commit(.existance(isExists, item)))
+			KeychainUtil.Logger.log(logRecord.commit(.existance(isExists, item)))
 			return isExists
 		} catch Error.itemNotFound {
 			isExists = false
-			Keychain.Logger.log(logRecord.commit(.existance(isExists)))
+			KeychainUtil.Logger.log(logRecord.commit(.existance(isExists)))
 			return isExists
 		} catch Error.nilItem {
 			isExists = false
-			Keychain.Logger.log(logRecord.commit(.existance(isExists)))
+			KeychainUtil.Logger.log(logRecord.commit(.existance(isExists)))
 			return isExists
 		} catch {
-			Keychain.Logger.log(logRecord.commit(.error(error)))
+			KeychainUtil.Logger.log(logRecord.commit(.error(error)))
 			throw error
 		}
 	}
@@ -102,30 +103,30 @@ public extension Keychain {
 
 
 
-public extension Keychain {
+public extension KeychainUtil {
 	@discardableResult
-	static func clear () -> [Keychain.Class: OSStatus] {
+	static func clear () -> [KeychainUtil.Class: OSStatus] {
 		let logRecord = Logger.Record(.clearing, [:])
 		
-		var deleteResults = [Keychain.Class: OSStatus]()
+		var deleteResults = [KeychainUtil.Class: OSStatus]()
 		
-		for keychainClass in Keychain.Class.allCases {
+		for keychainClass in KeychainUtil.Class.allCases {
 			let logRecord = Logger.Record(.clearingClass(keychainClass), [:])
 			
 			let query = [kSecClass: keychainClass.keychainIdentifier]
 			let status = SecItemDelete(query as CFDictionary)
 			
-			Keychain.Logger.log(logRecord.commit(.clearingClass(keychainClass, status)))
+			KeychainUtil.Logger.log(logRecord.commit(.clearingClass(keychainClass, status)))
 			
 			deleteResults[keychainClass] = status
 		}
 		
-		Keychain.Logger.log(logRecord.commit(.clearing(deleteResults)))
+		KeychainUtil.Logger.log(logRecord.commit(.clearing(deleteResults)))
 		
 		return deleteResults
 	}
 	
-	static func clear (_ keychainClass: Keychain.Class) throws {
+	static func clear (_ keychainClass: KeychainUtil.Class) throws {
 		let logRecord = Logger.Record(.clearingClass(keychainClass), [:])
 		
 		do {
@@ -134,9 +135,9 @@ public extension Keychain {
 			
 			guard status == errSecSuccess else { throw Error.classCLearingFailed(keychainClass, status) }
 			
-			Keychain.Logger.log(logRecord.commit(.clearingClass(keychainClass, status)))
+			KeychainUtil.Logger.log(logRecord.commit(.clearingClass(keychainClass, status)))
 		} catch {
-			Keychain.Logger.log(logRecord.commit(.error(error)))
+			KeychainUtil.Logger.log(logRecord.commit(.error(error)))
 			throw error
 		}
 	}
