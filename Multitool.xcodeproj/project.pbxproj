@@ -7,12 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A5BD54825BC1FB600481A2B /* LoggingUtil_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5BD54725BC1FB600481A2B /* LoggingUtil_macOS.framework */; };
+		3A5BD54925BC1FB700481A2B /* LoggingUtil_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5BD54725BC1FB600481A2B /* LoggingUtil_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A634C4B255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A634C4A255FE5C900758139 /* UserDefaultsUtil_macOS.framework */; };
+		3A634C4C255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A634C4A255FE5C900758139 /* UserDefaultsUtil_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A8BD883256FD05E00E4C225 /* MultitoolBase_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */; };
+		3A8BD884256FD05F00E4C225 /* MultitoolBase_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A8BD8E5256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */; };
+		3A8BD8E6256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A949B28245462BD007E7928 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B27245462BD007E7928 /* main.swift */; };
 		3A949BF6245467E0007E7928 /* Keychain_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF4245467E0007E7928 /* Keychain_macOS.framework */; };
 		3A949BF7245467E0007E7928 /* Keychain_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF4245467E0007E7928 /* Keychain_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A9A2A4C2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */; };
-		3A9A2A4D2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A5BD54C25BC1FB700481A2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949AB9245461CA007E7928 /* Base.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A85DB0225AF363D006E76AF;
+			remoteInfo = MultitoolBaseTests;
+		};
+		3A5BD55125BC1FB700481A2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949AE12454621D007E7928 /* Sketches.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A1AA04C25A762F9005FEF1F;
+			remoteInfo = SketchesTestground;
+		};
+		3A5BD55325BC1FB700481A2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949AE12454621D007E7928 /* Sketches.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AEB6FD825B86FBD007A3312;
+			remoteInfo = NetworkUtil;
+		};
+		3A8BD881256FD05E00E4C225 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949AB9245461CA007E7928 /* Base.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A8BD84C256FAB2600E4C225;
+			remoteInfo = "MultitoolBase-macOS";
+		};
+		3A8BD8E3256FD1C700E4C225 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A949AC3245461DB007E7928 /* Closures.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A8BD8BA256FD13A00E4C225;
+			remoteInfo = "MultitoolClosures-macOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3A949B22245462BD007E7928 /* CopyFiles */ = {
@@ -30,8 +74,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3A9A2A4D2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Embed Frameworks */,
+				3A5BD54925BC1FB700481A2B /* LoggingUtil_macOS.framework in Embed Frameworks */,
+				3A8BD8E6256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Embed Frameworks */,
+				3A634C4C255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Embed Frameworks */,
 				3A949BF7245467E0007E7928 /* Keychain_macOS.framework in Embed Frameworks */,
+				3A8BD884256FD05F00E4C225 /* MultitoolBase_macOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -39,6 +86,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A5A71F6255ED1560061A989 /* UserDefaultsManager_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UserDefaultsManager_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A5BD54725BC1FB600481A2B /* LoggingUtil_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoggingUtil_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A634C4A255FE5C900758139 /* UserDefaultsUtil_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UserDefaultsUtil_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A949AB9245461CA007E7928 /* Base.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Base.xcodeproj; path = Base/Base.xcodeproj; sourceTree = "<group>"; };
 		3A949AC3245461DB007E7928 /* Closures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Closures.xcodeproj; path = Closures/Closures.xcodeproj; sourceTree = "<group>"; };
 		3A949ACD245461E5007E7928 /* Errors.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Errors.xcodeproj; path = Errors/Errors.xcodeproj; sourceTree = "<group>"; };
@@ -56,8 +106,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9A2A4C2508D308000ABDC2 /* MTUserDefaults_macOS.framework in Frameworks */,
+				3A5BD54825BC1FB600481A2B /* LoggingUtil_macOS.framework in Frameworks */,
+				3A8BD8E5256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Frameworks */,
+				3A634C4B255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Frameworks */,
 				3A949BF6245467E0007E7928 /* Keychain_macOS.framework in Frameworks */,
+				3A8BD883256FD05E00E4C225 /* MultitoolBase_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +134,8 @@
 		3A949ABA245461CA007E7928 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */,
+				3A5BD54D25BC1FB700481A2B /* MultitoolBaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +143,7 @@
 		3A949AC4245461DB007E7928 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +165,8 @@
 		3A949AE22454621D007E7928 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				3A5BD55225BC1FB700481A2B /* SketchesTestground */,
+				3A5BD55425BC1FB700481A2B /* NetworkUtil.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +190,9 @@
 		3A949BF3245467E0007E7928 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A5BD54725BC1FB600481A2B /* LoggingUtil_macOS.framework */,
+				3A634C4A255FE5C900758139 /* UserDefaultsUtil_macOS.framework */,
+				3A5A71F6255ED1560061A989 /* UserDefaultsManager_macOS.framework */,
 				3A9A2A4B2508D308000ABDC2 /* MTUserDefaults_macOS.framework */,
 				3A949BF4245467E0007E7928 /* Keychain_macOS.framework */,
 				3A949BF5245467E0007E7928 /* UserDefaults_macOS.framework */,
@@ -213,6 +274,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3A5BD54D25BC1FB700481A2B /* MultitoolBaseTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MultitoolBaseTests.xctest;
+			remoteRef = 3A5BD54C25BC1FB700481A2B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A5BD55225BC1FB700481A2B /* SketchesTestground */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SketchesTestground;
+			remoteRef = 3A5BD55125BC1FB700481A2B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A5BD55425BC1FB700481A2B /* NetworkUtil.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NetworkUtil.framework;
+			remoteRef = 3A5BD55325BC1FB700481A2B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MultitoolBase_macOS.framework;
+			remoteRef = 3A8BD881256FD05E00E4C225 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MultitoolClosures_macOS.framework;
+			remoteRef = 3A8BD8E3256FD1C700E4C225 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A949B20245462BD007E7928 /* Sources */ = {
@@ -346,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -406,7 +505,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

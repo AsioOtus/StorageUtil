@@ -79,7 +79,7 @@ public extension Data {
 	}
 	
 	var oct: String {
-		return map { String(format: "%02d", $0) }.joined(separator: " ")
+		return map { String(format: "%02dx", $0) }.joined(separator: " ")
 	}
 	
 	var dec: String {
@@ -87,7 +87,7 @@ public extension Data {
 	}
 	
 	var hex: String {
-		return map { String(format: "%02h", $0) }.joined(separator: " ")
+		return map { String(format: "%02hx", $0) }.joined(separator: " ")
 	}
 	
 	
@@ -97,7 +97,7 @@ public extension Data {
 	}
 	
 	var plainOct: String {
-		return map { String(format: "%02d", $0) }.joined()
+		return map { String(format: "%02dx", $0) }.joined()
 	}
 	
 	var plainDec: String {
@@ -105,6 +105,6 @@ public extension Data {
 	}
 	
 	var plainHex: String {
-		return map { String(format: "%02h", $0) }.joined()
+		return map { String(format: "%02hx", $0) }.joined()
 	}
 }

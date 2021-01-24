@@ -2,7 +2,7 @@ import os.log
 
 
 
-extension UserDefaultsUtil.Logger {
+extension Logger {
 	struct Record<Value> {
 		let key: String
 		let operation: Operation

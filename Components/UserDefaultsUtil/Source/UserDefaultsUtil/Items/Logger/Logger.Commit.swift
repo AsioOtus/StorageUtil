@@ -1,8 +1,6 @@
 import os.log
 
-
-
-extension UserDefaultsUtil.Logger {
+extension Logger {
 	struct Commit<ValueType> {
 		let key: String
 		

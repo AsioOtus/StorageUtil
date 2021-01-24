@@ -1,6 +1,6 @@
 import os.log
 
-extension UserDefaultsUtil.Logger {
+extension Logger {
 	public struct Info<ValueType> {
 		public let key: String
 		public let operation: String
@@ -17,16 +17,16 @@ extension UserDefaultsUtil.Logger {
 		public let additional: String?
 		
 		public var defaultMessage: String {
-			var message = "\(key) – \(operation)"
+			var message = "\(key) | \(operation)"
 			
-			message += " – \(existance)"
+			message += " | \(existance)"
 			
 			if let oldValue = oldValue {
-				message += " – \(oldValue)"
+				message += " | \(oldValue)"
 			}
 			
 			if let newValue = newValue {
-				message += " – \(newValue)"
+				message += " | \(newValue)"
 			}
 			
 			if let error = error {

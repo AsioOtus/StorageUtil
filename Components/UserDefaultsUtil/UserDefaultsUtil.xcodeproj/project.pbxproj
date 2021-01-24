@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3A16FEC924F43A0F00CBA263 /* DynamicDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16FEC824F43A0F00CBA263 /* DynamicDefaultValueProvider.swift */; };
+		3A19CEEC25BD891200D097D7 /* UserDefaultsUtilItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A19CEEB25BD891200D097D7 /* UserDefaultsUtilItem.swift */; };
+		3A19CEED25BD891200D097D7 /* UserDefaultsUtilItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A19CEEB25BD891200D097D7 /* UserDefaultsUtilItem.swift */; };
+		3A19CEF325BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A19CEF225BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift */; };
+		3A19CEF425BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A19CEF225BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift */; };
 		3A3701AC247C036D00100BEB /* Logger.Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AB247C036D00100BEB /* Logger.Commit.swift */; };
 		3A3701B0247C04D000100BEB /* Logger.Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701AF247C04D000100BEB /* Logger.Operation.swift */; };
 		3A3701B2247C05C800100BEB /* Logger.Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B1247C05C800100BEB /* Logger.Info.swift */; };
@@ -16,7 +20,6 @@
 		3A3701B8247EC05500100BEB /* StaticDefaultValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3701B7247EC05500100BEB /* StaticDefaultValueProvider.swift */; };
 		3A634C7F255FEF5F00758139 /* Item.Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A634C7E255FEF5F00758139 /* Item.Coder.swift */; };
 		3A634C80255FEF5F00758139 /* Item.Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A634C7E255FEF5F00758139 /* Item.Coder.swift */; };
-		3A70234C24912D0500A226AF /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70234B24912D0500A226AF /* UserDefaultsUtil.swift */; };
 		3A949BEF245467D1007E7928 /* UserDefaultsUtil_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A949BED245467D1007E7928 /* UserDefaultsUtil_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AD3B5192460942600056493 /* Item.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B8A245464AF007E7928 /* Item.Error.swift */; };
 		3AD3B51B2460942600056493 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B89245464AF007E7928 /* Item.swift */; };
@@ -37,7 +40,6 @@
 		3AFBE5142507D0A2000C089B /* UserDefaultsUtil_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BEA245467D1007E7928 /* UserDefaultsUtil_macOS.framework */; };
 		3AFBE51B2507D134000C089B /* Item_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBE51A2507D134000C089B /* Item_macOSTests.swift */; };
 		3AFBE5472507D2F7000C089B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3B51E2460945100056493 /* Settings.swift */; };
-		3AFBE5482507D2F7000C089B /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70234B24912D0500A226AF /* UserDefaultsUtil.swift */; };
 		3AFBE5492507D2F7000C089B /* DefaultableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B88245464AF007E7928 /* DefaultableItem.swift */; };
 		3AFBE54A2507D2F7000C089B /* Item.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B8A245464AF007E7928 /* Item.Error.swift */; };
 		3AFBE54B2507D2F7000C089B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B89245464AF007E7928 /* Item.swift */; };
@@ -70,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		3A16FEC824F43A0F00CBA263 /* DynamicDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicDefaultValueProvider.swift; sourceTree = "<group>"; };
+		3A19CEEB25BD891200D097D7 /* UserDefaultsUtilItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtilItem.swift; sourceTree = "<group>"; };
+		3A19CEF225BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtilDefaultableItem.swift; sourceTree = "<group>"; };
 		3A3701AB247C036D00100BEB /* Logger.Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.Commit.swift; sourceTree = "<group>"; };
 		3A3701AF247C04D000100BEB /* Logger.Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.Operation.swift; sourceTree = "<group>"; };
 		3A3701B1247C05C800100BEB /* Logger.Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.Info.swift; sourceTree = "<group>"; };
@@ -77,7 +81,6 @@
 		3A3701B5247EB4E300100BEB /* UserDefaultsUtilDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtilDefaultValueProvider.swift; sourceTree = "<group>"; };
 		3A3701B7247EC05500100BEB /* StaticDefaultValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticDefaultValueProvider.swift; sourceTree = "<group>"; };
 		3A634C7E255FEF5F00758139 /* Item.Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.Coder.swift; sourceTree = "<group>"; };
-		3A70234B24912D0500A226AF /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		3A949B88245464AF007E7928 /* DefaultableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultableItem.swift; sourceTree = "<group>"; };
 		3A949B89245464AF007E7928 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3A949B8A245464AF007E7928 /* Item.Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.Error.swift; sourceTree = "<group>"; };
@@ -119,6 +122,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A19CEDF25BD851F00D097D7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A634C7E255FEF5F00758139 /* Item.Coder.swift */,
+				3A949B8A245464AF007E7928 /* Item.Error.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3A19CEE725BD857000D097D7 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				3A949B88245464AF007E7928 /* DefaultableItem.swift */,
+				3A949B89245464AF007E7928 /* Item.swift */,
+				3AD3B52524609B9500056493 /* ParametricDefaultableItem.swift */,
+				3AD3B5232460993A00056493 /* ParametricItem.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		3A19CEEA25BD88D300D097D7 /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				3A19CEF225BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift */,
+				3A19CEEB25BD891200D097D7 /* UserDefaultsUtilItem.swift */,
+			);
+			path = PropertyWrappers;
+			sourceTree = "<group>";
+		};
 		3A949B7A2454647B007E7928 = {
 			isa = PBXGroup;
 			children = (
@@ -143,8 +175,6 @@
 			children = (
 				3A949B87245464AF007E7928 /* Items */,
 				3AD3B51E2460945100056493 /* Settings.swift */,
-				3A70234B24912D0500A226AF /* UserDefaultsUtil.swift */,
-				3AFB9DC6256311B600939519 /* UserDefaultsUtilError.swift */,
 			);
 			path = UserDefaultsUtil;
 			sourceTree = "<group>";
@@ -153,13 +183,10 @@
 			isa = PBXGroup;
 			children = (
 				3AFBE50A2507CBA6000C089B /* DefaultValueProviders */,
+				3A19CEDF25BD851F00D097D7 /* Helpers */,
+				3A19CEE725BD857000D097D7 /* Items */,
 				3AD3B5222460989800056493 /* Logger */,
-				3A949B88245464AF007E7928 /* DefaultableItem.swift */,
-				3A634C7E255FEF5F00758139 /* Item.Coder.swift */,
-				3A949B8A245464AF007E7928 /* Item.Error.swift */,
-				3A949B89245464AF007E7928 /* Item.swift */,
-				3AD3B52524609B9500056493 /* ParametricDefaultableItem.swift */,
-				3AD3B5232460993A00056493 /* ParametricItem.swift */,
+				3A19CEEA25BD88D300D097D7 /* PropertyWrappers */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -187,6 +214,7 @@
 			children = (
 				3A3701B5247EB4E300100BEB /* UserDefaultsUtilDefaultValueProvider.swift */,
 				3AD3B52D2460A21700056493 /* UserDefaultsUtilDescribable.swift */,
+				3AFB9DC6256311B600939519 /* UserDefaultsUtilError.swift */,
 				3AD3B50B2460938000056493 /* UserDefaultsUtilItemKeyPostfixProvider.swift */,
 				3AD3B5202460954400056493 /* UserDefaultsUtilItemKeyPrefixProvider.swift */,
 				3AD3B5292460A0CC00056493 /* UserDefaultsUtilLoggingProvider.swift */,
@@ -336,6 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A3701B6247EB4E300100BEB /* UserDefaultsUtilDefaultValueProvider.swift in Sources */,
+				3A19CEF325BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift in Sources */,
+				3A19CEEC25BD891200D097D7 /* UserDefaultsUtilItem.swift in Sources */,
 				3AD3B52A2460A0CC00056493 /* UserDefaultsUtilLoggingProvider.swift in Sources */,
 				3AFB9DCC2563135600939519 /* Logger.Moderator.swift in Sources */,
 				3AD3B5192460942600056493 /* Item.Error.swift in Sources */,
@@ -353,7 +383,6 @@
 				3A634C7F255FEF5F00758139 /* Item.Coder.swift in Sources */,
 				3A3701B0247C04D000100BEB /* Logger.Operation.swift in Sources */,
 				3A3701AC247C036D00100BEB /* Logger.Commit.swift in Sources */,
-				3A70234C24912D0500A226AF /* UserDefaultsUtil.swift in Sources */,
 				3AD3B52E2460A21700056493 /* UserDefaultsUtilDescribable.swift in Sources */,
 				3AFB9DC7256311B600939519 /* UserDefaultsUtilError.swift in Sources */,
 				3A3701B4247C0C6300100BEB /* StandardLoggingProvider.swift in Sources */,
@@ -369,7 +398,6 @@
 				3AFBE55B2507D2F7000C089B /* UserDefaultsUtilLoggingProvider.swift in Sources */,
 				3AFBE5572507D2F7000C089B /* UserDefaultsUtilDefaultValueProvider.swift in Sources */,
 				3AFBE5552507D2F7000C089B /* Logger.Record.swift in Sources */,
-				3AFBE5482507D2F7000C089B /* UserDefaultsUtil.swift in Sources */,
 				3AFBE5522507D2F7000C089B /* Logger.Commit.swift in Sources */,
 				3AFBE5492507D2F7000C089B /* DefaultableItem.swift in Sources */,
 				3AFBE5472507D2F7000C089B /* Settings.swift in Sources */,
@@ -389,6 +417,8 @@
 				3AFB9DC8256311B600939519 /* UserDefaultsUtilError.swift in Sources */,
 				3AFBE54A2507D2F7000C089B /* Item.Error.swift in Sources */,
 				3AFBE54F2507D2F7000C089B /* DynamicDefaultValueProvider.swift in Sources */,
+				3A19CEED25BD891200D097D7 /* UserDefaultsUtilItem.swift in Sources */,
+				3A19CEF425BD8B3000D097D7 /* UserDefaultsUtilDefaultableItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

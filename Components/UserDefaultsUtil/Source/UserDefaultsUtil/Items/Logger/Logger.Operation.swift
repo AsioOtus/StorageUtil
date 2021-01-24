@@ -1,4 +1,4 @@
-extension UserDefaultsUtil.Logger {
+extension Logger {
 	enum Operation {
 		case save
 		case load

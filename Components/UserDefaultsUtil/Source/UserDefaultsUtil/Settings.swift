@@ -3,30 +3,32 @@ import os
 
 
 
-extension UserDefaultsUtil {
-	public struct Settings {
-		public let items: Items
-		public var logging: Logging
-		
-		public init (
-			items: Items,
-			logging: Logging = .default
-		) {
-			self.items = items
-			self.logging = logging
-		}
-		
-		internal static let `default` = Settings()
-		private init () {
-			self.items = .default
-			self.logging = .default
-		}
+public var settings: Settings = .default
+
+
+
+public struct Settings {
+	public let items: Items
+	public var logging: Logging
+	
+	public init (
+		items: Items,
+		logging: Logging = .default
+	) {
+		self.items = items
+		self.logging = logging
+	}
+	
+	internal static let `default` = Settings()
+	private init () {
+		self.items = .default
+		self.logging = .default
 	}
 }
 
 
 
-extension UserDefaultsUtil.Settings {
+extension Settings {
 	public struct Items {
 		public let itemKeyPrefixProvider: UserDefaultsUtilItemKeyPrefixProvider?
 		
@@ -43,7 +45,7 @@ extension UserDefaultsUtil.Settings {
 
 
 
-extension UserDefaultsUtil.Settings {
+extension Settings {
 	public struct Logging {
 		public var enable: Bool
 		public var level: OSLogType
