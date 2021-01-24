@@ -14,19 +14,26 @@
 			remoteGlobalIDString = 3A5BD56925BC335B00481A2B;
 			remoteInfo = "NetworkUtil-macOS";
 		};
+		3A396EB625BDA29100B110C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A396EB125BDA29100B110C7 /* KeychainUtil.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A949BDC245467AE007E7928;
+			remoteInfo = "KeychainUtil-macOS";
+		};
+		3A396EB825BDA29100B110C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A396EB125BDA29100B110C7 /* KeychainUtil.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A211E51257E38060017229F;
+			remoteInfo = KeychainUtilTestground;
+		};
 		3A5BD56225BC334A00481A2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A5BD52425BC1E1500481A2B /* LoggingUtil.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3A5BD53125BC1E4000481A2B;
 			remoteInfo = "LoggingUtil-macOS";
-		};
-		3A65C36E256BA48B00C4A9C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A949BDC245467AE007E7928;
-			remoteInfo = "KeychainUtil-macOS";
 		};
 		3A81C33025627F590048D103 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -42,23 +49,25 @@
 			remoteGlobalIDString = 3AFBE50F2507D0A2000C089B;
 			remoteInfo = UserDefaultsUtil_macOSTests;
 		};
-		3A85DAEC25AF01BC006E76AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A211E51257E38060017229F;
-			remoteInfo = KeychainUtilTestground;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A396EB125BDA29100B110C7 /* KeychainUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainUtil.xcodeproj; path = KeychainUtil/KeychainUtil.xcodeproj; sourceTree = "<group>"; };
 		3A5BD52425BC1E1500481A2B /* LoggingUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoggingUtil.xcodeproj; path = LoggingUtil/LoggingUtil.xcodeproj; sourceTree = "<group>"; };
 		3A5BD55E25BC334900481A2B /* NetworkUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkUtil.xcodeproj; path = NetworkUtil/NetworkUtil.xcodeproj; sourceTree = "<group>"; };
 		3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UserDefaultsUtil.xcodeproj; path = UserDefaultsUtil/UserDefaultsUtil.xcodeproj; sourceTree = "<group>"; };
-		3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeychainUtil.xcodeproj; path = Keychain/KeychainUtil.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		3A396EB225BDA29100B110C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A396EB725BDA29100B110C7 /* KeychainUtil_macOS.framework */,
+				3A396EB925BDA29100B110C7 /* KeychainUtilTestground */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3A5BD52525BC1E1500481A2B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,15 +84,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3A65C36B256BA48B00C4A9C2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3A65C36F256BA48B00C4A9C2 /* KeychainUtil_macOS.framework */,
-				3A85DAED25AF01BC006E76AF /* KeychainUtilTestground */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3A81C32B25627F590048D103 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +96,7 @@
 		3A949AD024546211007E7928 = {
 			isa = PBXGroup;
 			children = (
-				3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */,
+				3A396EB125BDA29100B110C7 /* KeychainUtil.xcodeproj */,
 				3A5BD52425BC1E1500481A2B /* LoggingUtil.xcodeproj */,
 				3A5BD55E25BC334900481A2B /* NetworkUtil.xcodeproj */,
 				3A79D0772508CFB5000E8137 /* UserDefaultsUtil.xcodeproj */,
@@ -123,8 +123,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3A65C36B256BA48B00C4A9C2 /* Products */;
-					ProjectRef = 3A949AEB2454622F007E7928 /* KeychainUtil.xcodeproj */;
+					ProductGroup = 3A396EB225BDA29100B110C7 /* Products */;
+					ProjectRef = 3A396EB125BDA29100B110C7 /* KeychainUtil.xcodeproj */;
 				},
 				{
 					ProductGroup = 3A5BD52525BC1E1500481A2B /* Products */;
@@ -153,18 +153,25 @@
 			remoteRef = 3A19CED925BC821A00D097D7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		3A396EB725BDA29100B110C7 /* KeychainUtil_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KeychainUtil_macOS.framework;
+			remoteRef = 3A396EB625BDA29100B110C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A396EB925BDA29100B110C7 /* KeychainUtilTestground */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = KeychainUtilTestground;
+			remoteRef = 3A396EB825BDA29100B110C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		3A5BD56325BC334A00481A2B /* LoggingUtil_macOS.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = LoggingUtil_macOS.framework;
 			remoteRef = 3A5BD56225BC334A00481A2B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3A65C36F256BA48B00C4A9C2 /* KeychainUtil_macOS.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = KeychainUtil_macOS.framework;
-			remoteRef = 3A65C36E256BA48B00C4A9C2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3A81C33125627F590048D103 /* UserDefaultsUtil_macOS.framework */ = {
@@ -179,13 +186,6 @@
 			fileType = wrapper.cfbundle;
 			path = UserDefaultsUtil_macOSTests.xctest;
 			remoteRef = 3A81C33225627F590048D103 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3A85DAED25AF01BC006E76AF /* KeychainUtilTestground */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = KeychainUtilTestground;
-			remoteRef = 3A85DAEC25AF01BC006E76AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
