@@ -5,7 +5,7 @@ public struct Logger {
 		self.userDefaultsItemTypeName = userDefaultsItemTypeName
 	}
 	
-	func log<ValueType> (_ commit: Commit<ValueType>) {
+	func log<Value> (_ commit: Commit<Value>) {
 		let info = Moderator.info(commit, userDefaultsItemTypeName, settings.logging)
 		
 		if

@@ -50,28 +50,30 @@ extension ParametricDefaultableItem {
 			return isExists
 		}
 	}
-}
-
-
-
-extension ParametricDefaultableItem {
+	
 	public func loadOrDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> Value {
-		let (value, logCommit) = super.loadOrDefault(keyPostfixProvider)
-		logger.log(logCommit)
-		return value
+		accessQueue.sync {
+			let (value, logCommit) = super.loadOrDefault(keyPostfixProvider)
+			logger.log(logCommit)
+			return value
+		}
 	}
 	
 	@discardableResult
 	public func saveDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
-		let (isSavingSucceeded, logCommit) = super.saveDefault(keyPostfixProvider)
-		logger.log(logCommit)
-		return isSavingSucceeded
+		accessQueue.sync {
+			let (isSavingSucceeded, logCommit) = super.saveDefault(keyPostfixProvider)
+			logger.log(logCommit)
+			return isSavingSucceeded
+		}
 	}
 	
 	@discardableResult
 	public func saveDefaultIfNotExists (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
-		let (isSavingSucceeded, logCommit) = super.saveDefaultIfNotExists(keyPostfixProvider)
-		logger.log(logCommit)
-		return isSavingSucceeded
+		accessQueue.sync {
+			let (isSavingSucceeded, logCommit) = super.saveDefaultIfNotExists(keyPostfixProvider)
+			logger.log(logCommit)
+			return isSavingSucceeded
+		}
 	}
 }

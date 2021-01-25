@@ -2,14 +2,18 @@ import Foundation
 
 
 
-open class ParametricItem<ValueType: Codable, KeyPostfixProviderType: UserDefaultsUtilItemKeyPostfixProvider>: Item<ValueType> {	
+open class ParametricItem<Value: Codable, KeyPostfixProviderType: UserDefaultsUtilItemKeyPostfixProvider>: Item<Value> {
 	func postfixedKey (_ keyPostfixProvider: KeyPostfixProviderType?) -> String {
 		let postfixedKey = super.postfixedKey(keyPostfixProvider)
 		return postfixedKey
 	}
-	
+}
+
+
+
+extension ParametricItem {
 	@discardableResult
-	public func save (_ object: ValueType, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+	public func save (_ object: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let (isSavingSucceeded, logCommit) = super.save(object, keyPostfixProvider)
 			logger.log(logCommit)
@@ -17,7 +21,7 @@ open class ParametricItem<ValueType: Codable, KeyPostfixProviderType: UserDefaul
 		}
 	}
 	
-	public func load (_ keyPostfixProvider: KeyPostfixProviderType) -> ValueType? {
+	public func load (_ keyPostfixProvider: KeyPostfixProviderType) -> Value? {
 		accessQueue.sync {
 			let (value, logCommit) = super.load(keyPostfixProvider)
 			logger.log(logCommit)

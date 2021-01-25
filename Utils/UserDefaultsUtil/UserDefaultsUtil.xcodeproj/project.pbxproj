@@ -164,31 +164,15 @@
 		3A949B84245464AF007E7928 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3A949B85245464AF007E7928 /* UserDefaultsUtil */,
-				3AD3B50A2460936700056493 /* Protocols */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		3A949B85245464AF007E7928 /* UserDefaultsUtil */ = {
-			isa = PBXGroup;
-			children = (
-				3A949B87245464AF007E7928 /* Items */,
-				3AD3B51E2460945100056493 /* Settings.swift */,
-			);
-			path = UserDefaultsUtil;
-			sourceTree = "<group>";
-		};
-		3A949B87245464AF007E7928 /* Items */ = {
-			isa = PBXGroup;
-			children = (
 				3AFBE50A2507CBA6000C089B /* DefaultValueProviders */,
 				3A19CEDF25BD851F00D097D7 /* Helpers */,
 				3A19CEE725BD857000D097D7 /* Items */,
 				3AD3B5222460989800056493 /* Logger */,
 				3A19CEEA25BD88D300D097D7 /* PropertyWrappers */,
+				3AD3B50A2460936700056493 /* Protocols */,
+				3AD3B51E2460945100056493 /* Settings.swift */,
 			);
-			path = Items;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		3A949BEB245467D1007E7928 /* Products */ = {

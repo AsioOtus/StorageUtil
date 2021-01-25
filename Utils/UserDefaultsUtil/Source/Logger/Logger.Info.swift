@@ -1,13 +1,13 @@
 import os.log
 
 extension Logger {
-	public struct Info<ValueType> {
+	public struct Info<Value> {
 		public let key: String
 		public let operation: String
 		
 		public let existance: Bool
-		public let oldValue: ValueType?
-		public let newValue: ValueType?
+		public let oldValue: Value?
+		public let newValue: Value?
 		
 		public let error: Error?
 		

@@ -2,22 +2,25 @@ import Foundation
 
 
 
-open class Item<ValueType: Codable> {
+open class Item<Value: Codable> {
 	let logger: Logger
 	
 	public let userDefaultsInstance: UserDefaults
 	public let accessQueue: DispatchQueue
 	
 	public final let baseKey: String
-	public final var key: String { Self.key(baseKey) }
+	public final let key: String
 	
 	public init (_ baseKey: String, _ userDefaultsInstance: UserDefaults = .standard, queue: DispatchQueue? = nil) {
+		let key = Self.key(baseKey)
+		
 		self.logger = Logger(String(describing: Self.self))
 		
 		self.baseKey = baseKey
+		self.key = key
 		
 		self.userDefaultsInstance = userDefaultsInstance
-		self.accessQueue = queue ?? DispatchQueue(label: "\(Self.self).\(Self.key(baseKey)).accessQueue")
+		self.accessQueue = queue ?? DispatchQueue(label: "\(Self.self).\(key).accessQueue")
 	}
 
 	public final func postfixedKey (_ postfixProvider: UserDefaultsUtilItemKeyPostfixProvider?) -> String {
@@ -45,7 +48,7 @@ open class Item<ValueType: Codable> {
 
 public extension Item {
 	@discardableResult
-	func save (_ object: ValueType) -> Bool {
+	func save (_ object: Value) -> Bool {
 		accessQueue.sync {
 			let (isSuccess, logCommit) = save(object, nil)
 			logger.log(logCommit)
@@ -53,7 +56,7 @@ public extension Item {
 		}
 	}
 	
-	func load () -> ValueType? {
+	func load () -> Value? {
 		accessQueue.sync {
 			let (value, logCommit) = load(nil)
 			logger.log(logCommit)
@@ -81,9 +84,9 @@ public extension Item {
 
 internal extension Item {
 	@discardableResult
-	func save (_ value: ValueType, _ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> (Bool, Logger.Commit<ValueType>) {
+	func save (_ value: Value, _ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> (Bool, Logger.Commit<Value>) {
 		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record<ValueType>(.default, key, .save, value)
+		let logRecord = Logger.Record<Value>(.default, key, .save, value)
 		
 		do {
 			let (oldValue, _) = load(keyPostfixProvider)
@@ -98,13 +101,13 @@ internal extension Item {
 		}
 	}
 	
-	func load (_ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> (ValueType?, Logger.Commit<ValueType>) {
+	func load (_ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> (Value?, Logger.Commit<Value>) {
 		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record<ValueType>(.default, key, .load)
+		let logRecord = Logger.Record<Value>(.default, key, .load)
 		
 		do {
 			guard let valueJsonString = userDefaultsInstance.string(forKey: key) else { throw Error.itemNotFound }
-			let value = try Coder.decode(valueJsonString, ValueType.self)
+			let value = try Coder.decode(valueJsonString, Value.self)
 			
 			return (value, logRecord.commit(value))
 		} catch let error as UserDefaultsUtilError {
@@ -114,9 +117,9 @@ internal extension Item {
 		}
 	}
 	
-	func delete (_ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> Logger.Commit<ValueType> {
+	func delete (_ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> Logger.Commit<Value> {
 		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record<ValueType>(.default, key, .delete)
+		let logRecord = Logger.Record<Value>(.default, key, .delete)
 		
 		let (oldValue, _) = load(keyPostfixProvider)
 		userDefaultsInstance.removeObject(forKey: key)
@@ -124,9 +127,9 @@ internal extension Item {
 		return logRecord.commit(oldValue)
 	}
 	
-	func isExists (_ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> (Bool, Logger.Commit<ValueType>) {
+	func isExists (_ keyPostfixProvider: UserDefaultsUtilItemKeyPostfixProvider? = nil) -> (Bool, Logger.Commit<Value>) {
 		let key = postfixedKey(keyPostfixProvider)
-		let logRecord = Logger.Record<ValueType>(.default, key, .isExists)
+		let logRecord = Logger.Record<Value>(.default, key, .isExists)
 		
 		let (value, _) = load(keyPostfixProvider)
 		let isExists = value != nil
