@@ -1,6 +1,6 @@
 import os
 
-public extension LogHandler {
+public extension DefaultLogHandler {
 	struct Settings {
 		public var level = LogLevel.info
 		public var enableSourceCodeInfo = false
@@ -12,7 +12,7 @@ public extension LogHandler {
 	}
 }
 
-public class LogHandler {
+public class DefaultLogHandler: LogHandler {
 	private let logger = os.Logger()
 	
 	public let prefix: String
@@ -50,7 +50,7 @@ public class LogHandler {
 		return finalMessage
 	}
 	
-	func log (_ level: LogLevel, _ source: String, _ message: String, _ file: String, _ function: String, _ line: UInt) {
+	public func log (_ level: LogLevel, _ source: String, _ message: String, _ file: String, _ function: String, _ line: UInt) {
 		let finalMessage = self.message(level, source: source, message: message)
 		
 		switch level {

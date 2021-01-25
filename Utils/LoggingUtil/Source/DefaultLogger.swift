@@ -1,4 +1,4 @@
-public struct Logger {
+public struct DefaultLogger: Logger {
 	public let source: String
 	public let logHandler: LogHandler
 	
