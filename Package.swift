@@ -11,13 +11,19 @@ let package = Package(
 	products: [
 		.library(
 			name: "NetworkUtil",
-			targets: ["NetworkUtil"])
+			targets: ["NetworkUtil"]
+		)
 	],
 	targets: [
 		.target(
 			name: "NetworkUtil",
 			dependencies: [],
 			path: "Utils/NetworkUtil/Source"
+		),
+		.target(
+			name: "UserDefaultsUtil",
+			dependencies: [],
+			path: "Utils/UserDefaultsUtil/Source"
 		)
 	],
 	swiftLanguageVersions: [.v5]
