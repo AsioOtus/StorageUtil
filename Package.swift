@@ -9,9 +9,13 @@ let package = Package(
 		.macOS(.v10_15)
 	],
 	products: [
+		// .library(
+		// 	name: "NetworkUtil",
+		// 	targets: ["NetworkUtil"]
+		// ),
 		.library(
-			name: "NetworkUtil",
-			targets: ["NetworkUtil"]
+			name: "Base",
+			targets: ["Base"]
 		),
 		.library(
 			name: "UserDefaultsUtil",
@@ -19,10 +23,15 @@ let package = Package(
 		)
 	],
 	targets: [
+		// .target(
+		// 	name: "NetworkUtil",
+		// 	dependencies: [],
+		// 	path: "Utils/NetworkUtil/Source"
+		// ),
 		.target(
-			name: "NetworkUtil",
+			name: "Base",
 			dependencies: [],
-			path: "Utils/NetworkUtil/Source"
+			path: "Base/Source"
 		),
 		.target(
 			name: "UserDefaultsUtil",
