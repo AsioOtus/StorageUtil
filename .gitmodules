@@ -1,0 +1,3 @@
+[submodule "Utils/UserDefaultsUtil"]
+	path = Utils/UserDefaultsUtil
+	url = https://github.com/AsioOtus/MT-UserDefaultsUtil.git
