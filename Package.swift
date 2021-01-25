@@ -12,6 +12,10 @@ let package = Package(
 		.library(
 			name: "NetworkUtil",
 			targets: ["NetworkUtil"]
+		),
+		.library(
+			name: "UserDefaultsUtil",
+			targets: ["UserDefaultsUtil"]
 		)
 	],
 	targets: [
