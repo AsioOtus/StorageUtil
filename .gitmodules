@@ -4,3 +4,6 @@
 [submodule "Utils/KeychainUtil"]
 	path = Utils/KeychainUtil
 	url = https://github.com/AsioOtus/MT-KeychainUtil.git
+[submodule "Utils/LoggingUtil"]
+	path = Utils/LoggingUtil
+	url = https://github.com/AsioOtus/MT-LoggingUtil.git
