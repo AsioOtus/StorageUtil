@@ -9,34 +9,52 @@ let package = Package(
 		.macOS(.v10_15)
 	],
 	products: [
-		// .library(
-		// 	name: "NetworkUtil",
-		// 	targets: ["NetworkUtil"]
-		// ),
 		.library(
-			name: "Base",
-			targets: ["Base"]
+			name: "MultitoolCore",
+			targets: ["MultitoolCore"]
+		),
+		.library(
+			name: "KeychainUtil",
+			targets: ["KeychainUtil"]
+		),
+		.library(
+			name: "LoggingUtil",
+			targets: ["LoggingUtil"]
 		),
 		.library(
 			name: "UserDefaultsUtil",
 			targets: ["UserDefaultsUtil"]
+		),
+		.library(
+			name: "UIKitExtension",
+			targets: ["UIKitExtension"]
 		)
 	],
 	targets: [
-		// .target(
-		// 	name: "NetworkUtil",
-		// 	dependencies: [],
-		// 	path: "Utils/NetworkUtil/Source"
-		// ),
 		.target(
-			name: "Base",
+			name: "MultitoolCore",
 			dependencies: [],
-			path: "Base/Source"
+			path: "Base/Source/Core"
+		),
+		.target(
+			name: "KeychainUtil",
+			dependencies: [],
+			path: "Utils/KeychainUtil/Source"
+		),
+		.target(
+			name: "LoggingUtil",
+			dependencies: [],
+			path: "Utils/LoggingUtil/Source"
 		),
 		.target(
 			name: "UserDefaultsUtil",
 			dependencies: [],
 			path: "Utils/UserDefaultsUtil/Source"
+		),
+		.target(
+			name: "UIKitExtensions",
+			dependencies: [],
+			path: "UIKitExtensions/Source"
 		)
 	],
 	swiftLanguageVersions: [.v5]

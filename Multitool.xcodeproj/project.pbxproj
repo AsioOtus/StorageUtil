@@ -13,8 +13,6 @@
 		3A634C4C255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A634C4A255FE5C900758139 /* UserDefaultsUtil_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A8BD883256FD05E00E4C225 /* MultitoolBase_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */; };
 		3A8BD884256FD05F00E4C225 /* MultitoolBase_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A8BD8E5256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */; };
-		3A8BD8E6256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A949B28245462BD007E7928 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A949B27245462BD007E7928 /* main.swift */; };
 		3A949BF6245467E0007E7928 /* Keychain_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF4245467E0007E7928 /* Keychain_macOS.framework */; };
 		3A949BF7245467E0007E7928 /* Keychain_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A949BF4245467E0007E7928 /* Keychain_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -42,13 +40,6 @@
 			remoteGlobalIDString = 3A8BD84C256FAB2600E4C225;
 			remoteInfo = "MultitoolBase-macOS";
 		};
-		3A8BD8E3256FD1C700E4C225 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A949AC3245461DB007E7928 /* Closures.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A8BD8BA256FD13A00E4C225;
-			remoteInfo = "MultitoolClosures-macOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,7 +59,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3A5BD54925BC1FB700481A2B /* LoggingUtil_macOS.framework in Embed Frameworks */,
-				3A8BD8E6256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Embed Frameworks */,
 				3A634C4C255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Embed Frameworks */,
 				3A949BF7245467E0007E7928 /* Keychain_macOS.framework in Embed Frameworks */,
 				3A8BD884256FD05F00E4C225 /* MultitoolBase_macOS.framework in Embed Frameworks */,
@@ -79,13 +69,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A396E7F25BDA18500B110C7 /* SystemFrameworksExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemFrameworksExtensions.xcodeproj; path = SystemFrameworksExtensions/SystemFrameworksExtensions.xcodeproj; sourceTree = "<group>"; };
+		3A1B846425C013DA0042A2DC /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		3A1B846D25C016780042A2DC /* UIKitExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIKitExtensions.xcodeproj; path = UIKitExtensions/UIKitExtensions.xcodeproj; sourceTree = "<group>"; };
 		3A396EA025BDA25900B110C7 /* Utils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utils.xcodeproj; path = Utils/Utils.xcodeproj; sourceTree = "<group>"; };
 		3A5A71F6255ED1560061A989 /* UserDefaultsManager_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UserDefaultsManager_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5BD54725BC1FB600481A2B /* LoggingUtil_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoggingUtil_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A634C4A255FE5C900758139 /* UserDefaultsUtil_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UserDefaultsUtil_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A949AB9245461CA007E7928 /* Base.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Base.xcodeproj; path = Base/Base.xcodeproj; sourceTree = "<group>"; };
-		3A949AC3245461DB007E7928 /* Closures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Closures.xcodeproj; path = Closures/Closures.xcodeproj; sourceTree = "<group>"; };
 		3A949ACD245461E5007E7928 /* Errors.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Errors.xcodeproj; path = Errors/Errors.xcodeproj; sourceTree = "<group>"; };
 		3A949AE12454621D007E7928 /* Sketches.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sketches.xcodeproj; path = Sketches/Sketches.xcodeproj; sourceTree = "<group>"; };
 		3A949B24245462BD007E7928 /* Testground */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testground; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +91,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5BD54825BC1FB600481A2B /* LoggingUtil_macOS.framework in Frameworks */,
-				3A8BD8E5256FD1C700E4C225 /* MultitoolClosures_macOS.framework in Frameworks */,
 				3A634C4B255FE5C900758139 /* UserDefaultsUtil_macOS.framework in Frameworks */,
 				3A949BF6245467E0007E7928 /* Keychain_macOS.framework in Frameworks */,
 				3A8BD883256FD05E00E4C225 /* MultitoolBase_macOS.framework in Frameworks */,
@@ -111,13 +100,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A396E8025BDA18500B110C7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3A396EA125BDA25900B110C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,11 +110,11 @@
 		3A949A5F24545EF0007E7928 = {
 			isa = PBXGroup;
 			children = (
+				3A1B846425C013DA0042A2DC /* Package.swift */,
 				3A949AB9245461CA007E7928 /* Base.xcodeproj */,
-				3A949AC3245461DB007E7928 /* Closures.xcodeproj */,
 				3A949ACD245461E5007E7928 /* Errors.xcodeproj */,
 				3A396EA025BDA25900B110C7 /* Utils.xcodeproj */,
-				3A396E7F25BDA18500B110C7 /* SystemFrameworksExtensions.xcodeproj */,
+				3A1B846D25C016780042A2DC /* UIKitExtensions.xcodeproj */,
 				3A949AE12454621D007E7928 /* Sketches.xcodeproj */,
 				3A949B26245462BD007E7928 /* Testground */,
 				3A949B25245462BD007E7928 /* Products */,
@@ -145,14 +127,6 @@
 			children = (
 				3A8BD882256FD05E00E4C225 /* MultitoolBase_macOS.framework */,
 				3A5BD54D25BC1FB700481A2B /* MultitoolBaseTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3A949AC4245461DB007E7928 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,20 +227,12 @@
 					ProjectRef = 3A949AB9245461CA007E7928 /* Base.xcodeproj */;
 				},
 				{
-					ProductGroup = 3A949AC4245461DB007E7928 /* Products */;
-					ProjectRef = 3A949AC3245461DB007E7928 /* Closures.xcodeproj */;
-				},
-				{
 					ProductGroup = 3A949ACE245461E5007E7928 /* Products */;
 					ProjectRef = 3A949ACD245461E5007E7928 /* Errors.xcodeproj */;
 				},
 				{
 					ProductGroup = 3A949AE22454621D007E7928 /* Products */;
 					ProjectRef = 3A949AE12454621D007E7928 /* Sketches.xcodeproj */;
-				},
-				{
-					ProductGroup = 3A396E8025BDA18500B110C7 /* Products */;
-					ProjectRef = 3A396E7F25BDA18500B110C7 /* SystemFrameworksExtensions.xcodeproj */;
 				},
 				{
 					ProductGroup = 3A396EA125BDA25900B110C7 /* Products */;
@@ -300,13 +266,6 @@
 			fileType = wrapper.framework;
 			path = MultitoolBase_macOS.framework;
 			remoteRef = 3A8BD881256FD05E00E4C225 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3A8BD8E4256FD1C700E4C225 /* MultitoolClosures_macOS.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MultitoolClosures_macOS.framework;
-			remoteRef = 3A8BD8E3256FD1C700E4C225 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

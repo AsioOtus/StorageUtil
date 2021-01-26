@@ -34,11 +34,8 @@
 		3A949B8F245464E6007E7928 /* RequestsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTest.swift; sourceTree = "<group>"; };
 		3A949B90245464E6007E7928 /* CryptoStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoStructure.swift; sourceTree = "<group>"; };
 		3A949B91245464E6007E7928 /* NetworkStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStructure.swift; sourceTree = "<group>"; };
-		3A949B92245464E6007E7928 /* ДействияРомана.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ДействияРомана.swift"; path = "../ДействияРомана.swift"; sourceTree = "<group>"; };
 		3A949B93245464E6007E7928 /* MobileIDNetworkStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileIDNetworkStructure.swift; sourceTree = "<group>"; };
 		3A949B94245464E6007E7928 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		3A949B96245464E6007E7928 /* Knot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knot.swift; sourceTree = "<group>"; };
-		3A949B97245464E6007E7928 /* Chotko.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Chotko.cpp; sourceTree = "<group>"; };
 		3AA613142508249F00A54E2B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		3AEB6FDA25B86FBD007A3312 /* NetworkUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkUtil.h; sourceTree = "<group>"; };
 		3AEB6FDB25B86FBD007A3312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,7 +81,6 @@
 		3A949B8B245464E6007E7928 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3A949B95245464E6007E7928 /* Lulz */,
 				3A949B8C245464E6007E7928 /* ControllerLog.swift */,
 				3A949B8E245464E6007E7928 /* Crypto.swift */,
 				3A949B90245464E6007E7928 /* CryptoStructure.swift */,
@@ -98,16 +94,6 @@
 				3A5BD51625BB73E100481A2B /* LogMessageFormat */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		3A949B95245464E6007E7928 /* Lulz */ = {
-			isa = PBXGroup;
-			children = (
-				3A949B92245464E6007E7928 /* ДействияРомана.swift */,
-				3A949B96245464E6007E7928 /* Knot.swift */,
-				3A949B97245464E6007E7928 /* Chotko.cpp */,
-			);
-			path = Lulz;
 			sourceTree = "<group>";
 		};
 		3AEB6FD925B86FBD007A3312 /* NetworkUtil */ = {
