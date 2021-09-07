@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 extension StandardStorage {
 	public struct Coder {
 		static func encode <T: Encodable> (_ object: T) throws -> String {
@@ -25,8 +23,6 @@ extension StandardStorage {
 		}
 	}
 }
-
-
 
 extension StandardStorage.Coder {
 	public enum Error: UserDefaultsUtil.Error {
@@ -59,8 +55,6 @@ extension StandardStorage.Coder {
 		}
 	}
 }
-
-
 
 extension StandardStorage.Coder.Error: CustomStringConvertible {
 	public var description: String {

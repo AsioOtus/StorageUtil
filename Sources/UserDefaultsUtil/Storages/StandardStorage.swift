@@ -1,23 +1,22 @@
 import Foundation
 
-public class StandardStorage: Storage {
-	public static let `default` = StandardStorage(keyPrefix: nil)
-	
+public class StandardStorage: Storage {	
 	public let keyPrefix: String?
 	public let userDefaults: UserDefaults
 	public let label: String
 	
 	public var logHandler: LogHandler? = nil
-	public var enableStorageLogging: Bool = false
 	
 	public init (
 		keyPrefix: String?,
 		userDefaults: UserDefaults = .standard,
-		label: String = "\(Storage.self) – \(#file):\(#line)"
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
 	) {
 		self.keyPrefix = keyPrefix
 		self.userDefaults = userDefaults
-		self.label = label
+		self.label = label ?? "\(StandardStorage.self) – \(file):\(line) – \(UUID().uuidString)"
 	}
 	
 	public func prefixKey (_ key: String) -> String { KeyBuilder.build(prefix: keyPrefix, key: key) }
@@ -29,12 +28,6 @@ extension StandardStorage {
 		self.logHandler = logHandler
 		return self
 	}
-	
-	@discardableResult
-	public func enableStorageLogging (_ enableStorageLogging: Bool) -> StandardStorage {
-		self.enableStorageLogging = enableStorageLogging
-		return self
-	}
 }
 
 extension StandardStorage {
@@ -43,9 +36,7 @@ extension StandardStorage {
 		var details = LogRecord<Value>.Details(operation: "save")
 		details.newValue = value
 		defer {
-			if enableStorageLogging {
-				logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
-			}
+			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
 		}
 		
 		do {
@@ -70,9 +61,7 @@ extension StandardStorage {
 	public func load <Value: Codable> (_ key: String, _ type: Value.Type) throws -> Value? {
 		var details = LogRecord<Value>.Details(operation: "load")
 		defer {
-			if enableStorageLogging {
-				logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
-			}
+			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
 		}
 		
 		do {
@@ -96,9 +85,7 @@ extension StandardStorage {
 	public func delete <Value: Codable> (_ key: String, _ type: Value.Type) -> Value? {
 		var details = LogRecord<Value>.Details(operation: "delete")
 		defer {
-			if enableStorageLogging {
-				logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
-			}
+			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
 		}
 		
 		let prefixedKey = prefixKey(key)

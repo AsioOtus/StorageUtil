@@ -1,38 +1,50 @@
 import Foundation
 
-
-
 open class DefaultableItem <Value: Codable>: Item<Value> {
-	public let defaultValue: () -> Value
+	public let defaultValue: (String) -> Value
 	
 	public init (
 		_ key: String,
-		defaultValue: Value,
-		storage: Storage = StandardStorage.default,
+		defaultValue: @escaping (String) -> Value,
+		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = nil,
 		queue: DispatchQueue? = nil,
-		label: String = "\(DefaultableItem.self) – \(#file):\(#line)"
-	) {
-		self.defaultValue = { defaultValue }
-		
-		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
-	}
-	
-	public init (
-		_ key: String,
-		defaultValue: @escaping () -> Value,
-		storage: Storage = StandardStorage.default,
-		logHandler: LogHandler? = nil,
-		queue: DispatchQueue? = nil,
-		label: String = "\(DefaultableItem.self) – \(#file):\(#line)"
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
 	) {
 		self.defaultValue = defaultValue
 		
+		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line)
 		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
 	}
+	
+	public convenience init (
+		_ key: String,
+		defaultValue: @escaping () -> Value,
+		storage: Storage = DefaultInstances.storage,
+		logHandler: LogHandler? = nil,
+		queue: DispatchQueue? = nil,
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
+	) {
+		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+	}
+	
+	public convenience init (
+		_ key: String,
+		defaultValue: Value,
+		storage: Storage = DefaultInstances.storage,
+		logHandler: LogHandler? = nil,
+		queue: DispatchQueue? = nil,
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
+	) {
+		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+	}
 }
-
-
 
 extension DefaultableItem {
 	public func loadOrDefault () -> Value {
@@ -47,7 +59,7 @@ extension DefaultableItem {
 					
 					return value
 				} else {
-					let defaultValue = self.defaultValue()
+					let defaultValue = self.defaultValue(key)
 					
 					details.existance = false
 					details.comment = "default value used – \(defaultValue)"
@@ -56,7 +68,7 @@ extension DefaultableItem {
 					return defaultValue
 				}
 			} catch {
-				let defaultValue = self.defaultValue()
+				let defaultValue = self.defaultValue(key)
 				
 				details.existance = false
 				details.error = StandardStorage.Error(.unexpectedError(error))
@@ -74,7 +86,7 @@ extension DefaultableItem {
 			var details = LogRecord<Value>.Details(operation: "save default")
 			
 			do {
-				let defaultValue = self.defaultValue()
+				let defaultValue = self.defaultValue(key)
 				
 				details.newValue = defaultValue
 				
@@ -108,7 +120,7 @@ extension DefaultableItem {
 					
 					return true
 				} else {
-					let defaultValue = self.defaultValue()
+					let defaultValue = self.defaultValue(key)
 					
 					details.newValue = defaultValue
 					

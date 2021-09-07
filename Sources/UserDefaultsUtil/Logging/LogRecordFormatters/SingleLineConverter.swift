@@ -4,9 +4,7 @@ public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
 	public func convert <Value> (_ record: LogRecord<Value>) -> String {
 		var messageComponents = [String]()
 		
-		if let storageLabel = record.info.storageLabel {
-			messageComponents.append(storageLabel)
-		}
+		messageComponents.append(record.info.storageLabel)
 		
 		if let itemLabel = record.info.itemLabel {
 			messageComponents.append(itemLabel)

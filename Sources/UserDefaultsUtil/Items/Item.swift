@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 open class Item <Value: Codable> {
 	internal let accessQueue: DispatchQueue
 	internal let logger: Logger<Value>
@@ -12,21 +10,23 @@ open class Item <Value: Codable> {
 	
 	public init (
 		_ key: String,
-		storage: Storage = StandardStorage.default,
-		logHandler: LogHandler? = nil,
+		storage: Storage = DefaultInstances.storage,
+		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String = "\(Info.moduleName).\(Item.self) – \(#file):\(#line) – \(UUID().uuidString)"
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
 	) {
+		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line)
+		
 		self.key = key
 		self.label = label
 		self.storage = storage
 		
 		self.accessQueue = queue ?? DispatchQueue(label: "\(label).\(key).accessQueue")
-		self.logger = Logger(info: .init(key: key, itemLabel: label, storageLabel: storage.label, storageKeyPrefix: storage.keyPrefix), logHandler: logHandler ?? storage.logHandler)
+		self.logger = Logger(info: .init(key: key, itemLabel: label, storageLabel: storage.label, storageKeyPrefix: storage.keyPrefix), logHandler: logHandler)
 	}
 }
-
-
 
 extension Item {
 	@discardableResult

@@ -1,38 +1,50 @@
 import Foundation
 
-
-
 open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableItem<Value, KeyPostfixProviderType> {
-	public let defaultValue: () -> Value
+	public let defaultValue: (String) -> Value
 	
 	public init (
 		_ key: String,
-		defaultValue: Value,
-		storage: Storage = StandardStorage.default,
+		defaultValue: @escaping (String) -> Value,
+		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = nil,
 		queue: DispatchQueue? = nil,
-		label: String = "\(ParametrizableDefaultableItem.self) – \(#file):\(#line)"
-	) {
-		self.defaultValue = { defaultValue }
-		
-		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
-	}
-	
-	public init (
-		_ key: String,
-		defaultValue: @escaping () -> Value,
-		storage: Storage = StandardStorage.default,
-		logHandler: LogHandler? = nil,
-		queue: DispatchQueue? = nil,
-		label: String = "\(ParametrizableDefaultableItem.self) – \(#file):\(#line)"
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
 	) {
 		self.defaultValue = defaultValue
 		
+		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line)
 		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
 	}
+	
+	public convenience init (
+		_ key: String,
+		defaultValue: @escaping () -> Value,
+		storage: Storage = DefaultInstances.storage,
+		logHandler: LogHandler? = nil,
+		queue: DispatchQueue? = nil,
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
+	) {
+		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+	}
+	
+	public convenience init (
+		_ key: String,
+		defaultValue: Value,
+		storage: Storage = DefaultInstances.storage,
+		logHandler: LogHandler? = nil,
+		queue: DispatchQueue? = nil,
+		label: String? = nil,
+		file: String = #file,
+		line: Int = #line
+	) {
+		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+	}
 }
-
-
 
 extension ParametrizableDefaultableItem {
 	public func loadOrDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> Value {
@@ -51,7 +63,7 @@ extension ParametrizableDefaultableItem {
 					
 					return value
 				} else {
-					let defaultValue = self.defaultValue()
+					let defaultValue = self.defaultValue(postfixedKey)
 					
 					details.existance = false
 					details.comment = "default value used – \(defaultValue)"
@@ -60,7 +72,7 @@ extension ParametrizableDefaultableItem {
 					return defaultValue
 				}
 			} catch {
-				let defaultValue = self.defaultValue()
+				let defaultValue = self.defaultValue(postfixedKey)
 				
 				details.existance = false
 				details.error = StandardStorage.Error(.unexpectedError(error))
@@ -82,7 +94,7 @@ extension ParametrizableDefaultableItem {
 			details.keyPostfix = keyPostfix
 			
 			do {
-				let defaultValue = self.defaultValue()
+				let defaultValue = self.defaultValue(postfixedKey)
 				
 				details.newValue = defaultValue
 				
@@ -120,7 +132,7 @@ extension ParametrizableDefaultableItem {
 					
 					return true
 				} else {
-					let defaultValue = self.defaultValue()
+					let defaultValue = self.defaultValue(postfixedKey)
 					
 					details.newValue = defaultValue
 					
