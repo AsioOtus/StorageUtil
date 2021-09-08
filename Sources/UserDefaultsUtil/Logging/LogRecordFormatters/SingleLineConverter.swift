@@ -4,8 +4,6 @@ public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
 	public func convert <Value> (_ record: LogRecord<Value>) -> String {
 		var messageComponents = [String]()
 		
-		messageComponents.append(record.info.storageLabel)
-		
 		if let itemInfo = record.info.itemInfo {
 			messageComponents.append("\(itemInfo.source.joined(separator: ".")) – \(itemInfo.uuid.uuidString)")
 		} else {
