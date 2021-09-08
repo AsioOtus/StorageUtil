@@ -36,7 +36,7 @@ extension StandardStorage {
 		var details = LogRecord<Value>.Details(operation: "save")
 		details.newValue = value
 		defer {
-			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
+			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemInfo: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
 		}
 		
 		do {
@@ -61,7 +61,7 @@ extension StandardStorage {
 	public func load <Value: Codable> (_ key: String, _ type: Value.Type) throws -> Value? {
 		var details = LogRecord<Value>.Details(operation: "load")
 		defer {
-			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
+			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemInfo: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
 		}
 		
 		do {
@@ -85,7 +85,7 @@ extension StandardStorage {
 	public func delete <Value: Codable> (_ key: String, _ type: Value.Type) -> Value? {
 		var details = LogRecord<Value>.Details(operation: "delete")
 		defer {
-			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemLabel: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
+			logHandler?.log(LogRecord<Value>(info: .init(key: key, itemInfo: nil, storageLabel: label, storageKeyPrefix: keyPrefix), details: details))
 		}
 		
 		let prefixedKey = prefixKey(key)

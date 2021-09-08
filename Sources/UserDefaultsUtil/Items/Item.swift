@@ -17,14 +17,29 @@ open class Item <Value: Codable> {
 		file: String = #file,
 		line: Int = #line
 	) {
-		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line)
+		let uuid = UUID()
+		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line, uuid)
 		
 		self.key = key
 		self.label = label
 		self.storage = storage
 		
 		self.accessQueue = queue ?? DispatchQueue(label: "\(label).\(key).accessQueue")
-		self.logger = Logger(info: .init(key: key, itemLabel: label, storageLabel: storage.label, storageKeyPrefix: storage.keyPrefix), logHandler: logHandler)
+		self.logger = Logger(
+			info: .init(
+				key: key,
+				itemInfo: .init(
+					source: [String(describing: Info.moduleName), String(describing: Self.self)],
+					label: label,
+					uuid: uuid,
+					file: file,
+					line: line
+				),
+				storageLabel: storage.label,
+				storageKeyPrefix: storage.keyPrefix
+			),
+			logHandler: logHandler
+		)
 	}
 }
 

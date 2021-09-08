@@ -1,7 +1,18 @@
+import Foundation
+
 extension LogRecord {
 	public struct Info {
+		public struct ItemInfo {
+			let source: [String]
+			let label: String
+			let uuid: UUID
+			let file: String
+			let line: Int
+			
+		}
+		
 		let key: String
-		let itemLabel: String?
+		let itemInfo: ItemInfo?
 		let storageLabel: String
 		let storageKeyPrefix: String?
 	}

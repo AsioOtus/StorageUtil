@@ -15,7 +15,8 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	) {
 		self.defaultValue = defaultValue
 		
-		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line)
+		let uuid = UUID()
+		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line, uuid)
 		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
 	}
 	

@@ -6,8 +6,8 @@ public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
 		
 		messageComponents.append(record.info.storageLabel)
 		
-		if let itemLabel = record.info.itemLabel {
-			messageComponents.append(itemLabel)
+		if let itemInfo = record.info.itemInfo {
+			messageComponents.append("\(itemInfo.source.joined(separator: ".")) – \(itemInfo.uuid.uuidString)")
 		} else {
 			messageComponents.append("[Storage log]")
 		}
