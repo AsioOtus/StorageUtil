@@ -29,7 +29,7 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 			info: .init(
 				key: key,
 				itemInfo: .init(
-					source: [String(describing: Info.moduleName), String(describing: Self.self)],
+					source: [String(describing: Self.self)],
 					label: label,
 					uuid: uuid,
 					file: file,
