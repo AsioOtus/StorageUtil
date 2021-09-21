@@ -1,5 +1,5 @@
 extension StandardStorage {
-	public enum Error: UserDefaultsUtil.Error {
+	public enum Error: UserDefaultsUtil.UserDefaultsUtilError {
 		case codingError(Coder.Error)
 		case unexpectedError(Swift.Error)
 		

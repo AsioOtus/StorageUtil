@@ -27,7 +27,7 @@ extension LogRecord {
 		public var existance: Bool? = nil
 		public var keyPostfix: String? = nil
 		
-		public var error: Error? = nil
+		public var error: UserDefaultsUtilError? = nil
 		public var comment: String? = nil
 	}
 }
