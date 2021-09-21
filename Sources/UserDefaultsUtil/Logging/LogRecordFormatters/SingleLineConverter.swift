@@ -1,20 +1,9 @@
 public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
-	public var enableItemUuid: Bool
-	
-	public init (enableItemUuid: Bool = false) {
-		self.enableItemUuid = enableItemUuid
-	}
+	public init () { }
 	
 	public func convert <Value> (_ record: LogRecord<Value>) -> String {
 		var messageComponents = [String]()
-		
-		if let itemInfo = record.info.itemInfo {
-			let messagePart = itemInfo.source.joined(separator: ".") + (enableItemUuid ? itemInfo.uuid.uuidString : "")
-			messageComponents.append(messagePart)
-		} else {
-			messageComponents.append("[Storage log]")
-		}
-		
+				
 		messageComponents.append(KeyBuilder.build(prefix: record.info.storageKeyPrefix, key: record.info.key, postfix: record.details.keyPostfix))
 		messageComponents.append(record.details.operation.uppercased())
 		

@@ -9,15 +9,12 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
 		self.defaultValue = defaultValue
-		
-		let uuid = UUID()
-		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line, uuid)
-		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
+		super.init(key, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
 	}
 	
 	public convenience init (
@@ -26,11 +23,11 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
 	}
 	
 	public convenience init (
@@ -39,11 +36,11 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
 	}
 }
 
@@ -51,12 +48,12 @@ extension DefaultableItem {
 	public func loadOrDefault () -> Value {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "load or default")
+			defer { logger.log(details) }
 			
 			do {
 				if let value = try storage.load(key, Value.self) {
 					details.oldValue = value
 					details.existance = true
-					logger.log(details)
 					
 					return value
 				} else {
@@ -64,7 +61,6 @@ extension DefaultableItem {
 					
 					details.existance = false
 					details.comment = "default value used – \(defaultValue)"
-					logger.log(details)
 					
 					return defaultValue
 				}
@@ -74,7 +70,6 @@ extension DefaultableItem {
 				details.existance = false
 				details.error = StandardStorage.Error(.unexpectedError(error))
 				details.comment = "default value used – \(defaultValue)"
-				logger.log(details)
 				
 				return defaultValue
 			}
@@ -85,6 +80,7 @@ extension DefaultableItem {
 	public func saveDefault () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save default")
+			defer { logger.log(details) }
 			
 			do {
 				let defaultValue = self.defaultValue(key)
@@ -95,13 +91,10 @@ extension DefaultableItem {
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
-				logger.log(details)
 				
 				return true
 			} catch {
 				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
-				
 				return false
 			}
 		}
@@ -111,13 +104,13 @@ extension DefaultableItem {
 	public func saveDefaultIfNotExist () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save default if not exist")
+			defer { logger.log(details) }
 			
 			do {
 				if let value = try? storage.load(key, Value.self) {
 					details.oldValue = value
 					details.existance = true
 					details.comment = "old value preserved"
-					logger.log(details)
 					
 					return true
 				} else {
@@ -130,14 +123,11 @@ extension DefaultableItem {
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
 					details.comment = "default value saved"
-					logger.log(details)
 					
 					return true
 				}
 			} catch {
-				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
-				
+				details.error = StandardStorage.Error(.unexpectedError(error))				
 				return false
 			}
 		}

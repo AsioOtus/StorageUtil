@@ -6,37 +6,31 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 	
 	public let key: String
 	public let storage: Storage
-	public let label: String
+	
+	public let identificationInfo: IdentificationInfo
 	
 	public init (
 		_ key: String,
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
-		let uuid = UUID()
-		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line, uuid)
+		let identificationInfo = IdentificationInfo(typeId: String(describing: Self.self), file: file, line: line, alias: alias)
+		self.identificationInfo = identificationInfo
 		
 		self.key = key
-		self.label = label
 		self.storage = storage
 		
-		self.accessQueue = queue ?? DispatchQueue(label: "\(label).\(key).accessQueue")
+		self.accessQueue = queue ?? DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).accessQueue")
 		self.logger = Logger(
 			info: .init(
+				storageKeyPrefix: storage.keyPrefix,
 				key: key,
-				itemInfo: .init(
-					source: [String(describing: Self.self)],
-					label: label,
-					uuid: uuid,
-					file: file,
-					line: line
-				),
-				storageLabel: storage.label,
-				storageKeyPrefix: storage.keyPrefix
+				storageIdentificationInfo: storage.identificationInfo,
+				itemIdentificationInfo: identificationInfo
 			),
 			logHandler: logHandler
 		)
@@ -53,19 +47,17 @@ extension ParametrizableItem {
 			var details = LogRecord<Value>.Details(operation: "save")
 			details.newValue = value
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			do {
 				let oldValue = try storage.save(postfixedKey, value)
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
-				logger.log(details)
 				
 				return true
 			} catch {
-				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
-				
+				details.error = StandardStorage.Error(.unexpectedError(error))				
 				return false
 			}
 		}
@@ -78,19 +70,18 @@ extension ParametrizableItem {
 			
 			var details = LogRecord<Value>.Details(operation: "load")
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			do {
 				let value = try storage.load(postfixedKey, Value.self)
 				
 				details.oldValue = value
 				details.existance = value != nil
-				logger.log(details)
 				
 				return value
 			} catch {
 				details.existance = false
 				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
 				
 				return nil
 			}
@@ -104,12 +95,12 @@ extension ParametrizableItem {
 			
 			var details = LogRecord<Value>.Details(operation: "delete")
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			let value = storage.delete(postfixedKey, Value.self)
 			
 			details.oldValue = value
 			details.existance = value != nil
-			logger.log(details)
 		}
 	}
 	
@@ -120,19 +111,18 @@ extension ParametrizableItem {
 			
 			var details = LogRecord<Value>.Details(operation: "is exists")
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			do {
 				let value = try storage.load(postfixedKey, Value.self)
 				
 				details.oldValue = value
 				details.existance = value != nil
-				logger.log(details)
 				
 				return value != nil
 			} catch {
 				details.existance = false
 				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
 				
 				return false
 			}

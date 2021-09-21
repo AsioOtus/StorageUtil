@@ -9,15 +9,13 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
 		self.defaultValue = defaultValue
 		
-		let uuid = UUID()
-		let label = label ?? LabelBuilder.build(String(describing: Self.self), file, line, uuid)
-		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label)
+		super.init(key, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
 	}
 	
 	public convenience init (
@@ -26,11 +24,11 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
 	}
 	
 	public convenience init (
@@ -39,11 +37,11 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 		storage: Storage = DefaultInstances.storage,
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
-		label: String? = nil,
+		alias: String? = nil,
 		file: String = #file,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
 	}
 }
 
@@ -55,12 +53,12 @@ extension ParametrizableDefaultableItem {
 			
 			var details = LogRecord<Value>.Details(operation: "load or default")
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			do {
 				if let value = try storage.load(postfixedKey, Value.self) {
 					details.oldValue = value
 					details.existance = true
-					logger.log(details)
 					
 					return value
 				} else {
@@ -68,7 +66,6 @@ extension ParametrizableDefaultableItem {
 					
 					details.existance = false
 					details.comment = "default value used – \(defaultValue)"
-					logger.log(details)
 					
 					return defaultValue
 				}
@@ -78,7 +75,6 @@ extension ParametrizableDefaultableItem {
 				details.existance = false
 				details.error = StandardStorage.Error(.unexpectedError(error))
 				details.comment = "default value used – \(defaultValue)"
-				logger.log(details)
 				
 				return defaultValue
 			}
@@ -93,6 +89,7 @@ extension ParametrizableDefaultableItem {
 			
 			var details = LogRecord<Value>.Details(operation: "save default")
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			do {
 				let defaultValue = self.defaultValue(postfixedKey)
@@ -103,13 +100,10 @@ extension ParametrizableDefaultableItem {
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
-				logger.log(details)
 				
 				return true
 			} catch {
 				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
-				
 				return false
 			}
 		}
@@ -123,13 +117,13 @@ extension ParametrizableDefaultableItem {
 			
 			var details = LogRecord<Value>.Details(operation: "save default if not exist")
 			details.keyPostfix = keyPostfix
+			defer { logger.log(details) }
 			
 			do {
 				if let value = try? storage.load(postfixedKey, Value.self) {
 					details.oldValue = value
 					details.existance = true
 					details.comment = "old value preserved"
-					logger.log(details)
 					
 					return true
 				} else {
@@ -142,13 +136,11 @@ extension ParametrizableDefaultableItem {
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
 					details.comment = "default value saved"
-					logger.log(details)
 					
 					return true
 				}
 			} catch {
 				details.error = StandardStorage.Error(.unexpectedError(error))
-				logger.log(details)
 				
 				return false
 			}
