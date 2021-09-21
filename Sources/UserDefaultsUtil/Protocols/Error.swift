@@ -1,1 +1,1 @@
-protocol Error: Swift.Error { }
+public protocol Error: Swift.Error { }
