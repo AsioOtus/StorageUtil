@@ -1,6 +1,8 @@
 import Foundation
 
-public class StandardStorage: Storage {	
+public class StandardStorage: Storage {
+	public static let `default` = StandardStorage(keyPrefix: nil)
+	
 	public let keyPrefix: String?
 	public let userDefaults: UserDefaults
 	public let identificationInfo: IdentificationInfo
