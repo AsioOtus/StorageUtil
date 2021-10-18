@@ -13,7 +13,7 @@ public class StandardStorage: Storage {
 		keyPrefix: String?,
 		userDefaults: UserDefaults = .standard,
 		alias: String? = nil,
-		file: String = #file,
+		file: String = #fileID,
 		line: Int = #line
 	) {
 		self.identificationInfo = .init(typeId: String(describing: Self.self), file: file, line: line, alias: alias)

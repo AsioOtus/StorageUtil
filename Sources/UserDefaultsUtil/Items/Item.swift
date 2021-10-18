@@ -15,7 +15,7 @@ open class Item <Value: Codable> {
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
 		alias: String? = nil,
-		file: String = #file,
+		file: String = #fileID,
 		line: Int = #line
 	) {
 		let identificationInfo = IdentificationInfo(typeId: String(describing: Self.self), file: file, line: line, alias: alias)

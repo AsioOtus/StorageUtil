@@ -10,7 +10,7 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
 		alias: String? = nil,
-		file: String = #file,
+		file: String = #fileID,
 		line: Int = #line
 	) {
 		self.defaultValue = defaultValue
@@ -24,7 +24,7 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
 		alias: String? = nil,
-		file: String = #file,
+		file: String = #fileID,
 		line: Int = #line
 	) {
 		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
@@ -37,7 +37,7 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		logHandler: LogHandler? = DefaultInstances.logHandler,
 		queue: DispatchQueue? = nil,
 		alias: String? = nil,
-		file: String = #file,
+		file: String = #fileID,
 		line: Int = #line
 	) {
 		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
