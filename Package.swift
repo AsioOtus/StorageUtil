@@ -3,21 +3,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "UserDeaultsUtil",
+    name: "StorageUtil",
     products: [
         .library(
-            name: "UserDefaultsUtil",
-            targets: ["UserDefaultsUtil"]
+            name: "StorageUtil",
+            targets: ["StorageUtil"]
 		),
     ],
     targets: [
         .target(
-            name: "UserDefaultsUtil",
-            dependencies: []
+            name: "StorageUtil"
 		),
         .testTarget(
-            name: "UserDefaultsUtilTests",
-            dependencies: ["UserDefaultsUtil"]
+            name: "StorageUtilTests",
+            dependencies: ["StorageUtil"]
 		),
     ]
 )
