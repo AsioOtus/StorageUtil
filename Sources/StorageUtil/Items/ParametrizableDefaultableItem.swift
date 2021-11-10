@@ -5,40 +5,40 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	
 	public init (
 		_ key: String,
-		defaultValue: @escaping (String) -> Value,
+		default: @escaping (String) -> Value,
 		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.defaultValue = defaultValue
+		self.defaultValue = `default`
 		
 		super.init(key, settings: settings, queue: queue, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
-		defaultValue: @escaping () -> Value,
+		default: @escaping () -> Value,
 		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue() }, settings: settings, queue: queue, label: label, file: file, line: line)
+		self.init(key, default: { _ in `default`() }, settings: settings, queue: queue, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
-		defaultValue: Value,
+		default: Value,
 		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue }, settings: settings, queue: queue, label: label, file: file, line: line)
+		self.init(key, default: { _ in `default` }, settings: settings, queue: queue, label: label, file: file, line: line)
 	}
 }
 
