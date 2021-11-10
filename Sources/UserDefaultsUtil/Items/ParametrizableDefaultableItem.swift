@@ -6,8 +6,7 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	public init (
 		_ key: String,
 		defaultValue: @escaping (String) -> Value,
-		storage: Storage = Default.storage,
-		logHandler: LogHandler? = Default.logHandler,
+		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
@@ -15,33 +14,31 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	) {
 		self.defaultValue = defaultValue
 		
-		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		super.init(key, settings: settings, queue: queue, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
 		defaultValue: @escaping () -> Value,
-		storage: Storage = Default.storage,
-		logHandler: LogHandler? = Default.logHandler,
+		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue() }, settings: settings, queue: queue, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
 		defaultValue: Value,
-		storage: Storage = Default.storage,
-		logHandler: LogHandler? = Default.logHandler,
+		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue }, settings: settings, queue: queue, label: label, file: file, line: line)
 	}
 }
 
@@ -73,7 +70,7 @@ extension ParametrizableDefaultableItem {
 				let defaultValue = self.defaultValue(postfixedKey)
 				
 				details.existance = false
-				details.error = StandardStorage.Error(.unexpectedError(error))
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				details.comment = "default value used – \(defaultValue)"
 				
 				return defaultValue
@@ -103,7 +100,7 @@ extension ParametrizableDefaultableItem {
 				
 				return true
 			} catch {
-				details.error = StandardStorage.Error(.unexpectedError(error))
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				return false
 			}
 		}
@@ -140,8 +137,7 @@ extension ParametrizableDefaultableItem {
 					return true
 				}
 			} catch {
-				details.error = StandardStorage.Error(.unexpectedError(error))
-				
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				return false
 			}
 		}

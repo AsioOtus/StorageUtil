@@ -1,7 +1,7 @@
 import Foundation
 
-public class StandardStorage: Storage {
-	public static let `default` = StandardStorage(keyPrefix: nil)
+public class UserDefaultsStorage: Storage {
+	public static let `default` = UserDefaultsStorage(keyPrefix: nil)
 	
 	public let keyPrefix: String?
 	public let userDefaults: UserDefaults
@@ -25,15 +25,15 @@ public class StandardStorage: Storage {
 	public func prefixKey (_ key: String) -> String { KeyBuilder.build(prefix: keyPrefix, key: key) }
 }
 
-extension StandardStorage {
+extension UserDefaultsStorage {
 	@discardableResult
-	public func logHandler (_ logHandler: LogHandler) -> StandardStorage {
+	public func logHandler (_ logHandler: LogHandler) -> UserDefaultsStorage {
 		self.logHandler = logHandler
 		return self
 	}
 }
 
-extension StandardStorage {
+extension UserDefaultsStorage {
 	@discardableResult
 	public func save <Value: Codable> (_ key: String, _ value: Value) throws -> Value? {
 		var details = LogRecord<Value>.Details(operation: "save")
@@ -65,7 +65,7 @@ extension StandardStorage {
 			
 			return oldValue
 		} catch {
-			details.error = StandardStorage.Error(.unexpectedError(error))
+			details.error = UserDefaultsStorage.Error(.unexpectedError(error))
 			
 			throw error
 		}
@@ -99,7 +99,7 @@ extension StandardStorage {
 			return value
 		} catch {
 			details.existance = false
-			details.error = StandardStorage.Error(.unexpectedError(error))
+			details.error = UserDefaultsStorage.Error(.unexpectedError(error))
 			
 			throw error
 		}

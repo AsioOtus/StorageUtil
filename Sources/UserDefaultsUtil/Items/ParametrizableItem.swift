@@ -11,8 +11,7 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 	
 	public init (
 		_ key: String,
-		storage: Storage = Default.storage,
-		logHandler: LogHandler? = Default.logHandler,
+		settings: Settings = .default,
 		queue: DispatchQueue? = nil,
 		label: String? = nil,
 		file: String = #fileID,
@@ -22,7 +21,7 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 		self.identificationInfo = identificationInfo
 		
 		self.key = key
-		self.storage = storage
+		self.storage = settings.storage
 		
 		self.accessQueue = queue ?? DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).accessQueue")
 		self.logger = Logger(
@@ -32,7 +31,7 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 				storage: storage.identificationInfo,
 				item: identificationInfo
 			),
-			logHandler: logHandler
+			logHandler: settings.logHandler
 		)
 	}
 }
@@ -57,7 +56,7 @@ extension ParametrizableItem {
 				
 				return true
 			} catch {
-				details.error = StandardStorage.Error(.unexpectedError(error))				
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				return false
 			}
 		}
@@ -81,8 +80,7 @@ extension ParametrizableItem {
 				return value
 			} catch {
 				details.existance = false
-				details.error = StandardStorage.Error(.unexpectedError(error))
-				
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				return nil
 			}
 		}
@@ -122,8 +120,7 @@ extension ParametrizableItem {
 				return value != nil
 			} catch {
 				details.existance = false
-				details.error = StandardStorage.Error(.unexpectedError(error))
-				
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				return false
 			}
 		}

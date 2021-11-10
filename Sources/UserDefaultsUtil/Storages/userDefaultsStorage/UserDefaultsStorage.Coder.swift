@@ -1,6 +1,6 @@
 import Foundation
 
-extension StandardStorage {
+extension UserDefaultsStorage {
 	public struct Coder {
 		static func encode <T: Encodable> (_ object: T) throws -> String {
 			do {
@@ -24,8 +24,8 @@ extension StandardStorage {
 	}
 }
 
-extension StandardStorage.Coder {
-	public enum Error: UserDefaultsUtil.UserDefaultsUtilError {
+extension UserDefaultsStorage.Coder {
+	public enum Error: StorageUtilError {		
 		case jsonDataDecodingFailed(String)
 		case jsonStringEncodingFailed(String)
 		
@@ -56,7 +56,7 @@ extension StandardStorage.Coder {
 	}
 }
 
-extension StandardStorage.Coder.Error: CustomStringConvertible {
+extension UserDefaultsStorage.Coder.Error: CustomStringConvertible {
 	public var description: String {
 		let description: String
 		

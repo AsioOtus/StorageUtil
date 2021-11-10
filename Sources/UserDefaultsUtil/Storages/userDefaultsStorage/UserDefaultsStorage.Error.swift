@@ -1,5 +1,5 @@
-extension StandardStorage {
-	public enum Error: UserDefaultsUtil.UserDefaultsUtilError {
+extension UserDefaultsStorage {
+	public enum Error: StorageUtilError {
 		case codingError(Coder.Error)
 		case unexpectedError(Swift.Error)
 		
@@ -26,7 +26,7 @@ extension StandardStorage {
 	}
 }
 
-extension StandardStorage.Error: CustomStringConvertible {
+extension UserDefaultsStorage.Error: CustomStringConvertible {
 	public var description: String {
 		let description: String
 		
