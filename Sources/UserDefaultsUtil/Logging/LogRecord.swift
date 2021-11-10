@@ -2,10 +2,10 @@ import Foundation
 
 extension LogRecord {
 	public struct Info {
-		public let storageKeyPrefix: String?
+		public let keyPrefix: String?
 		public let key: String
-		public let storageIdentificationInfo: IdentificationInfo
-		public let itemIdentificationInfo: IdentificationInfo?
+		public let storage: IdentificationInfo
+		public let item: IdentificationInfo?
 	}
 }
 

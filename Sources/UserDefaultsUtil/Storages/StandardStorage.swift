@@ -12,11 +12,11 @@ public class StandardStorage: Storage {
 	public init (
 		keyPrefix: String?,
 		userDefaults: UserDefaults = .standard,
-		alias: String? = nil,
+		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.identificationInfo = .init(typeId: String(describing: Self.self), file: file, line: line, alias: alias)
+		self.identificationInfo = .init(type: String(describing: Self.self), file: file, line: line, label: label)
 		
 		self.keyPrefix = keyPrefix
 		self.userDefaults = userDefaults
@@ -42,10 +42,10 @@ extension StandardStorage {
 			logHandler?.log(
 				LogRecord<Value>(
 					info: .init(
-						storageKeyPrefix: keyPrefix,
+						keyPrefix: keyPrefix,
 						key: key,
-						storageIdentificationInfo: identificationInfo,
-						itemIdentificationInfo: nil
+						storage: identificationInfo,
+						item: nil
 					),
 					details: details
 				)
@@ -77,10 +77,10 @@ extension StandardStorage {
 			logHandler?.log(
 				LogRecord<Value>(
 					info: .init(
-						storageKeyPrefix: keyPrefix,
+						keyPrefix: keyPrefix,
 						key: key,
-						storageIdentificationInfo: identificationInfo,
-						itemIdentificationInfo: nil
+						storage: identificationInfo,
+						item: nil
 					),
 					details: details
 				)
@@ -111,10 +111,10 @@ extension StandardStorage {
 			logHandler?.log(
 				LogRecord<Value>(
 					info: .init(
-						storageKeyPrefix: keyPrefix,
+						keyPrefix: keyPrefix,
 						key: key,
-						storageIdentificationInfo: identificationInfo,
-						itemIdentificationInfo: nil
+						storage: identificationInfo,
+						item: nil
 					),
 					details: details
 				)

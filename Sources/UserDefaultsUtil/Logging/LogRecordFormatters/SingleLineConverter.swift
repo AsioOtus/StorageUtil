@@ -4,7 +4,7 @@ public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
 	public func convert <Value> (_ record: LogRecord<Value>) -> String {
 		var messageComponents = [String]()
 				
-		messageComponents.append(KeyBuilder.build(prefix: record.info.storageKeyPrefix, key: record.info.key, postfix: record.details.keyPostfix))
+		messageComponents.append(KeyBuilder.build(prefix: record.info.keyPrefix, key: record.info.key, postfix: record.details.keyPostfix))
 		messageComponents.append(record.details.operation.uppercased())
 		
 		if let existance = record.details.existance {

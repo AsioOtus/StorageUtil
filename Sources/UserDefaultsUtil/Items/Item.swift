@@ -11,14 +11,14 @@ open class Item <Value: Codable> {
 	
 	public init (
 		_ key: String,
-		storage: Storage = DefaultInstances.storage,
-		logHandler: LogHandler? = DefaultInstances.logHandler,
+		storage: Storage = Default.storage,
+		logHandler: LogHandler? = Default.logHandler,
 		queue: DispatchQueue? = nil,
-		alias: String? = nil,
+		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		let identificationInfo = IdentificationInfo(typeId: String(describing: Self.self), file: file, line: line, alias: alias)
+		let identificationInfo = IdentificationInfo(type: String(describing: Self.self), file: file, line: line, label: label)
 		self.identificationInfo = identificationInfo
 		
 		self.key = key
@@ -27,10 +27,10 @@ open class Item <Value: Codable> {
 		self.accessQueue = queue ?? DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).accessQueue")
 		self.logger = Logger(
 			info: .init(
-				storageKeyPrefix: storage.keyPrefix,
+				keyPrefix: storage.keyPrefix,
 				key: key,
-				storageIdentificationInfo: storage.identificationInfo,
-				itemIdentificationInfo: identificationInfo
+				storage: storage.identificationInfo,
+				item: identificationInfo
 			),
 			logHandler: logHandler
 		)

@@ -6,42 +6,42 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	public init (
 		_ key: String,
 		defaultValue: @escaping (String) -> Value,
-		storage: Storage = DefaultInstances.storage,
-		logHandler: LogHandler? = DefaultInstances.logHandler,
+		storage: Storage = Default.storage,
+		logHandler: LogHandler? = Default.logHandler,
 		queue: DispatchQueue? = nil,
-		alias: String? = nil,
+		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
 		self.defaultValue = defaultValue
 		
-		super.init(key, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
+		super.init(key, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
 		defaultValue: @escaping () -> Value,
-		storage: Storage = DefaultInstances.storage,
-		logHandler: LogHandler? = DefaultInstances.logHandler,
+		storage: Storage = Default.storage,
+		logHandler: LogHandler? = Default.logHandler,
 		queue: DispatchQueue? = nil,
-		alias: String? = nil,
+		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue() }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
 		defaultValue: Value,
-		storage: Storage = DefaultInstances.storage,
-		logHandler: LogHandler? = DefaultInstances.logHandler,
+		storage: Storage = Default.storage,
+		logHandler: LogHandler? = Default.logHandler,
 		queue: DispatchQueue? = nil,
-		alias: String? = nil,
+		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, alias: alias, file: file, line: line)
+		self.init(key, defaultValue: { _ in defaultValue }, storage: storage, logHandler: logHandler, queue: queue, label: label, file: file, line: line)
 	}
 }
 
