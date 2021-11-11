@@ -13,14 +13,14 @@ public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
 			messageComponents.append("Not exist")
 		}
 		
-		if let oldValue = record.details.oldValue {
-			messageComponents.append(String(describing: oldValue))
+		if let newValue = record.details.newValue {
+			messageComponents.append(String(describing: newValue))
 		} else {
 			messageComponents.append("nil")
 		}
 		
-		if let newValue = record.details.newValue {
-			messageComponents.append(String(describing: newValue))
+		if let oldValue = record.details.oldValue {
+			messageComponents.append(String(describing: oldValue))
 		} else {
 			messageComponents.append("nil")
 		}

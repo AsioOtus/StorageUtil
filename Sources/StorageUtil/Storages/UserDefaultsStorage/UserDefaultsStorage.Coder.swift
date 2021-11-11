@@ -46,6 +46,24 @@ extension UserDefaultsStorage.Coder {
 			return resultError
 		}
 		
+		public var description: String {
+			let description: String
+			
+			switch self {
+			case .jsonDataDecodingFailed(let jsonDataBase64):
+				description = "UserDefaultsStorage.Coder – JSON data decoding failed – \(jsonDataBase64)"
+			case .jsonStringEncodingFailed(let jsonString):
+				description = "UserDefaultsStorage.Coder – JSON string encoding failed – \(jsonString)"
+				
+			case .encodingFailed(let error):
+				description = "UserDefaultsStorage.Coder – Encoding error – \(error.localizedDescription)"
+			case .decodingFailed(let error):
+				description = "UserDefaultsStorage.Coder – Decoding error – \(error.localizedDescription)"
+			}
+			
+			return description
+		}
+		
 		public init (_ error: Self) {
 			if let innerError = error.innerError as? Self {
 				self = innerError
@@ -53,25 +71,5 @@ extension UserDefaultsStorage.Coder {
 				self = error
 			}
 		}
-	}
-}
-
-extension UserDefaultsStorage.Coder.Error: CustomStringConvertible {
-	public var description: String {
-		let description: String
-		
-		switch self {
-		case .jsonDataDecodingFailed(let jsonDataBase64):
-			description = "JSON data decoding failed – \(jsonDataBase64)"
-		case .jsonStringEncodingFailed(let jsonString):
-			description = "JSON string encoding failed – \(jsonString)"
-			
-		case .encodingFailed(let error):
-			description = "Encoding error – \(error.localizedDescription)"
-		case .decodingFailed(let error):
-			description = "Decoding error – \(error.localizedDescription)"
-		}
-		
-		return description
 	}
 }

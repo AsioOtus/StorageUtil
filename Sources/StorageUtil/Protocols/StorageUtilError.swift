@@ -1,1 +1,1 @@
-public protocol StorageUtilError: Error { }
+public protocol StorageUtilError: Error, CustomStringConvertible { }

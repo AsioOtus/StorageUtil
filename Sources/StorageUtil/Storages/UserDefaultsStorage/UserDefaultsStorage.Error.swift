@@ -16,6 +16,19 @@ extension UserDefaultsStorage {
 			return resultError
 		}
 		
+		public var description: String {
+			let description: String
+			
+			switch self {
+			case .codingError(let error):
+				description = "UserDefaultsStorage – Coding error – \(error.description)"
+			case .unexpectedError(let error):
+				description = "UserDefaultsStorage – Unexpected error - \(error.localizedDescription)"
+			}
+			
+			return description
+		}
+		
 		public init (_ error: Self) {
 			if let innerError = error.innerError as? Self {
 				self = innerError
@@ -23,20 +36,5 @@ extension UserDefaultsStorage {
 				self = error
 			}
 		}
-	}
-}
-
-extension UserDefaultsStorage.Error: CustomStringConvertible {
-	public var description: String {
-		let description: String
-		
-		switch self {
-		case .codingError(let error):
-			description = "Coding error – \(error.description)"
-		case .unexpectedError(let error):
-			description = "Unexpected error - \(error.localizedDescription)"
-		}
-		
-		return description
 	}
 }

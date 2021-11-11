@@ -23,7 +23,7 @@ open class Item <Value: Codable> {
 		self.key = key
 		self.storage = settings.storage
 		
-		self.accessQueue = queue ?? DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).accessQueue")
+		self.accessQueue = queue ?? DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).\(identificationInfo.instance).accessQueue")
 		self.logger = Logger(
 			info: .init(
 				keyPrefix: storage.keyPrefix,

@@ -65,7 +65,7 @@ extension UserDefaultsStorage {
 			
 			return oldValue
 		} catch {
-			details.error = UserDefaultsStorage.Error(.unexpectedError(error))
+			details.error = Error(.unexpectedError(error))
 			
 			throw error
 		}
@@ -99,7 +99,7 @@ extension UserDefaultsStorage {
 			return value
 		} catch {
 			details.existance = false
-			details.error = UserDefaultsStorage.Error(.unexpectedError(error))
+			details.error = Error(.unexpectedError(error))
 			
 			throw error
 		}
