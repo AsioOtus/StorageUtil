@@ -17,7 +17,7 @@ open class Item <Value: Codable> {
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		let identificationInfo = IdentificationInfo(type: String(describing: Self.self), file: file, line: line, label: label)
+		let identificationInfo = IdentificationInfo(type: String(describing: Self.self), file: file, line: line, label: label, extra: "Key: \(key)")
 		self.identificationInfo = identificationInfo
 		
 		self.key = key
@@ -51,6 +51,37 @@ extension Item {
 				details.existance = oldValue != nil
 				
 				return true
+			} catch {
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+				return false
+			}
+		}
+	}
+	
+	@discardableResult
+	public func saveIfNotExist (_ value: Value) -> Bool {
+		accessQueue.sync {
+			var details = LogRecord<Value>.Details(operation: "save if not exist")
+			defer { logger.log(details) }
+			
+			do {
+				if let oldValue = try? storage.load(key, Value.self) {
+					details.oldValue = oldValue
+					details.existance = true
+					details.comment = "old value preserved"
+					
+					return true
+				} else {
+					details.newValue = value
+					
+					let oldValue = try storage.save(key, value)
+					
+					details.oldValue = oldValue
+					details.existance = oldValue != nil
+					details.comment = "value saved"
+					
+					return true
+				}
 			} catch {
 				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
 				return false

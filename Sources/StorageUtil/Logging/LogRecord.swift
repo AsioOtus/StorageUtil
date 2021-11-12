@@ -12,11 +12,11 @@ extension LogRecord {
 extension LogRecord {
 	public struct Details {
 		public let operation: String
+		public var keyPostfix: String? = nil
 		
 		public var newValue: Value? = nil
 		public var oldValue: Value? = nil
 		public var existance: Bool? = nil
-		public var keyPostfix: String? = nil
 		
 		public var error: StorageUtilError? = nil
 		public var comment: String? = nil
