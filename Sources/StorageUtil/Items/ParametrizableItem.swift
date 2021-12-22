@@ -11,8 +11,8 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 	
 	public init (
 		_ key: String,
-		settings: Settings = .default,
-		queue: DispatchQueue? = nil,
+		storage: Storage = Global.storage,
+		logHandler: LogHandler? = Global.logHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
@@ -21,9 +21,9 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 		self.identificationInfo = identificationInfo
 		
 		self.key = key
-		self.storage = settings.storage
+		self.storage = storage
 		
-		self.accessQueue = queue ?? DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).\(identificationInfo.instance).accessQueue")
+		self.accessQueue = DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).\(identificationInfo.instance).accessQueue")
 		self.logger = Logger(
 			info: .init(
 				keyPrefix: storage.keyPrefix,
@@ -31,7 +31,7 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 				storage: storage.identificationInfo,
 				item: identificationInfo
 			),
-			logHandler: settings.logHandler
+			logHandler: logHandler
 		)
 	}
 }

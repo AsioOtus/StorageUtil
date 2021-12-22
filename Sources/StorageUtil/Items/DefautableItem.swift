@@ -6,38 +6,38 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 	public init (
 		_ key: String,
 		default: @escaping (String) -> Value,
-		settings: Settings = .default,
-		queue: DispatchQueue? = nil,
+		storage: Storage = Global.storage,
+		logHandler: LogHandler? = Global.logHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
 		self.defaultValue = `default`
-		super.init(key, settings: settings, queue: queue, label: label, file: file, line: line)
+		super.init(key, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
 		default: @escaping () -> Value,
-		settings: Settings = .default,
-		queue: DispatchQueue? = nil,
+		storage: Storage = Global.storage,
+		logHandler: LogHandler? = Global.logHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, default: { _ in `default`() }, settings: settings, queue: queue, label: label, file: file, line: line)
+		self.init(key, default: { _ in `default`() }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
 		default: Value,
-		settings: Settings = .default,
-		queue: DispatchQueue? = nil,
+		storage: Storage = Global.storage,
+		logHandler: LogHandler? = Global.logHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, default: { _ in `default` }, settings: settings, queue: queue, label: label, file: file, line: line)
+		self.init(key, default: { _ in `default` }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 }
 
