@@ -5,5 +5,5 @@ public protocol Storage {
 	
 	func save <Value: Codable> (_ key: String, _ value: Value) throws -> Value?
 	func load <Value: Codable> (_ key: String, _ type: Value.Type) throws -> Value?
-	func delete <Value: Codable> (_ key: String, _ type: Value.Type) -> Value?
+	func delete <Value: Codable> (_ key: String, _ type: Value.Type) throws -> Value?
 }

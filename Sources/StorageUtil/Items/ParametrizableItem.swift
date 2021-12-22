@@ -129,10 +129,14 @@ extension ParametrizableItem {
 			details.keyPostfix = keyPostfix
 			defer { logger.log(details) }
 			
-			let value = storage.delete(postfixedKey, Value.self)
-			
-			details.oldValue = value
-			details.existance = value != nil
+			do {
+				let value = try storage.delete(postfixedKey, Value.self)
+				
+				details.oldValue = value
+				details.existance = value != nil
+			} catch {
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+			}
 		}
 	}
 	

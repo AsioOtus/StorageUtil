@@ -37,6 +37,34 @@ open class Item <Value: Codable> {
 }
 
 extension Item {
+	private static var changesFlagKeyPrefix: String { "changesFlag" }
+	
+	@discardableResult
+	public func initial (_ initialValue: Value) -> Self {
+		let changesFlagKey = KeyBuilder.build(prefix: Self.changesFlagKeyPrefix, key: key)
+		
+		let changesFlag = try? storage.load(changesFlagKey, Bool.self)
+		if changesFlag == nil || changesFlag == false {
+			_ = try? storage.save(key, initialValue)
+		}
+		
+		return self
+	}
+
+	@discardableResult
+	public func resetInitial () -> Self {
+		let changesFlagKey = KeyBuilder.build(prefix: Self.changesFlagKeyPrefix, key: key)
+		_ = try? storage.delete(changesFlagKey, Bool.self)
+		return self
+	}
+	
+	internal func setChangesFlag () throws {
+		let changesFlagKey = KeyBuilder.build(prefix: Self.changesFlagKeyPrefix, key: key)
+		_ = try storage.save(changesFlagKey, true)
+	}
+}
+
+extension Item {
 	@discardableResult
 	public func save (_ value: Value) -> Bool {
 		accessQueue.sync {
@@ -49,6 +77,8 @@ extension Item {
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
+				
+				try setChangesFlag()
 				
 				return true
 			} catch {
@@ -79,6 +109,8 @@ extension Item {
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
 					details.comment = "value saved"
+					
+					try setChangesFlag()
 					
 					return true
 				}
@@ -114,10 +146,16 @@ extension Item {
 			var details = LogRecord<Value>.Details(operation: "delete")
 			defer { logger.log(details) }
 			
-			let value = storage.delete(key, Value.self)
+			do {
+				let value = try storage.delete(key, Value.self)
+				
+				details.oldValue = value
+				details.existance = value != nil
 			
-			details.oldValue = value
-			details.existance = value != nil
+				try setChangesFlag()
+			} catch {
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+			}
 		}
 	}
 	

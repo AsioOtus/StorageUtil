@@ -89,6 +89,8 @@ extension DefaultableItem {
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
 				
+				try setChangesFlag()
+				
 				return true
 			} catch {
 				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
@@ -120,6 +122,8 @@ extension DefaultableItem {
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
 					details.comment = "default value saved"
+					
+					try setChangesFlag()
 					
 					return true
 				}
