@@ -6,13 +6,11 @@ open class Item <Value: Codable> {
 	
 	public let key: String
 	public let storage: Storage
-	public let initial: Value?
 	
 	public let identificationInfo: IdentificationInfo
 	
 	public init (
 		_ key: String,
-		initial: Value? = nil,
 		storage: Storage = Global.storage,
 		logHandler: LogHandler? = Global.logHandler,
 		label: String? = nil,
@@ -24,7 +22,6 @@ open class Item <Value: Codable> {
 		
 		self.key = key
 		self.storage = storage
-		self.initial = initial
 		
 		self.accessQueue = DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).\(identificationInfo.instance).accessQueue")
 		self.logger = Logger(
@@ -36,22 +33,6 @@ open class Item <Value: Codable> {
 			),
 			logHandler: logHandler
 		)
-		
-		self.initialize()
-	}
-}
-
-extension Item {
-	private static func isInitializedKey (_ key: String) -> String { KeyBuilder.build(prefix: "$isInitialized", key: key) }
-	
-	public func initialize () {
-		let isInitializedKey = Self.isInitializedKey(key)
-		
-		let isInitialized = try? storage.load(isInitializedKey, Bool.self)
-		if let initialValue = initial, isInitialized == nil || isInitialized == false {
-			_ = try? storage.save(key, initialValue)
-			_ = try? storage.save(isInitializedKey, true)
-		}
 	}
 }
 

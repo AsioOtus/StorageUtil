@@ -5,7 +5,6 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 	
 	public init (
 		_ key: String,
-		initial: Value? = nil,
 		default: @escaping (String) -> Value,
 		storage: Storage = Global.storage,
 		logHandler: LogHandler? = Global.logHandler,
@@ -14,12 +13,11 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		line: Int = #line
 	) {
 		self.defaultValue = `default`
-		super.init(key, initial: initial, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+		super.init(key, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
-		initial: Value? = nil,
 		default: @escaping () -> Value,
 		storage: Storage = Global.storage,
 		logHandler: LogHandler? = Global.logHandler,
@@ -27,12 +25,11 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, initial: initial, default: { _ in `default`() }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+		self.init(key, default: { _ in `default`() }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 	
 	public convenience init (
 		_ key: String,
-		initial: Value? = nil,
 		default: Value,
 		storage: Storage = Global.storage,
 		logHandler: LogHandler? = Global.logHandler,
@@ -40,7 +37,7 @@ open class DefaultableItem <Value: Codable>: Item<Value> {
 		file: String = #fileID,
 		line: Int = #line
 	) {
-		self.init(key, initial: initial, default: { _ in `default` }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+		self.init(key, default: { _ in `default` }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 }
 
