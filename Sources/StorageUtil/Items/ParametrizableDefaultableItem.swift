@@ -6,8 +6,8 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	public init (
 		_ key: String,
 		default: @escaping (String) -> Value,
-		storage: Storage = Global.storage,
-		logHandler: LogHandler? = Global.logHandler,
+		storage: Storage = Global.params.defaultStorage,
+		logHandler: LogHandler? = Global.params.defaultLogHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
@@ -20,8 +20,8 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	public convenience init (
 		_ key: String,
 		default: @escaping () -> Value,
-		storage: Storage = Global.storage,
-		logHandler: LogHandler? = Global.logHandler,
+		storage: Storage = Global.params.defaultStorage,
+		logHandler: LogHandler? = Global.params.defaultLogHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
@@ -32,8 +32,8 @@ open class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType
 	public convenience init (
 		_ key: String,
 		default: Value,
-		storage: Storage = Global.storage,
-		logHandler: LogHandler? = Global.logHandler,
+		storage: Storage = Global.params.defaultStorage,
+		logHandler: LogHandler? = Global.params.defaultLogHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line

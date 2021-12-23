@@ -11,8 +11,8 @@ open class Item <Value: Codable> {
 	
 	public init (
 		_ key: String,
-		storage: Storage = Global.storage,
-		logHandler: LogHandler? = Global.logHandler,
+		storage: Storage = Global.params.defaultStorage,
+		logHandler: LogHandler? = Global.params.defaultLogHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line
