@@ -11,8 +11,8 @@ open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfi
 	
 	public init (
 		_ key: String,
-		storage: Storage = Global.params.defaultStorage,
-		logHandler: LogHandler? = Global.params.defaultLogHandler,
+		storage: Storage = Global.parameters.defaultStorage,
+		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line

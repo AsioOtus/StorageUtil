@@ -5,8 +5,8 @@ public class InitializableItem <Value: Codable>: Item<Value> {
 	public init (
 		_ key: String,
 		initial: Value?,
-		storage: Storage = Global.params.defaultStorage,
-		logHandler: LogHandler? = Global.params.defaultLogHandler,
+		storage: Storage = Global.parameters.defaultStorage,
+		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
 		label: String? = nil,
 		file: String = #fileID,
 		line: Int = #line

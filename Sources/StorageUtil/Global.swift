@@ -1,5 +1,5 @@
 public extension Global {
-	static var params = Self(storage: UserDefaultsStorage(keyPrefix: nil), logHandler: nil)
+	static var parameters = Self(storage: UserDefaultsStorage(keyPrefix: nil), logHandler: nil)
 }
 
 public struct Global {
