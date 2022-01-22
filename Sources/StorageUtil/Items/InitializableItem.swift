@@ -2,7 +2,7 @@ import Foundation
 
 public typealias Initializable = InitializableItem
 
-public class InitializableItem <InnerItem: ItemProtocol> {
+public class InitializableItem <InnerItem: ItemProtocol>: InitializableItemProtocol {
 	public let item: InnerItem
 	
 	private let isInitializedKey: String
@@ -21,7 +21,7 @@ public class InitializableItem <InnerItem: ItemProtocol> {
 	}
 }
 
-extension InitializableItem: ItemProtocol {
+extension InitializableItem {
 	public typealias Value = InnerItem.Value
 	
 	public var key: String { item.key }
@@ -37,9 +37,9 @@ extension InitializableItem: ItemProtocol {
 	public func isExists () -> Bool { item.isExists() }
 }
 
-extension InitializableItem {
+public extension InitializableItem {
 	@discardableResult
-	public func initialize () -> Self {
+	func initialize () -> Self {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "initialization")
 			defer { logger.log(details) }
@@ -60,11 +60,7 @@ extension InitializableItem {
 }
 
 public extension ItemProtocol {
-	func initializable (_ initial: Value?) -> InitializableItem<Self> {
-		.init(self, initial: initial)
-	}
-	
-	func withInitialization (_ initial: Value?) -> InitializableItem<Self> {
+	func initial (_ initial: Value?) -> InitializableItem<Self> {
 		InitializableItem.withInitialization(self, initial: initial)
 	}
 }

@@ -2,7 +2,7 @@ import Foundation
 
 public typealias Defaultable = DefaultableItem
 
-public class DefaultableItem <InnerItem: ItemProtocol> {
+public class DefaultableItem <InnerItem: ItemProtocol>: DefaultableItemProtocol {
 	public let item: InnerItem
 	public let defaultValue: (String) -> Value
 	
@@ -20,7 +20,7 @@ public class DefaultableItem <InnerItem: ItemProtocol> {
 	}
 }
 
-extension DefaultableItem: ItemProtocol {
+extension DefaultableItem {
 	public typealias Value = InnerItem.Value
 	
 	public var key: String { item.key }
@@ -128,15 +128,15 @@ public extension DefaultableItem {
 }
 
 public extension ItemProtocol {
-	func defaultable (_ default: @escaping (String) -> Value) -> DefaultableItem<Self> {
+	func `default` (_ default: @escaping (String) -> Value) -> DefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 	
-	func defaultable (_ default: @escaping () -> Value) -> DefaultableItem<Self> {
+	func `default` (_ default: @escaping () -> Value) -> DefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 
-	func defaultable (_ default: Value) -> DefaultableItem<Self> {
+	func `default` (_ default: Value) -> DefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 }

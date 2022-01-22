@@ -3,6 +3,8 @@ import XCTest
 
 final class StorageUtilTests: XCTestCase {
 	func test () {
-		let item = Item<Int>(key: "test").withInitialization(0).defaultable(10)
+		let item = Item(key: "test")
+			.initial(0)
+			.default(10)
 	}
 }
