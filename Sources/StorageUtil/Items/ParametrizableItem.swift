@@ -1,6 +1,6 @@
 import Foundation
 
-open class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider> {
+public class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider> {
 	internal let accessQueue: DispatchQueue
 	internal let logger: Logger<Value>
 	

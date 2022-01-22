@@ -22,11 +22,19 @@ public class InitializableItem <Value: Codable>: Item<Value> {
 
 extension InitializableItem {
 	public func initialize () {
-		let isInitialized = try? storage.load(isInitializedKey, Bool.self)
-		if isInitialized == nil || isInitialized == false {
-			_ = try? storage.save(key, initial)
+		accessQueue.sync {
+			var details = LogRecord<Value>.Details(operation: "initialization")
+			defer { logger.log(details) }
+			
+			let isInitialized = try? storage.load(isInitializedKey, Bool.self)
+			
+			if isInitialized == nil || isInitialized == false {
+				_ = try? storage.save(key, initial)
+				details.comment = "completed"
+			} else {
+				_ = try? storage.save(isInitializedKey, true)
+				details.comment = "already initialized"
+			}
 		}
-		
-		_ = try? storage.save(isInitializedKey, true)
 	}
 }

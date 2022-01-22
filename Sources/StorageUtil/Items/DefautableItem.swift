@@ -1,6 +1,4 @@
-import Foundation
-
-open class DefaultableItem <Value: Codable>: Item<Value> {
+public class DefaultableItem <Value: Codable>: Item<Value> {
 	public let defaultValue: (String) -> Value
 	
 	public init (

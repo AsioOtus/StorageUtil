@@ -1,6 +1,6 @@
 import Foundation
 
-open class Item <Value: Codable> {
+public class Item <Value: Codable> {
 	internal let accessQueue: DispatchQueue
 	internal let logger: Logger<Value>
 	
