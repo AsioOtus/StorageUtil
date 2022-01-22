@@ -1,8 +1,8 @@
 import Foundation
 
-public class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider> {
-	internal let accessQueue: DispatchQueue
-	internal let logger: Logger<Value>
+public class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableItemProtocol {
+	public let accessQueue: DispatchQueue
+	public let logger: Logger<Value>
 	
 	public let key: String
 	public let storage: Storage
@@ -120,7 +120,7 @@ extension ParametrizableItem {
 		}
 	}
 	
-	public func delete (_ keyPostfixProvider: KeyPostfixProviderType) {
+	public func delete (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
 			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
@@ -134,8 +134,12 @@ extension ParametrizableItem {
 				
 				details.oldValue = value
 				details.existance = value != nil
+				
+				return true
 			} catch {
 				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+				
+				return false
 			}
 		}
 	}

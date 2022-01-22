@@ -1,27 +1,45 @@
-public class InitializableItem <Value: Codable>: Item<Value> {
+import Foundation
+
+public typealias Initializable = InitializableItem
+
+public class InitializableItem <InnerItem: ItemProtocol> {
+	public let item: InnerItem
+	
 	private let isInitializedKey: String
 	public let initial: Value?
 	
-	public init (
-		_ key: String,
-		initial: Value?,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
+	public init (_ item: InnerItem, initial: Value?) {
+		self.item = item
+		
 		self.initial = initial
-		self.isInitializedKey = KeyBuilder.build(prefix: "$isInitialized", key: key)
-		
-		super.init(key, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
-		
-		self.initialize()
+		self.isInitializedKey = KeyBuilder.build(prefix: "$isInitialized", key: item.key)
+	}
+	
+	public static func withInitialization (_ item: InnerItem, initial: Value?) -> InitializableItem {
+		InitializableItem(item, initial: initial)
+			.initialize()
 	}
 }
 
+extension InitializableItem: ItemProtocol {
+	public typealias Value = InnerItem.Value
+	
+	public var key: String { item.key }
+	public var storage: Storage { item.storage }
+	
+	public var accessQueue: DispatchQueue { item.accessQueue }
+	public var logger: Logger<Value> { item.logger }
+	
+	public func save (_ value: Value) -> Bool { item.save(value) }
+	public func saveIfNotExists (_ value: Value) -> Bool { item.saveIfNotExists(value) }
+	public func load () -> Value? { item.load() }
+	public func delete () -> Bool { item.delete() }
+	public func isExists () -> Bool { item.isExists() }
+}
+
 extension InitializableItem {
-	public func initialize () {
+	@discardableResult
+	public func initialize () -> Self {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "initialization")
 			defer { logger.log(details) }
@@ -36,5 +54,17 @@ extension InitializableItem {
 				details.comment = "already initialized"
 			}
 		}
+		
+		return self
+	}
+}
+
+public extension ItemProtocol {
+	func initializable (_ initial: Value?) -> InitializableItem<Self> {
+		.init(self, initial: initial)
+	}
+	
+	func withInitialization (_ initial: Value?) -> InitializableItem<Self> {
+		InitializableItem.withInitialization(self, initial: initial)
 	}
 }

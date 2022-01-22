@@ -1,16 +1,16 @@
 import Foundation
 
-public class Item <Value: Codable> {
-	internal let accessQueue: DispatchQueue
-	internal let logger: Logger<Value>
-	
+public class Item <Value: Codable>: ItemProtocol {
 	public let key: String
 	public let storage: Storage
+
+	public let accessQueue: DispatchQueue
+	public let logger: Logger<Value>
 	
 	public let identificationInfo: IdentificationInfo
 	
 	public init (
-		_ key: String,
+		key: String,
 		storage: Storage = Global.parameters.defaultStorage,
 		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
 		label: String? = nil,
@@ -59,7 +59,7 @@ extension Item {
 	}
 	
 	@discardableResult
-	public func saveIfNotExist (_ value: Value) -> Bool {
+	public func saveIfNotExists (_ value: Value) -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save if not exist")
 			defer { logger.log(details) }
@@ -109,7 +109,7 @@ extension Item {
 		}
 	}
 	
-	public func delete () -> Bool  {
+	public func delete () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "delete")
 			defer { logger.log(details) }

@@ -1,52 +1,49 @@
-public class DefaultableItem <Value: Codable>: Item<Value> {
+import Foundation
+
+public typealias Defaultable = DefaultableItem
+
+public class DefaultableItem <InnerItem: ItemProtocol> {
+	public let item: InnerItem
 	public let defaultValue: (String) -> Value
 	
-	public init (
-		_ key: String,
-		default: @escaping (String) -> Value,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
+	public init (_ item: InnerItem, default: @escaping (String) -> Value) {
+		self.item = item
 		self.defaultValue = `default`
-		super.init(key, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 	
-	public convenience init (
-		_ key: String,
-		default: @escaping () -> Value,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
-		self.init(key, default: { _ in `default`() }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+	public convenience init (_ item: InnerItem, default: @escaping () -> Value) {
+		self.init(item, default: { _ in `default`() })
 	}
 	
-	public convenience init (
-		_ key: String,
-		default: Value,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
-		self.init(key, default: { _ in `default` }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+	public convenience init (_ item: InnerItem, default: Value) {
+		self.init(item, default: { _ in `default` })
 	}
 }
 
-extension DefaultableItem {
-	public func loadOrDefault () -> Value {
+extension DefaultableItem: ItemProtocol {
+	public typealias Value = InnerItem.Value
+	
+	public var key: String { item.key }
+	public var storage: Storage { item.storage }
+	
+	public var accessQueue: DispatchQueue { item.accessQueue }
+	public var logger: Logger<Value> { item.logger }
+	
+	public func save (_ value: Value) -> Bool { item.save(value) }
+	public func saveIfNotExists (_ value: Value) -> Bool { item.saveIfNotExists(value) }
+	public func load () -> Value? { item.load() }
+	public func delete () -> Bool { item.delete() }
+	public func isExists () -> Bool { item.isExists() }
+}
+
+public extension DefaultableItem {
+	func loadOrDefault () -> Value {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "load or default")
 			defer { logger.log(details) }
 			
 			do {
-				if let value = try storage.load(key, Value.self) {
+				if let value = try storage.load(item.key, Value.self) {
 					details.oldValue = value
 					details.existance = true
 					
@@ -69,10 +66,11 @@ extension DefaultableItem {
 				return defaultValue
 			}
 		}
+		
 	}
 	
 	@discardableResult
-	public func saveDefault () -> Bool {
+	func saveDefault () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save default")
 			defer { logger.log(details) }
@@ -96,7 +94,7 @@ extension DefaultableItem {
 	}
 	
 	@discardableResult
-	public func saveDefaultIfNotExist () -> Bool {
+	func saveDefaultIfNotExist () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save default if not exist")
 			defer { logger.log(details) }
@@ -126,5 +124,19 @@ extension DefaultableItem {
 				return false
 			}
 		}
+	}
+}
+
+public extension ItemProtocol {
+	func defaultable (_ default: @escaping (String) -> Value) -> DefaultableItem<Self> {
+		.init(self, default: `default`)
+	}
+	
+	func defaultable (_ default: @escaping () -> Value) -> DefaultableItem<Self> {
+		.init(self, default: `default`)
+	}
+
+	func defaultable (_ default: Value) -> DefaultableItem<Self> {
+		.init(self, default: `default`)
 	}
 }

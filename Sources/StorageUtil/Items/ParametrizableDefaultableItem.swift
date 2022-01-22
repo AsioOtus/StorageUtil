@@ -1,44 +1,53 @@
 import Foundation
 
-public class ParametrizableDefaultableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableItem<Value, KeyPostfixProviderType> {
+public typealias ParametrizableDefaultable = ParametrizableDefaultableItem
+
+public class ParametrizableDefaultableItem <InnerItem: ParametrizableItemProtocol> {
+	public let item: InnerItem
 	public let defaultValue: (String) -> Value
 	
-	public init (
-		_ key: String,
-		default: @escaping (String) -> Value,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
+	public init (_ item: InnerItem, default: @escaping (String) -> Value) {
+		self.item = item
 		self.defaultValue = `default`
-		
-		super.init(key, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
 	}
 	
-	public convenience init (
-		_ key: String,
-		default: @escaping () -> Value,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
-		self.init(key, default: { _ in `default`() }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+	public convenience init (_ item: InnerItem, default: @escaping () -> Value) {
+		self.init(item, default: { _ in `default`() })
 	}
 	
-	public convenience init (
-		_ key: String,
-		default: Value,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
-		self.init(key, default: { _ in `default` }, storage: storage, logHandler: logHandler, label: label, file: file, line: line)
+	public convenience init (_ item: InnerItem, default: Value) {
+		self.init(item, default: { _ in `default` })
+	}
+}
+
+extension ParametrizableDefaultableItem: ParametrizableItemProtocol {
+	public typealias Value = InnerItem.Value
+	public typealias KeyPostfixProviderType = InnerItem.KeyPostfixProviderType
+	
+	public var key: String { item.key }
+	public var storage: Storage { item.storage }
+	
+	public var accessQueue: DispatchQueue { item.accessQueue }
+	public var logger: Logger<Value> { item.logger }
+	
+	public func save (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		item.save(value, keyPostfixProvider)
+	}
+	
+	public func saveIfNotExist (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		item.saveIfNotExist(value, keyPostfixProvider)
+	}
+	
+	public func load (_ keyPostfixProvider: KeyPostfixProviderType) -> Value? {
+		item.load(keyPostfixProvider)
+	}
+	
+	public func delete (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		item.delete(keyPostfixProvider)
+	}
+	
+	public func isExists (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+		item.isExists(keyPostfixProvider)
 	}
 }
 
@@ -141,5 +150,19 @@ extension ParametrizableDefaultableItem {
 				return false
 			}
 		}
+	}
+}
+
+public extension ParametrizableItemProtocol {
+	func defaultable (_ default: @escaping (String) -> Value) -> ParametrizableDefaultableItem<Self> {
+		.init(self, default: `default`)
+	}
+	
+	func defaultable (_ default: @escaping () -> Value) -> ParametrizableDefaultableItem<Self> {
+		.init(self, default: `default`)
+	}
+	
+	func defaultable (_ default: Value) -> ParametrizableDefaultableItem<Self> {
+		.init(self, default: `default`)
 	}
 }

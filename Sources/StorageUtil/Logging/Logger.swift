@@ -1,8 +1,13 @@
-struct Logger<Value: Codable> {
-	let info: LogRecord<Value>.Info
-	let logHandler: LogHandler?
+public struct Logger<Value: Codable> {
+	public let info: LogRecord<Value>.Info
+	public let logHandler: LogHandler?
 	
-	func log (_ details: LogRecord<Value>.Details) {
+	public init (info: LogRecord<Value>.Info, logHandler: LogHandler?) {
+		self.info = info
+		self.logHandler = logHandler
+	}
+	
+	public func log (_ details: LogRecord<Value>.Details) {
 		logHandler?.log(.init(info: info, details: details))
 	}
 }
