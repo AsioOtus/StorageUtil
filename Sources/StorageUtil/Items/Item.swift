@@ -109,7 +109,7 @@ extension Item {
 		}
 	}
 	
-	public func delete () {
+	public func delete () -> Bool  {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "delete")
 			defer { logger.log(details) }
@@ -119,8 +119,12 @@ extension Item {
 				
 				details.oldValue = value
 				details.existance = value != nil
+				
+				return true
 			} catch {
 				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+				
+				return false
 			}
 		}
 	}
