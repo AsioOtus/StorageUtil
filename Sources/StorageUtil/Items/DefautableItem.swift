@@ -2,38 +2,46 @@ import Foundation
 
 public typealias Defaultable = DefaultableItem
 
-public class DefaultableItem <InnerItem: ItemProtocol>: DefaultableItemProtocol {
+public struct DefaultableItem <InnerItem: ItemProtocol>: DefaultableItemProtocol {
 	public let item: InnerItem
-	public let defaultValue: (String) -> Value
+	public let defaultValue: (Key) -> Value
 	
-	public init (_ item: InnerItem, default: @escaping (String) -> Value) {
+	public init (_ item: InnerItem, default: @escaping (Key) -> Value) {
 		self.item = item
 		self.defaultValue = `default`
 	}
 	
-	public convenience init (_ item: InnerItem, default: @escaping () -> Value) {
+	public init (_ item: InnerItem, default: @escaping () -> Value) {
 		self.init(item, default: { _ in `default`() })
 	}
 	
-	public convenience init (_ item: InnerItem, default: Value) {
+	public init (_ item: InnerItem, default: Value) {
 		self.init(item, default: { _ in `default` })
 	}
 }
 
-extension DefaultableItem {
-	public typealias Value = InnerItem.Value
+public extension DefaultableItem {
+	typealias Value = InnerItem.Value
 	
-	public var key: String { item.key }
-	public var storage: Storage { item.storage }
+	var accessQueue: DispatchQueue { item.accessQueue }
+	var logger: Logger<Value> { item.logger }
 	
-	public var accessQueue: DispatchQueue { item.accessQueue }
-	public var logger: Logger<Value> { item.logger }
+	var storage: Storage { item.storage }
 	
-	public func save (_ value: Value) -> Bool { item.save(value) }
-	public func saveIfNotExists (_ value: Value) -> Bool { item.saveIfNotExists(value) }
-	public func load () -> Value? { item.load() }
-	public func delete () -> Bool { item.delete() }
-	public func isExists () -> Bool { item.isExists() }
+	func save (_ key: Key, _ value: Value) throws -> Value? { try item.save(key, value) }
+	func load (_ key: Key) throws -> Value? { try item.load(key) }
+	func delete (_ key: Key) throws -> Value? { try item.delete(key) }
+}
+
+public extension DefaultableItem {
+	var key: Key { item.key }
+	
+	@discardableResult func save (_ value: Value) -> Bool { item.save(value) }
+	@discardableResult func saveIfExists (_ value: Value) -> Bool { item.saveIfExists(value) }
+	@discardableResult func saveIfNotExists (_ value: Value) -> Bool { item.saveIfNotExists(value) }
+	func load () -> Value? { item.load() }
+	@discardableResult func delete () -> Bool { item.delete() }
+	func isExists () -> Bool { item.isExists() }
 }
 
 public extension DefaultableItem {
@@ -43,7 +51,7 @@ public extension DefaultableItem {
 			defer { logger.log(details) }
 			
 			do {
-				if let value = try storage.load(item.key, Value.self) {
+				if let value = try load(item.key) {
 					details.oldValue = value
 					details.existance = true
 					
@@ -66,7 +74,6 @@ public extension DefaultableItem {
 				return defaultValue
 			}
 		}
-		
 	}
 	
 	@discardableResult
@@ -80,7 +87,7 @@ public extension DefaultableItem {
 				
 				details.newValue = defaultValue
 				
-				let oldValue = try storage.save(key, defaultValue)
+				let oldValue = try save(key, defaultValue)
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
@@ -100,7 +107,7 @@ public extension DefaultableItem {
 			defer { logger.log(details) }
 			
 			do {
-				if let value = try? storage.load(key, Value.self) {
+				if let value = try? load(key) {
 					details.oldValue = value
 					details.existance = true
 					details.comment = "old value preserved"
@@ -111,7 +118,7 @@ public extension DefaultableItem {
 					
 					details.newValue = defaultValue
 					
-					let oldValue = try storage.save(key, defaultValue)
+					let oldValue = try save(key, defaultValue)
 					
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
@@ -128,7 +135,7 @@ public extension DefaultableItem {
 }
 
 public extension ItemProtocol {
-	func `default` (_ default: @escaping (String) -> Value) -> DefaultableItem<Self> {
+	func `default` (_ default: @escaping (Key) -> Value) -> DefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 	

@@ -22,7 +22,7 @@ public class UserDefaultsStorage: Storage {
 		self.userDefaults = userDefaults
 	}
 	
-	public func prefixKey (_ key: String) -> String { KeyBuilder.build(prefix: keyPrefix, key: key) }
+	public func prefixKey (_ key: Key) -> Key { key.add(prefix: keyPrefix) }
 }
 
 extension UserDefaultsStorage {
@@ -35,7 +35,7 @@ extension UserDefaultsStorage {
 
 extension UserDefaultsStorage {
 	@discardableResult
-	public func save <Value: Codable> (_ key: String, _ value: Value) throws -> Value? {
+	public func save <Value: Codable> (_ key: Key, _ value: Value) throws -> Value? {
 		var details = LogRecord<Value>.Details(operation: "save")
 		details.newValue = value
 		defer {
@@ -61,7 +61,7 @@ extension UserDefaultsStorage {
 			details.existance = oldValue != nil
 			
 			let valueJsonString = try Coder.encode(value)
-			userDefaults.set(valueJsonString, forKey: prefixedKey)
+			userDefaults.set(valueJsonString, forKey: prefixedKey.value)
 			
 			return oldValue
 		} catch {
@@ -71,7 +71,7 @@ extension UserDefaultsStorage {
 		}
 	}
 	
-	public func load <Value: Codable> (_ key: String, _ type: Value.Type) throws -> Value? {
+	public func load <Value: Codable> (_ key: Key, _ type: Value.Type) throws -> Value? {
 		var details = LogRecord<Value>.Details(operation: "load")
 		defer {
 			logHandler?.log(
@@ -90,7 +90,7 @@ extension UserDefaultsStorage {
 		do {
 			let prefixedKey = prefixKey(key)
 			
-			guard let valueJsonString = userDefaults.string(forKey: prefixedKey) else { return nil }
+			guard let valueJsonString = userDefaults.string(forKey: prefixedKey.value) else { return nil }
 			let value = try Coder.decode(valueJsonString, type)
 			
 			details.oldValue = value
@@ -105,7 +105,7 @@ extension UserDefaultsStorage {
 		}
 	}
 	
-	public func delete <Value: Codable> (_ key: String, _ type: Value.Type) -> Value? {
+	public func delete <Value: Codable> (_ key: Key, _ type: Value.Type) -> Value? {
 		var details = LogRecord<Value>.Details(operation: "delete")
 		defer {
 			logHandler?.log(
@@ -124,7 +124,7 @@ extension UserDefaultsStorage {
 		let prefixedKey = prefixKey(key)
 		
 		let oldValue = try? load(key, type)
-		userDefaults.removeObject(forKey: prefixedKey)
+		userDefaults.removeObject(forKey: prefixedKey.value)
 		
 		details.oldValue = oldValue
 		details.existance = oldValue != nil

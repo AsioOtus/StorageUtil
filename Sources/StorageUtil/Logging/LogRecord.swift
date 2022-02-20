@@ -3,7 +3,7 @@ import Foundation
 extension LogRecord {
 	public struct Info {
 		public let keyPrefix: String?
-		public let key: String
+		public let key: Key
 		public let storage: IdentificationInfo
 		public let item: IdentificationInfo?
 	}

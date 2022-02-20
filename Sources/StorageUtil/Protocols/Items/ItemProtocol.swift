@@ -1,15 +1,8 @@
-import Foundation
-
-public protocol ItemProtocol {
-	associatedtype Value: Codable
-	
-	var key: String { get }
-	var storage: Storage { get }
-	
-	var accessQueue: DispatchQueue { get }
-	var logger: Logger<Value> { get }
+public protocol ItemProtocol: BaseItemProtocol {	
+	var key: Key { get }
 	
 	func save (_ value: Value) -> Bool
+	func saveIfExists (_ value: Value) -> Bool
 	func saveIfNotExists (_ value: Value) -> Bool
 	func load () -> Value?
 	func delete () -> Bool

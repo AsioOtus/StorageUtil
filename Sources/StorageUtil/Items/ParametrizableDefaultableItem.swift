@@ -2,38 +2,48 @@ import Foundation
 
 public typealias ParametrizableDefaultable = ParametrizableDefaultableItem
 
-public class ParametrizableDefaultableItem <InnerItem: ParametrizableItemProtocol> {
+public struct ParametrizableDefaultableItem <InnerItem: ParametrizableItemProtocol> {
 	public let item: InnerItem
-	public let defaultValue: (String) -> Value
+	public let defaultValue: (Key) -> Value
 	
-	public init (_ item: InnerItem, default: @escaping (String) -> Value) {
+	public init (_ item: InnerItem, default: @escaping (Key) -> Value) {
 		self.item = item
 		self.defaultValue = `default`
 	}
 	
-	public convenience init (_ item: InnerItem, default: @escaping () -> Value) {
+	public init (_ item: InnerItem, default: @escaping () -> Value) {
 		self.init(item, default: { _ in `default`() })
 	}
 	
-	public convenience init (_ item: InnerItem, default: Value) {
+	public init (_ item: InnerItem, default: Value) {
 		self.init(item, default: { _ in `default` })
 	}
 }
 
+public extension ParametrizableDefaultableItem {
+	typealias Value = InnerItem.Value
+	
+	var accessQueue: DispatchQueue { item.accessQueue }
+	var logger: Logger<Value> { item.logger }
+	
+	var storage: Storage { item.storage }
+	
+	func save (_ key: Key, _ value: Value) throws -> Value? { try item.save(key, value) }
+	func load (_ key: Key) throws -> Value? { try item.load(key) }
+	func delete (_ key: Key) throws -> Value? { try item.delete(key) }
+}
+
 extension ParametrizableDefaultableItem: ParametrizableItemProtocol {
-	public typealias Value = InnerItem.Value
 	public typealias KeyPostfixProviderType = InnerItem.KeyPostfixProviderType
 	
-	public var key: String { item.key }
-	public var storage: Storage { item.storage }
+	public var key: Key { item.key }
 	
-	public var accessQueue: DispatchQueue { item.accessQueue }
-	public var logger: Logger<Value> { item.logger }
-	
+	@discardableResult
 	public func save (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		item.save(value, keyPostfixProvider)
 	}
 	
+	@discardableResult
 	public func saveIfNotExist (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		item.saveIfNotExist(value, keyPostfixProvider)
 	}
@@ -42,6 +52,7 @@ extension ParametrizableDefaultableItem: ParametrizableItemProtocol {
 		item.load(keyPostfixProvider)
 	}
 	
+	@discardableResult 
 	public func delete (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		item.delete(keyPostfixProvider)
 	}
@@ -55,14 +66,14 @@ extension ParametrizableDefaultableItem {
 	public func loadOrDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> Value {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "load or default")
 			details.keyPostfix = keyPostfix
 			defer { logger.log(details) }
 			
 			do {
-				if let value = try storage.load(postfixedKey, Value.self) {
+				if let value = try load(postfixedKey) {
 					details.oldValue = value
 					details.existance = true
 					
@@ -91,7 +102,7 @@ extension ParametrizableDefaultableItem {
 	public func saveDefault (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "save default")
 			details.keyPostfix = keyPostfix
@@ -102,7 +113,7 @@ extension ParametrizableDefaultableItem {
 				
 				details.newValue = defaultValue
 				
-				let oldValue = try storage.save(postfixedKey, defaultValue)
+				let oldValue = try save(postfixedKey, defaultValue)
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
@@ -119,14 +130,14 @@ extension ParametrizableDefaultableItem {
 	public func saveDefaultIfNotExist (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "save default if not exist")
 			details.keyPostfix = keyPostfix
 			defer { logger.log(details) }
 			
 			do {
-				if let value = try? storage.load(postfixedKey, Value.self) {
+				if let value = try? load(postfixedKey) {
 					details.oldValue = value
 					details.existance = true
 					details.comment = "old value preserved"
@@ -137,7 +148,7 @@ extension ParametrizableDefaultableItem {
 					
 					details.newValue = defaultValue
 					
-					let oldValue = try storage.save(postfixedKey, defaultValue)
+					let oldValue = try save(postfixedKey, defaultValue)
 					
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
@@ -154,15 +165,15 @@ extension ParametrizableDefaultableItem {
 }
 
 public extension ParametrizableItemProtocol {
-	func defaultable (_ default: @escaping (String) -> Value) -> ParametrizableDefaultableItem<Self> {
+	func `default` (_ default: @escaping (Key) -> Value) -> ParametrizableDefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 	
-	func defaultable (_ default: @escaping () -> Value) -> ParametrizableDefaultableItem<Self> {
+	func `default` (_ default: @escaping () -> Value) -> ParametrizableDefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 	
-	func defaultable (_ default: Value) -> ParametrizableDefaultableItem<Self> {
+	func `default` (_ default: Value) -> ParametrizableDefaultableItem<Self> {
 		.init(self, default: `default`)
 	}
 }

@@ -4,23 +4,23 @@ public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
 	public func convert <Value> (_ record: LogRecord<Value>) -> String {
 		var messageComponents = [String]()
 				
-		messageComponents.append(KeyBuilder.build(prefix: record.info.keyPrefix, key: record.info.key, postfix: record.details.keyPostfix))
+		messageComponents.append(record.info.key.add(prefix: record.info.keyPrefix, postfix: record.details.keyPostfix).value)
 		messageComponents.append(record.details.operation.uppercased())
 		
 		if let existance = record.details.existance {
-			messageComponents.append(existance.description)
+			messageComponents.append(existance ? "Existed" : "Not existed")
 		} else {
-			messageComponents.append("Not exist")
-		}
-		
-		if let newValue = record.details.newValue {
-			messageComponents.append(String(describing: newValue))
-		} else {
-			messageComponents.append("nil")
+			messageComponents.append("Existance undefined")
 		}
 		
 		if let oldValue = record.details.oldValue {
 			messageComponents.append(String(describing: oldValue))
+		} else {
+			messageComponents.append("nil")
+		}
+		
+		if let newValue = record.details.newValue {
+			messageComponents.append(String(describing: newValue))
 		} else {
 			messageComponents.append("nil")
 		}

@@ -1,47 +1,34 @@
 import Foundation
 
-public class ParametrizableItem <Value: Codable, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableItemProtocol {
-	public let accessQueue: DispatchQueue
-	public let logger: Logger<Value>
+public struct ParametrizableItem <InnerItem: ItemProtocol, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableItemProtocol {
+	public let item: InnerItem
 	
-	public let key: String
-	public let storage: Storage
-	
-	public let identificationInfo: IdentificationInfo
-	
-	public init (
-		_ key: String,
-		storage: Storage = Global.parameters.defaultStorage,
-		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
-		label: String? = nil,
-		file: String = #fileID,
-		line: Int = #line
-	) {
-		let identificationInfo = IdentificationInfo(type: String(describing: Self.self), file: file, line: line, label: label, extra: "Key: \(key)")
-		self.identificationInfo = identificationInfo
-		
-		self.key = key
-		self.storage = storage
-		
-		self.accessQueue = DispatchQueue(label: "\(identificationInfo.typeDescription).\(key).\(identificationInfo.instance).accessQueue")
-		self.logger = Logger(
-			info: .init(
-				keyPrefix: storage.keyPrefix,
-				key: key,
-				storage: storage.identificationInfo,
-				item: identificationInfo
-			),
-			logHandler: logHandler
-		)
+	public init (_ item: InnerItem) {
+		self.item = item
 	}
 }
 
-extension ParametrizableItem {
+public extension ParametrizableItem {
+	typealias Value = InnerItem.Value
+	
+	var accessQueue: DispatchQueue { item.accessQueue }
+	var logger: Logger<Value> { item.logger }
+	
+	var storage: Storage { item.storage }
+	
+	func save (_ key: Key, _ value: Value) throws -> Value? { try item.save(key, value) }
+	func load (_ key: Key) throws -> Value? { try item.load(key) }
+	func delete (_ key: Key) throws -> Value? { try item.delete(key) }
+}
+
+public extension ParametrizableItem {
+	var key: Key { item.key }
+	
 	@discardableResult
-	public func save (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+	func save (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "save")
 			details.newValue = value
@@ -49,7 +36,7 @@ extension ParametrizableItem {
 			defer { logger.log(details) }
 			
 			do {
-				let oldValue = try storage.save(postfixedKey, value)
+				let oldValue = try save(postfixedKey, value)
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
@@ -63,16 +50,16 @@ extension ParametrizableItem {
 	}
 	
 	@discardableResult
-	public func saveIfNotExist (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+	func saveIfNotExist (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "save if not exist")
 			defer { logger.log(details) }
 			
 			do {
-				if let oldValue = try? storage.load(postfixedKey, Value.self) {
+				if let oldValue = try? load(postfixedKey) {
 					details.oldValue = oldValue
 					details.existance = true
 					details.comment = "old value preserved"
@@ -81,7 +68,7 @@ extension ParametrizableItem {
 				} else {
 					details.newValue = value
 					
-					let oldValue = try storage.save(postfixedKey, value)
+					let oldValue = try save(postfixedKey, value)
 					
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
@@ -96,17 +83,17 @@ extension ParametrizableItem {
 		}
 	}
 	
-	public func load (_ keyPostfixProvider: KeyPostfixProviderType) -> Value? {
+	func load (_ keyPostfixProvider: KeyPostfixProviderType) -> Value? {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "load")
 			details.keyPostfix = keyPostfix
 			defer { logger.log(details) }
 			
 			do {
-				let value = try storage.load(postfixedKey, Value.self)
+				let value = try load(postfixedKey)
 				
 				details.oldValue = value
 				details.existance = value != nil
@@ -120,17 +107,17 @@ extension ParametrizableItem {
 		}
 	}
 	
-	public func delete (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+	func delete (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "delete")
 			details.keyPostfix = keyPostfix
 			defer { logger.log(details) }
 			
 			do {
-				let value = try storage.delete(postfixedKey, Value.self)
+				let value = try delete(postfixedKey)
 				
 				details.oldValue = value
 				details.existance = value != nil
@@ -144,17 +131,17 @@ extension ParametrizableItem {
 		}
 	}
 	
-	public func isExists (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
+	func isExists (_ keyPostfixProvider: KeyPostfixProviderType) -> Bool {
 		accessQueue.sync {
 			let keyPostfix = keyPostfixProvider.keyPostfix
-			let postfixedKey = KeyBuilder.build(key: key, postfix: keyPostfix)
+			let postfixedKey = item.key.add(postfix: keyPostfix)
 			
 			var details = LogRecord<Value>.Details(operation: "is exists")
 			details.keyPostfix = keyPostfix
 			defer { logger.log(details) }
 			
 			do {
-				let value = try storage.load(postfixedKey, Value.self)
+				let value = try load(postfixedKey)
 				
 				details.oldValue = value
 				details.existance = value != nil
@@ -166,5 +153,11 @@ extension ParametrizableItem {
 				return false
 			}
 		}
+	}
+}
+
+public extension ItemProtocol {
+	func parametrized <KeyPostfixProviderType: KeyPostfixProvider> (keyPostfixProviderType: KeyPostfixProviderType.Type) -> ParametrizableItem <Self, KeyPostfixProviderType> {
+		.init(self)
 	}
 }

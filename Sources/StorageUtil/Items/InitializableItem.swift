@@ -2,42 +2,49 @@ import Foundation
 
 public typealias Initializable = InitializableItem
 
-public class InitializableItem <InnerItem: ItemProtocol>: InitializableItemProtocol {
-	public let item: InnerItem
+public struct InitializableItem <InnerItem: ItemProtocol>: InitializableItemProtocol {
+	private let isInitializedKey: Key
 	
-	private let isInitializedKey: String
+	public let item: InnerItem
 	public let initial: Value?
 	
 	public init (_ item: InnerItem, initial: Value?) {
 		self.item = item
 		
 		self.initial = initial
-		self.isInitializedKey = KeyBuilder.build(prefix: "$isInitialized", key: item.key)
+		self.isInitializedKey = item.key.add(prefix: "$isInitialized")
 	}
-	
-	public static func withInitialization (_ item: InnerItem, initial: Value?) -> InitializableItem {
-		InitializableItem(item, initial: initial)
-			.initialize()
-	}
-}
-
-extension InitializableItem {
-	public typealias Value = InnerItem.Value
-	
-	public var key: String { item.key }
-	public var storage: Storage { item.storage }
-	
-	public var accessQueue: DispatchQueue { item.accessQueue }
-	public var logger: Logger<Value> { item.logger }
-	
-	public func save (_ value: Value) -> Bool { item.save(value) }
-	public func saveIfNotExists (_ value: Value) -> Bool { item.saveIfNotExists(value) }
-	public func load () -> Value? { item.load() }
-	public func delete () -> Bool { item.delete() }
-	public func isExists () -> Bool { item.isExists() }
 }
 
 public extension InitializableItem {
+	typealias Value = InnerItem.Value
+	
+	var accessQueue: DispatchQueue { item.accessQueue }
+	var logger: Logger<Value> { item.logger }
+	
+	var storage: Storage { item.storage }
+	
+	func save (_ key: Key, _ value: Value) throws -> Value? { try item.save(key, value) }
+	func load (_ key: Key) throws -> Value? { try item.load(key) }
+	func delete (_ key: Key) throws -> Value? { try item.delete(key) }
+}
+
+public extension InitializableItem {
+	var key: Key { item.key }
+	
+	@discardableResult func save (_ value: Value) -> Bool { item.save(value) }
+	@discardableResult func saveIfExists (_ value: Value) -> Bool { item.saveIfExists(value) }
+	@discardableResult func saveIfNotExists (_ value: Value) -> Bool { item.saveIfNotExists(value) }
+	func load () -> Value? { item.load() }
+	@discardableResult func delete () -> Bool { item.delete() }
+	func isExists () -> Bool { item.isExists() }
+}
+
+public extension InitializableItem {
+	static func withInitialization (_ item: InnerItem, initial: Value?) -> InitializableItem {
+		InitializableItem(item, initial: initial).initialize()
+	}
+	
 	@discardableResult
 	func initialize () -> Self {
 		accessQueue.sync {
@@ -61,6 +68,6 @@ public extension InitializableItem {
 
 public extension ItemProtocol {
 	func initial (_ initial: Value?) -> InitializableItem<Self> {
-		InitializableItem.withInitialization(self, initial: initial)
+		.withInitialization(self, initial: initial)
 	}
 }

@@ -1,7 +1,7 @@
 import Foundation
 
-public class Item <Value: Codable>: ItemProtocol {
-	public let key: String
+public struct Item <Value: Codable>: ItemProtocol {
+	public let key: Key
 	public let storage: Storage
 
 	public let accessQueue: DispatchQueue
@@ -10,7 +10,7 @@ public class Item <Value: Codable>: ItemProtocol {
 	public let identificationInfo: IdentificationInfo
 	
 	public init (
-		key: String,
+		key: Key,
 		storage: Storage = Global.parameters.defaultStorage,
 		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
 		label: String? = nil,
@@ -36,16 +36,22 @@ public class Item <Value: Codable>: ItemProtocol {
 	}
 }
 
-extension Item {
+public extension Item {
+	func save (_ key: Key, _ value: Value) throws -> Value? { try storage.save(key, value) }
+	func load (_ key: Key) throws -> Value? { try storage.load(key, Value.self) }
+	func delete (_ key: Key) throws -> Value? { try storage.delete(key, Value.self) }
+}
+
+public extension Item {
 	@discardableResult
-	public func save (_ value: Value) -> Bool {
+	func save (_ value: Value) -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save")
 			details.newValue = value
 			defer { logger.log(details) }
 			
 			do {
-				let oldValue = try storage.save(key, value)
+				let oldValue = try save(key, value)
 				
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
@@ -59,13 +65,43 @@ extension Item {
 	}
 	
 	@discardableResult
-	public func saveIfNotExists (_ value: Value) -> Bool {
+	func saveIfExists (_ value: Value) -> Bool {
+		accessQueue.sync {
+			var details = LogRecord<Value>.Details(operation: "save if exist")
+			defer { logger.log(details) }
+			
+			do {
+				if (try? load(key)) != nil {
+					details.newValue = value
+					
+					let oldValue = try save(key, value)
+					
+					details.oldValue = oldValue
+					details.existance = oldValue != nil
+					details.comment = "value saved"
+					
+					return true
+				} else {
+					details.existance = false
+					details.comment = "value not exists preserved"
+					
+					return true
+				}
+			} catch {
+				details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+				return false
+			}
+		}
+	}
+	
+	@discardableResult
+	func saveIfNotExists (_ value: Value) -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save if not exist")
 			defer { logger.log(details) }
 			
 			do {
-				if let oldValue = try? storage.load(key, Value.self) {
+				if let oldValue = try? load(key) {
 					details.oldValue = oldValue
 					details.existance = true
 					details.comment = "old value preserved"
@@ -74,7 +110,7 @@ extension Item {
 				} else {
 					details.newValue = value
 					
-					let oldValue = try storage.save(key, value)
+					let oldValue = try save(key, value)
 					
 					details.oldValue = oldValue
 					details.existance = oldValue != nil
@@ -89,13 +125,13 @@ extension Item {
 		}
 	}
 	
-	public func load () -> Value? {
+	func load () -> Value? {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "load")
 			defer { logger.log(details) }
 			
 			do {
-				let value = try storage.load(key, Value.self)
+				let value = try load(key)
 				
 				details.oldValue = value
 				details.existance = value != nil
@@ -109,13 +145,13 @@ extension Item {
 		}
 	}
 	
-	public func delete () -> Bool {
+	func delete () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "delete")
 			defer { logger.log(details) }
 			
 			do {
-				let value = try storage.delete(key, Value.self)
+				let value = try delete(key)
 				
 				details.oldValue = value
 				details.existance = value != nil
@@ -129,13 +165,13 @@ extension Item {
 		}
 	}
 	
-	public func isExists () -> Bool {
+	func isExists () -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "is exists")
 			defer { logger.log(details) }
 			
 			do {
-				let value = try storage.load(key, Value.self)
+				let value = try load(key)
 				
 				details.oldValue = value
 				details.existance = value != nil

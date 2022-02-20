@@ -1,14 +1,9 @@
 import Foundation
 
-public protocol ParametrizableItemProtocol {
-	associatedtype Value: Codable
+public protocol ParametrizableItemProtocol: BaseItemProtocol {
 	associatedtype KeyPostfixProviderType: KeyPostfixProvider
 	
-	var key: String { get }
-	var storage: Storage { get }
-	
-	var accessQueue: DispatchQueue { get }
-	var logger: Logger<Value> { get }
+	var key: Key { get }
 	
 	func save (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool
 	func saveIfNotExist (_ value: Value, _ keyPostfixProvider: KeyPostfixProviderType) -> Bool
