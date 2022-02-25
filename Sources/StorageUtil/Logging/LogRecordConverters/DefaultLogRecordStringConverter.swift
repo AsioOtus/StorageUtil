@@ -1,4 +1,4 @@
-public struct SingleLineLogRecordStringConverter: LogRecordStringConverter {
+public struct DefaultLogRecordStringConverter: LogRecordStringConverter {
 	public init () { }
 	
 	public func convert <Value> (_ record: LogRecord<Value>) -> String {

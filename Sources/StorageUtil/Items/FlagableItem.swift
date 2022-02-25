@@ -120,5 +120,5 @@ public extension FlagableItem {
 }
 
 public extension ItemProtocol {
-	func flagable () -> FlagableItem<Self> { .init(self) }
+	func flagged () -> FlagableItem<Self> { .init(self) }
 }

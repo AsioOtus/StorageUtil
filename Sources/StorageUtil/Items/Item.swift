@@ -186,3 +186,9 @@ public extension Item {
 		}
 	}
 }
+
+public extension Item {
+	func with <NewValue: Codable> (type: NewValue.Type, label: String? = nil, file: String = #fileID, line: Int = #line) -> Item<NewValue> {
+		.init(key: key, storage: storage, logHandler: logger.logHandler, label: label, file: file, line: line)
+	}
+}

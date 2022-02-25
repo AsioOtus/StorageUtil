@@ -5,32 +5,17 @@ extension String: KeyPostfixProvider {
 	public var keyPostfix: String { self }
 }
 
+extension Key {
+	static let test: Self = "test"
+}
+
 final class StorageUtilTests: XCTestCase {
 	func test () {
 		Global.parameters.defaultLogHandler = DefaultLogHandler()
-		
-		let item = Item<Int>(key: "test")
-			.flagable()
-		
-		item.delete()
-		
-//		item.save(nil)
-		
-		let bbb = item.load()
-		print(bbb)
-		
-		item.saveWithFlag(22)
-		
-		print(item.load())
-	}
-	
-	func testT () {
-		let a = Int???(nil)
-		
-		if let b = a, case .none = b {
-			print("A")
-		} else {
-			print("B")
-		}
+		let i = Item<Int>(key: .test)
+		i.with(type: String.self)
+		let item = i.key.item(type: Int.self).load()
+//			.default(0)
+//			.flagged()
 	}
 }

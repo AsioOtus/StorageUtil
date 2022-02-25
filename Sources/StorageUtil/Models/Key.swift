@@ -6,6 +6,26 @@ public struct Key {
 	}
 }
 
+public extension Key {
+	func item <Value> (
+		type: Value.Type,
+		storage: Storage = Global.parameters.defaultStorage,
+		logHandler: LogHandler? = Global.parameters.defaultLogHandler,
+		label: String? = nil,
+		file: String = #fileID,
+		line: Int = #line
+	) -> Item<Value> {
+		.init(
+			key: self,
+			storage: storage,
+			logHandler: logHandler,
+			label: label,
+			file: file,
+			line: line
+		)
+	}
+}
+
 extension Key: ExpressibleByStringLiteral {
 	public init (stringLiteral key: String) {
 		self.value = key
