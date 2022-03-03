@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Item <Value: Codable>: ItemProtocol {
+public struct Item <Value: Codable>: KeyedItem {
 	public let key: Key
 	public let storage: Storage
 

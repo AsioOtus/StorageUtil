@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol BaseItemProtocol {
+public protocol BaseItem {
 	associatedtype Value: Codable
 	
 	var accessQueue: DispatchQueue { get }

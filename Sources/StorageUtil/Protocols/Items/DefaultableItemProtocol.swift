@@ -1,5 +1,6 @@
-public protocol DefaultableItemProtocol: ItemProtocol {
+public protocol DefaultableItemProtocol: KeyedItem {
 	func loadOrDefault () -> Value
 	func saveDefault () -> Bool
-	func saveDefaultIfNotExist () -> Bool
+    func saveDefaultIfExists () -> Bool
+	func saveDefaultIfNotExists () -> Bool
 }

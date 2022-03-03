@@ -1,4 +1,4 @@
-public protocol ItemProtocol: BaseItemProtocol {	
+public protocol KeyedItem: BaseItem {	
 	var key: Key { get }
 	
 	func save (_ value: Value) -> Bool

@@ -2,7 +2,7 @@ import Foundation
 
 public typealias Defaultable = DefaultableItem
 
-public struct DefaultableItem <InnerItem: ItemProtocol>: DefaultableItemProtocol {
+public struct DefaultableItem <InnerItem: KeyedItem>: DefaultableItemProtocol {
 	public let item: InnerItem
 	public let defaultValue: (Key) -> Value
 	
@@ -100,10 +100,42 @@ public extension DefaultableItem {
 		}
 	}
 	
+    @discardableResult
+    func saveDefaultIfExists () -> Bool {
+        accessQueue.sync {
+            var details = LogRecord<Value>.Details(operation: "save default if exists")
+            defer { logger.log(details) }
+            
+            do {
+                if (try? load(key)) != nil {
+                    let defaultValue = self.defaultValue(key)
+                    
+                    details.newValue = defaultValue
+                    
+                    let oldValue = try save(key, defaultValue)
+                    
+                    details.oldValue = oldValue
+                    details.existance = oldValue != nil
+                    details.comment = "default value saved"
+                    
+                    return true
+                } else {
+                    details.existance = false
+                    details.comment = "value not exists preserved"
+                    
+                    return true
+                }
+            } catch {
+                details.error = (error as? StorageUtilError) ?? UnexpectedError(error)
+                return false
+            }
+        }
+    }
+    
 	@discardableResult
-	func saveDefaultIfNotExist () -> Bool {
+	func saveDefaultIfNotExists () -> Bool {
 		accessQueue.sync {
-			var details = LogRecord<Value>.Details(operation: "save default if not exist")
+			var details = LogRecord<Value>.Details(operation: "save default if not exists")
 			defer { logger.log(details) }
 			
 			do {
@@ -134,7 +166,7 @@ public extension DefaultableItem {
 	}
 }
 
-public extension ItemProtocol {
+public extension KeyedItem {
 	func `default` (_ default: @escaping (Key) -> Value) -> DefaultableItem<Self> {
 		.init(self, default: `default`)
 	}

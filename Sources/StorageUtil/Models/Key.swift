@@ -1,9 +1,5 @@
 public struct Key {
 	let value: String
-	
-    public init (_ value: String) {
-        self.value = value
-    }
     
 	func add (prefix: String? = nil, postfix: String? = nil) -> Key {
 		.init(value: [prefix, value, postfix].compactMap{ $0 }.joined(separator: "."))

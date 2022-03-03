@@ -2,7 +2,7 @@ import Foundation
 
 public typealias Initializable = InitializableItem
 
-public struct InitializableItem <InnerItem: ItemProtocol>: InitializableItemProtocol {
+public struct InitializableItem <InnerItem: KeyedItem>: InitializableItemProtocol {
 	private let isInitializedKey: Key
 	
 	public let item: InnerItem
@@ -66,7 +66,7 @@ public extension InitializableItem {
 	}
 }
 
-public extension ItemProtocol {
+public extension KeyedItem {
 	func initial (_ initial: Value?) -> InitializableItem<Self> {
 		.withInitialization(self, initial: initial)
 	}

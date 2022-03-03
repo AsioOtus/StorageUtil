@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ParametrizableItem <InnerItem: ItemProtocol, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableItemProtocol {
+public struct ParametrizableItem <InnerItem: KeyedItem, KeyPostfixProviderType: KeyPostfixProvider>: ParametrizableKeyedItem {
 	public let item: InnerItem
 	
 	public init (_ item: InnerItem) {
@@ -156,7 +156,7 @@ public extension ParametrizableItem {
 	}
 }
 
-public extension ItemProtocol {
+public extension KeyedItem {
 	func parametrized <KeyPostfixProviderType: KeyPostfixProvider> (keyPostfixProviderType: KeyPostfixProviderType.Type) -> ParametrizableItem <Self, KeyPostfixProviderType> {
 		.init(self)
 	}

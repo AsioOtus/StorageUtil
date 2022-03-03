@@ -2,7 +2,7 @@ import Foundation
 
 public typealias Flaggable = FlagableItem
 
-public struct FlagableItem <InnerItem: ItemProtocol>: FlagableItemProtocol {
+public struct FlagableItem <InnerItem: KeyedItem>: FlagableItemProtocol {
 	private let flagKey: Key
 	
 	public let item: InnerItem
@@ -119,6 +119,6 @@ public extension FlagableItem {
 	}
 }
 
-public extension ItemProtocol {
+public extension KeyedItem {
 	func flagged () -> FlagableItem<Self> { .init(self) }
 }

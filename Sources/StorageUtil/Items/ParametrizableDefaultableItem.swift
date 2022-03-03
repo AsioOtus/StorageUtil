@@ -2,7 +2,7 @@ import Foundation
 
 public typealias ParametrizableDefaultable = ParametrizableDefaultableItem
 
-public struct ParametrizableDefaultableItem <InnerItem: ParametrizableItemProtocol> {
+public struct ParametrizableDefaultableItem <InnerItem: ParametrizableKeyedItem> {
 	public let item: InnerItem
 	public let defaultValue: (Key) -> Value
 	
@@ -33,7 +33,7 @@ public extension ParametrizableDefaultableItem {
 	func delete (_ key: Key) throws -> Value? { try item.delete(key) }
 }
 
-extension ParametrizableDefaultableItem: ParametrizableItemProtocol {
+extension ParametrizableDefaultableItem: ParametrizableKeyedItem {
 	public typealias KeyPostfixProviderType = InnerItem.KeyPostfixProviderType
 	
 	public var key: Key { item.key }
@@ -164,7 +164,7 @@ extension ParametrizableDefaultableItem {
 	}
 }
 
-public extension ParametrizableItemProtocol {
+public extension ParametrizableKeyedItem {
 	func `default` (_ default: @escaping (Key) -> Value) -> ParametrizableDefaultableItem<Self> {
 		.init(self, default: `default`)
 	}

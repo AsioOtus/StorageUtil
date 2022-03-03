@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol ParametrizableItemProtocol: BaseItemProtocol {
+public protocol ParametrizableKeyedItem: BaseItem {
 	associatedtype KeyPostfixProviderType: KeyPostfixProvider
 	
 	var key: Key { get }

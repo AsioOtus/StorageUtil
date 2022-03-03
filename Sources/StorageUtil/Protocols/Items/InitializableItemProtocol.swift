@@ -1,3 +1,3 @@
-public protocol InitializableItemProtocol: ItemProtocol {
+public protocol InitializableItemProtocol: KeyedItem {
 	func initialize () -> Self
 }

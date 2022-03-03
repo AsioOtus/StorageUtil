@@ -2,7 +2,7 @@ import Foundation
 
 public typealias Watchable = WatchableItem
 
-public struct WatchableItem <InnerItem: ItemProtocol>: ItemProtocol {
+public struct WatchableItem <InnerItem: KeyedItem>: KeyedItem {
 	private let isChangedKey: Key
 	
 	public let item: InnerItem
@@ -137,6 +137,6 @@ private extension WatchableItem {
 	}
 }
 
-public extension ItemProtocol {
+public extension KeyedItem {
 	func watchable () -> WatchableItem<Self> { .init(self) }
 }
