@@ -40,17 +40,29 @@ public extension FlagableItem {
 }
 
 public extension FlagableItem {
+    func toggle () {
+        accessQueue.sync {
+            guard let flag = try? storage.load(flagKey, Bool.self) else {
+                logger.log(.init(operation: "toggle failed"))
+                return
+            }
+            
+            _ = try? storage.save(flagKey, !flag)
+            logger.log(.init(operation: "flag toggled to \(!flag)"))
+        }
+    }
+    
 	func set (flag: Bool) {
 		accessQueue.sync {
 			_ = try? storage.save(flagKey, true)
-			logger.log(LogRecord<Value>.Details(operation: "flag set to \(flag)"))
+            logger.log(.init(operation: "flag set to \(flag)"))
 		}
 	}
 }
 
 public extension FlagableItem {
 	@discardableResult
-	func saveWithFlag (_ value: Value) -> Bool {
+    func save (_ value: Value, flag: Bool) -> Bool {
 		accessQueue.sync {
 			var details = LogRecord<Value>.Details(operation: "save with flag")
 			details.newValue = value
@@ -62,7 +74,7 @@ public extension FlagableItem {
 				details.oldValue = oldValue
 				details.existance = oldValue != nil
 				
-				_ = try storage.save(flagKey, true)
+				_ = try storage.save(flagKey, flag)
 				
 				return true
 			} catch {
