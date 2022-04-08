@@ -1,6 +1,6 @@
 import Foundation
 
-public final class SingleValueStorage <V: Codable>: Storage {
+public final class SingleValueStorage: Storage {
     public var value: String?
     
     public let keyPrefix: String?
@@ -8,7 +8,7 @@ public final class SingleValueStorage <V: Codable>: Storage {
     
     public var logHandler: LogHandler? = nil
     
-    public init (
+    public init <V: Codable> (
         value: V?,
         keyPrefix: String?,
         label: String? = nil,
