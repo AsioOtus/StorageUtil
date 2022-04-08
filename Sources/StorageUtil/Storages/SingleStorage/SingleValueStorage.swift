@@ -8,8 +8,8 @@ public final class SingleValueStorage: Storage {
     
     public var logHandler: LogHandler? = nil
     
-    public init <V: Codable> (
-        value: V?,
+    public init <Value: Codable> (
+        value: Value?,
         keyPrefix: String?,
         label: String? = nil,
         file: String = #fileID,
