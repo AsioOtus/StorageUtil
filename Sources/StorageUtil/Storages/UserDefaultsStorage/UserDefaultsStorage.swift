@@ -60,7 +60,7 @@ extension UserDefaultsStorage {
 			details.oldValue = oldValue
 			details.existance = oldValue != nil
 			
-			let valueJsonString = try Coder.encode(value)
+			let valueJsonString = try JSONCoder.default.encode(value)
 			userDefaults.set(valueJsonString, forKey: prefixedKey.value)
 			
 			return oldValue
@@ -91,7 +91,7 @@ extension UserDefaultsStorage {
 			let prefixedKey = prefixKey(key)
 			
 			guard let valueJsonString = userDefaults.string(forKey: prefixedKey.value) else { return nil }
-			let value = try Coder.decode(valueJsonString, type)
+            let value = try JSONCoder.default.decode(valueJsonString, type)
 			
 			details.oldValue = value
 			details.existance = true

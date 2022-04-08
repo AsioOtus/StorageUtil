@@ -1,6 +1,6 @@
 extension UserDefaultsStorage {
 	public enum Error: StorageUtilError {
-		case codingError(Coder.Error)
+		case codingError(JSONCoder.Error)
 		case unexpectedError(Swift.Error)
 		
 		private var innerError: Swift.Error? {
