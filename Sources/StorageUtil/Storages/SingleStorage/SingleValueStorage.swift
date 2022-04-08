@@ -10,7 +10,7 @@ public final class SingleValueStorage: Storage {
     
     public init <Value: Codable> (
         value: Value?,
-        keyPrefix: String?,
+        keyPrefix: String? = nil,
         label: String? = nil,
         file: String = #fileID,
         line: Int = #line
